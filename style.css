@@ -12,14 +12,19 @@
     justify-content: center;
     min-height: 100vh;
   }
-  
+
   .container {
-    background-color: #f7e9e6; /* Fondo claro para el contenedor */
     width: 90%;
     max-width: 400px;
-    padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .container2 {
+    width: 100%;
+    padding: 20px;
+    background-color: #f7e9e6; /* Fondo claro para el contenedor */
+    border-radius: 15px;
     text-align: center;
   }
   
@@ -33,14 +38,14 @@
   }
   
   .logo {
-    width: 80px;
+    width: 200px;
     height: auto;
     border-radius: 50%;
   }
   
   .username {
-    font-size: 1.2rem;
-    color: #4a4a4a;
+    font-size: 2rem;
+    color: #f7e9e6;
     margin-top: 10px;
   }
   
