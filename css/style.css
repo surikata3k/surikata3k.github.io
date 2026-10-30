@@ -1,93 +1,177 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    background-color: #262626; /* Fondo oscuro */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
+/* Surikata3K — atardecer en la sabana.
+   Colores tomados del logo: cielo coral, sol, tinta del suricato, crema de la barriga. */
+:root {
+  --sky-top: #E8634A;
+  --sky-low: #C94B37;
+  --sun: #F7A21B;
+  --ink: #1F1812;
+  --earth: #2B2119;
+  --earth-line: #45362A;
+  --cream: #F6E7C8;
+  --cream-muted: #BBA88A;
 
-  .container {
-    width: 90%;
-    max-width: 400px;
-    border-radius: 15px;
-    text-align: center;
-  }
-  
-  .container2 {
-    width: 100%;
-    padding: 20px;
-    /* background-color: #f7e9e6; /* Fondo claro para el contenedor */
-    border-radius: 15px;
-    text-align: center;
-  }
-  
-  header {
-    margin-bottom: 20px;
-  }
-  
-  .logo-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .logo {
-    width: 200px;
-    height: auto;
-    border-radius: 50%;
-  }
-  
-  .username {
-    font-size: 2rem;
-    color: #f7e9e6;
-    margin-top: 10px;
-  }
-  
-  main {
-    width: 100%;
-  }
-  
-  .links a {
-    display: block;
-    background-color: #b54531; /* Color de botones */
-    color: #fff;
-    padding: 15px 0;
-    margin: 10px 0;
-    border-radius: 8px;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  .links a:hover {
-    background-color: #e95940; /* Color de hover en botones */
-  }
-  
-  footer {
-    margin-top: 20px;
-  }
-  
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-  }
-  
-  .social-icons a {
-    font-size: 1.5rem;
-    color: #3a6351;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .social-icons a:hover {
-    color: #2d4d3a;
-  }
-  
+  --font: "Bricolage Grotesque", system-ui, sans-serif;
+  --column: 30rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--earth);
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  color: var(--cream);
+  background: var(--earth);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Cielo y madriguera ---------- */
+.sky {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: clamp(2rem, 8vh, 5rem);
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-low) 100%);
+  border-bottom: 3px solid var(--ink);
+}
+
+/* La caja recorta la imagen justo por los pies: el horizonte es su borde inferior. */
+.burrow {
+  width: 18rem;
+  height: 10.1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.meerkat {
+  display: block;
+  width: 18rem;
+  height: auto;
+  margin-top: -3.6rem;
+  animation: peek 1.1s cubic-bezier(.2, .9, .25, 1.15) .25s both;
+}
+
+@keyframes peek {
+  0%   { transform: translateY(100%); }
+  70%  { transform: translateY(-4%); }
+  100% { transform: translateY(0); }
+}
+
+/* ---------- Tierra ---------- */
+.ground {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: calc(var(--column) + 2rem);
+  margin: 0 auto;
+  padding: 2.5rem 1rem 3rem;
+}
+
+.intro h1 {
+  font-size: clamp(2.6rem, 11vw, 3.6rem);
+  font-weight: 800;
+  font-variation-settings: "opsz" 96;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.intro p {
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.45;
+  color: var(--cream-muted);
+}
+
+.links {
+  list-style: none;
+  margin-top: 2.25rem;
+  border-top: 1px solid var(--earth-line);
+}
+
+.links li {
+  border-bottom: 1px solid var(--earth-line);
+}
+
+.links a {
+  display: grid;
+  gap: 0.15rem;
+  padding: 1rem 0 1rem 1rem;
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Marca de sol a la izquierda: aparece al pasar o enfocar. */
+.links a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  bottom: 1rem;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--sun);
+  transform: scaleY(0);
+  transition: transform .2s ease;
+}
+
+.links a:hover::before,
+.links a:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.links .name {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.links a:hover .name,
+.links a:focus-visible .name {
+  color: var(--sun);
+}
+
+.links .desc {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--cream-muted);
+}
+
+.contact {
+  margin-top: 2rem;
+}
+
+.contact a {
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration-color: var(--sun);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.contact a:hover {
+  color: var(--sun);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--sun);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meerkat { animation: none; }
+  .links a::before { transition: none; }
+}
