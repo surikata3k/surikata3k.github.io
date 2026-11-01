@@ -43,7 +43,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 1.25rem;
+  gap: 1.5rem;
   padding-top: clamp(2rem, 8vh, 5rem);
   background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-low) 100%);
   border-bottom: 3px solid var(--ink);
@@ -69,28 +69,41 @@ body {
   animation: peek 1.1s cubic-bezier(.2, .9, .25, 1.15) .25s both;
 }
 
-/* Nombre de la web, a la derecha del suricato, apoyado en el horizonte. */
+/* Marca a la derecha del suricato: nombre + lema, apoyados en el horizonte. */
+.brand {
+  max-width: 20rem;
+  padding-bottom: 1.6rem;
+  animation: rise .6s ease-out .9s both;
+}
+
 .site-name {
-  padding-bottom: 1.4rem;
-  font-size: clamp(2.6rem, 9vw, 4rem);
+  font-size: clamp(2.6rem, 7vw, 3.8rem);
   font-weight: 800;
   font-variation-settings: "opsz" 96;
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--ink);
-  animation: rise .6s ease-out .9s both;
 }
 
-/* Pantallas estrechas: el nombre pasa encima del suricato. */
+.tagline {
+  margin-top: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #3B1A10;
+}
+
+/* Pantallas estrechas: la marca pasa encima del suricato, centrada. */
 @media (max-width: 30rem) {
   .sky {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-  .site-name {
+  .brand {
     order: -1;
-    padding-bottom: 0;
+    padding: 0 1rem;
+    text-align: center;
   }
 }
 
@@ -111,13 +124,7 @@ body {
   width: 100%;
   max-width: calc(var(--column) + 2rem);
   margin: 0 auto;
-  padding: 2.5rem 1rem 3rem;
-}
-
-.intro {
-  font-size: 1.125rem;
-  line-height: 1.45;
-  color: var(--cream-muted);
+  padding: 1.5rem 1rem 3rem;
 }
 
 .links {
@@ -198,6 +205,6 @@ a:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .meerkat, .site-name { animation: none; }
+  .meerkat, .brand { animation: none; }
   .links a::before { transition: none; }
 }
