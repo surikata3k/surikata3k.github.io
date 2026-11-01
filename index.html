@@ -5,65 +5,133 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surikata3K</title>
-  <meta name="description" content="Sysadmin notes, videos and small apps for the classroom.">
-  <meta name="theme-color" content="#E2573F">
+  <meta name="description" content="Sysadmin notes, videos and small web apps for the classroom.">
+  <meta name="theme-color" content="#F4ECDD">
   <link rel="canonical" href="https://surikata3k.com/">
   <meta property="og:title" content="Surikata3K">
-  <meta property="og:description" content="Sysadmin notes, videos and small apps for the classroom.">
+  <meta property="og:description" content="Sysadmin notes, videos and small web apps for the classroom.">
   <meta property="og:image" content="https://surikata3k.com/img/logo.png">
   <meta property="og:url" content="https://surikata3k.com/">
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-  <header class="sky">
-    <div class="burrow" aria-hidden="true">
-      <img src="/img/logo_no_background.png" alt="" class="meerkat" width="500" height="500">
-    </div>
-    <div class="brand">
-      <h1 class="site-name">Surikata3K</h1>
-      <p class="tagline">Sysadmin notes, videos and small apps for the classroom.</p>
-    </div>
-  </header>
+  <div class="page">
 
-  <main class="ground">
-    <nav aria-label="Links">
-      <ul class="links">
-        <li>
-          <a href="http://surikata3k.com/it-hub/">
-            <span class="name">IT-Hub</span>
-            <span class="desc">Notes on systems, networks and databases</span>
+    <header class="masthead">
+      <img src="/img/logo_mark.png" alt="" class="mark" width="248" height="283">
+      <div class="brand">
+        <h1>Surikata3K</h1>
+        <p>Sysadmin notes, videos and small web apps for the classroom.</p>
+      </div>
+    </header>
+
+    <!-- Llocs principals -->
+    <section class="places" aria-label="Sections">
+      <a class="place place-hub" href="https://surikata3k.com/it-hub/">
+        <span class="kicker">~/it-hub</span>
+        <span class="title">IT-Hub</span>
+        <span class="text">Notes on systems, networks and databases, organised by module.</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="place place-yt" href="https://www.youtube.com/@Surikata3K" target="_blank" rel="noopener">
+        <span class="kicker">videos</span>
+        <span class="title">YouTube</span>
+        <span class="text">Tutorials and step-by-step explanations.</span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="place place-gh" href="https://github.com/surikata3k/" target="_blank" rel="noopener">
+        <span class="kicker">code</span>
+        <span class="title">GitHub</span>
+        <span class="text">The code behind everything you see here.</span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <!-- Apps (formerly the /web-apps/ homepage) -->
+    <section class="apps" id="apps" aria-labelledby="apps-title">
+      <div class="apps-head">
+        <h2 id="apps-title">Apps</h2>
+        <div class="filters" role="group" aria-label="Filter apps">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="aula" aria-pressed="false">Classroom</button>
+          <button type="button" data-filter="pass" aria-pressed="false">Passwords</button>
+        </div>
+      </div>
+      <p class="apps-note">They run right in your browser: nothing to install, no server needed.</p>
+
+      <ul class="app-grid">
+        <li data-cat="aula">
+          <a class="app" href="https://surikata3k.com/ditsmagics/" style="--accent:#E8634A">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2.5"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 15h10"/></svg></span>
+            <span class="name">Dits Màgics</span>
+            <span class="desc">Touch typing in Catalan for kids, with 43 levels and stars to earn.</span>
+            <span class="tag">classroom</span>
           </a>
         </li>
-        <li>
-          <a href="https://surikata3k.com/web-apps/">
-            <span class="name">Web-Apps</span>
-            <span class="desc">Small apps that run in your browser</span>
+        <li data-cat="aula">
+          <a class="app" href="https://surikata3k.com/web-apps/calc_hours_ra/" style="--accent:#3E8E5A">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M8 14h3M8 17h6"/></svg></span>
+            <span class="name">Learning Outcome Hours</span>
+            <span class="desc">Plan and spread the hours of a module's learning outcomes (RA).</span>
+            <span class="tag">classroom</span>
           </a>
         </li>
-        <li>
-          <a href="https://www.youtube.com/@Surikata3K" target="_blank" rel="noopener">
-            <span class="name">YouTube</span>
-            <span class="desc">Videos and tutorials</span>
+        <li data-cat="pass">
+          <a class="app" href="https://surikata3k.com/web-apps/passgen/" style="--accent:#4F5BD5">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M18.5 15l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></span>
+            <span class="name">PassForge</span>
+            <span class="desc">A different password for every site, from a single master key.</span>
+            <span class="tag">passwords</span>
           </a>
         </li>
-        <li>
-          <a href="https://github.com/surikata3k/" target="_blank" rel="noopener">
-            <span class="name">GitHub</span>
-            <span class="desc">The code behind all of the above</span>
+        <li data-cat="pass">
+          <a class="app" href="https://surikata3k.com/web-apps/password_generator/" style="--accent:#8A4FC4">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2.5 2.5M14 9l2 2"/></svg></span>
+            <span class="name">Password Generator</span>
+            <span class="desc">Random passwords with the length and characters you choose.</span>
+            <span class="tag">passwords</span>
+          </a>
+        </li>
+        <li data-cat="pass">
+          <a class="app" href="https://surikata3k.com/web-apps/password_info/" style="--accent:#C98300">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+            <span class="name">Password Strength Checker</span>
+            <span class="desc">Check how strong a password really is.</span>
+            <span class="tag">passwords</span>
+          </a>
+        </li>
+        <li data-cat="pass">
+          <a class="app" href="https://surikata3k.com/web-apps/password_calculator/" style="--accent:#1C8C9E">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="2.5" width="15" height="19" rx="2.5"/><path d="M8 6.5h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></svg></span>
+            <span class="name">Entropy Calculator</span>
+            <span class="desc">Possible combinations and entropy by length and character set.</span>
+            <span class="tag">passwords</span>
           </a>
         </li>
       </ul>
-    </nav>
+    </section>
 
-    <footer class="contact">
-      <a href="mailto:hello@surikata3k.com">hello@surikata3k.com</a>
+    <footer class="foot">
+      <a class="mail" href="mailto:hello@surikata3k.com">hello@surikata3k.com</a>
+      <span class="legal">Apps licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="license" target="_blank">CC BY-NC-SA 4.0</a></span>
     </footer>
-  </main>
+  </div>
+
+  <script>
+    // App category filter
+    const buttons = document.querySelectorAll('.filters button');
+    const items = document.querySelectorAll('.app-grid li');
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      const f = btn.dataset.filter;
+      buttons.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      items.forEach(li => { li.hidden = f !== 'all' && li.dataset.cat !== f; });
+    }));
+  </script>
 </body>
 
 </html>

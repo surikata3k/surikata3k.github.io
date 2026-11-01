@@ -1,17 +1,19 @@
-/* Surikata3K — atardecer en la sabana.
-   Colores tomados del logo: cielo coral, sol, tinta del suricato, crema de la barriga. */
+/* Surikata3K — "quadern de camp".
+   Paper crema, tinta del suricato i el sol del logo com a accent. */
 :root {
-  --sky-top: #E8634A;
-  --sky-low: #C94B37;
-  --sun: #F7A21B;
+  --paper: #F4ECDD;
+  --card: #FFFAF1;
   --ink: #1F1812;
-  --earth: #2B2119;
-  --earth-line: #45362A;
+  --ink-soft: #5C4F43;
+  --sun: #F29A1A;
+  --coral: #E8634A;
   --cream: #F6E7C8;
-  --cream-muted: #BBA88A;
 
   --font: "Bricolage Grotesque", system-ui, sans-serif;
-  --column: 30rem;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius: 1.1rem;
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-up: 7px 7px 0 var(--ink);
 }
 
 *,
@@ -23,188 +25,353 @@
 }
 
 html {
-  background: var(--earth);
+  background: var(--paper);
 }
 
 body {
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
   font-family: var(--font);
-  color: var(--cream);
-  background: var(--earth);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 1px 1px, rgba(31, 24, 18, .09) 1px, transparent 0) 0 0 / 22px 22px,
+    var(--paper);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ---------- Cielo y madriguera ---------- */
-.sky {
-  flex: 0 0 auto;
+.page {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) 1rem 3rem;
+}
+
+/* ---------- Capçalera: logo + nom a la dreta ---------- */
+.masthead {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 1.5rem;
-  padding-top: clamp(2rem, 8vh, 5rem);
-  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-low) 100%);
-  border-bottom: 3px solid var(--ink);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.75rem);
 }
 
-/* La caja recorta la imagen justo por los pies (el horizonte es su borde inferior)
-   y por los lados, para que el nombre quede pegado al sol. */
-.burrow {
+.mark {
   flex: 0 0 auto;
-  width: 9.4rem;
-  height: 10.1rem;
-  overflow: hidden;
-  position: relative;
-}
-
-.meerkat {
-  display: block;
-  width: 18rem;
-  max-width: none;
+  width: clamp(4.5rem, 14vw, 7.5rem);
   height: auto;
-  margin-top: -3.6rem;
-  margin-left: -4.3rem;
-  animation: peek 1.1s cubic-bezier(.2, .9, .25, 1.15) .25s both;
+  animation: peek .9s cubic-bezier(.2, .9, .25, 1.2) .1s both;
 }
 
-/* Marca a la derecha del suricato: nombre + lema, apoyados en el horizonte. */
-.brand {
-  max-width: 20rem;
-  padding-bottom: 1.6rem;
-  animation: rise .6s ease-out .9s both;
-}
-
-.site-name {
-  font-size: clamp(2.6rem, 7vw, 3.8rem);
+.brand h1 {
+  font-size: clamp(2.6rem, 10vw, 5.2rem);
   font-weight: 800;
   font-variation-settings: "opsz" 96;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  line-height: .95;
+  letter-spacing: -0.03em;
 }
 
-.tagline {
-  margin-top: 0.6rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+.brand p {
+  margin-top: .6rem;
+  max-width: 30rem;
+  font-size: clamp(1rem, 2.6vw, 1.2rem);
   line-height: 1.4;
-  color: #3B1A10;
-}
-
-/* Pantallas estrechas: la marca pasa encima del suricato, centrada. */
-@media (max-width: 30rem) {
-  .sky {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .brand {
-    order: -1;
-    padding: 0 1rem;
-    text-align: center;
-  }
-}
-
-@keyframes rise {
-  from { opacity: 0; transform: translateY(.5rem); }
-  to   { opacity: 1; transform: none; }
+  color: var(--ink-soft);
 }
 
 @keyframes peek {
-  0%   { transform: translateY(100%); }
-  70%  { transform: translateY(-4%); }
-  100% { transform: translateY(0); }
+  0%   { transform: translateY(30%) rotate(-6deg); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: none; }
 }
 
-/* ---------- Tierra ---------- */
-.ground {
-  flex: 1 0 auto;
-  width: 100%;
-  max-width: calc(var(--column) + 2rem);
-  margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
-}
-
-.links {
-  list-style: none;
-  margin-top: 2.25rem;
-  border-top: 1px solid var(--earth-line);
-}
-
-.links li {
-  border-bottom: 1px solid var(--earth-line);
-}
-
-.links a {
+/* ---------- Llocs principals (bento) ---------- */
+.places {
   display: grid;
-  gap: 0.15rem;
-  padding: 1rem 0 1rem 1rem;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  margin-top: clamp(2rem, 6vw, 3.5rem);
+}
+
+.place {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  padding: 1.4rem 1.5rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   color: inherit;
   text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
-/* Marca de sol a la izquierda: aparece al pasar o enfocar. */
-.links a::before {
-  content: "";
+.place:hover,
+.place:focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-up);
+}
+
+.place .kicker {
+  font-family: var(--mono);
+  font-size: .8rem;
+  opacity: .75;
+}
+
+.place .title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.place .text {
+  font-size: 1rem;
+  line-height: 1.45;
+  max-width: 26rem;
+}
+
+.place .arrow {
   position: absolute;
-  left: 0;
-  top: 1rem;
-  bottom: 1rem;
-  width: 4px;
-  border-radius: 2px;
-  background: var(--sun);
-  transform: scaleY(0);
-  transition: transform .2s ease;
-}
-
-.links a:hover::before,
-.links a:focus-visible::before {
-  transform: scaleY(1);
-}
-
-.links .name {
-  font-size: 1.35rem;
+  top: 1.1rem;
+  right: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  line-height: 1.2;
+  transition: transform .15s ease;
 }
 
-.links a:hover .name,
-.links a:focus-visible .name {
+.place:hover .arrow {
+  transform: translateX(3px);
+}
+
+.place-hub {
+  grid-row: span 2;
+  justify-content: flex-end;
+  min-height: 15rem;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--cream);
+  box-shadow: 4px 4px 0 var(--sun);
+}
+
+.place-hub > span {
+  position: relative;
+  z-index: 1;
+}
+
+.place-hub:hover,
+.place-hub:focus-visible {
+  box-shadow: 7px 7px 0 var(--sun);
+}
+
+.place-hub .title {
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
   color: var(--sun);
 }
 
-.links .desc {
-  font-size: 1rem;
-  line-height: 1.4;
-  color: var(--cream-muted);
+/* Sol decoratiu darrere del text */
+.place-hub::before {
+  content: "";
+  position: absolute;
+  top: -3.5rem;
+  right: -3.5rem;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sun) 0%, var(--coral) 70%);
+  opacity: .9;
 }
 
-.contact {
-  margin-top: 2rem;
+.place-hub .arrow {
+  position: absolute;
+  color: var(--ink);
 }
 
-.contact a {
+.place-yt {
+  background: var(--coral);
+}
+
+.place-gh {
+  background: var(--card);
+}
+
+/* ---------- Aplicacions ---------- */
+.apps {
+  margin-top: clamp(3rem, 8vw, 4.5rem);
+}
+
+.apps-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.apps h2 {
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.apps-note {
+  margin-top: .4rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.filters button {
+  font: 600 .95rem var(--font);
+  color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: .4rem .95rem;
+  cursor: pointer;
+}
+
+.filters button[aria-pressed="true"] {
+  background: var(--ink);
   color: var(--cream);
+}
+
+.filters button:hover {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+.app-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.app-grid li[hidden] {
+  display: none;
+}
+
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  column-gap: .9rem;
+  row-gap: .45rem;
+  padding: 1.2rem;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: inherit;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.app:hover,
+.app:focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-up);
+}
+
+.app .icon {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: .8rem;
+  border: 2px solid var(--ink);
+  background: var(--accent);
+}
+
+.app .icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.app .name {
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.app .desc {
+  grid-column: 2;
+  font-size: .95rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.app .tag {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: .3rem;
+  font-family: var(--mono);
+  font-size: .75rem;
+  padding: .15rem .5rem;
+  border-radius: .4rem;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--ink);
+}
+
+/* ---------- Peu ---------- */
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .75rem 2rem;
+  margin-top: clamp(3rem, 8vw, 4.5rem);
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--ink);
+  font-size: .95rem;
+  color: var(--ink-soft);
+}
+
+.foot a {
+  color: var(--ink);
   font-weight: 600;
   text-decoration-color: var(--sun);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
 
-.contact a:hover {
-  color: var(--sun);
+.foot .mail {
+  font-size: 1.1rem;
 }
 
-a:focus-visible {
-  outline: 2px solid var(--sun);
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--sun);
   outline-offset: 3px;
-  border-radius: 2px;
+}
+
+/* ---------- Mòbil ---------- */
+@media (max-width: 40rem) {
+  .places {
+    grid-template-columns: 1fr;
+  }
+  .place-hub {
+    grid-row: auto;
+    min-height: 13rem;
+  }
+  .place-hub::before {
+    width: 8rem;
+    height: 8rem;
+    top: -3rem;
+    right: -3rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .meerkat, .brand { animation: none; }
-  .links a::before { transition: none; }
+  .mark { animation: none; }
+  .place, .app, .place .arrow { transition: none; }
 }
