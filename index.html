@@ -1,129 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surikata3K</title>
-  <meta name="description" content="Sysadmin notes, videos and small web apps for the classroom.">
-  <meta name="theme-color" content="#F4ECDD">
-  <link rel="canonical" href="https://surikata3k.com/">
-  <meta property="og:title" content="Surikata3K">
-  <meta property="og:description" content="Sysadmin notes, videos and small web apps for the classroom.">
-  <meta property="og:image" content="https://surikata3k.com/img/logo.png">
-  <meta property="og:url" content="https://surikata3k.com/">
-  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css?v=20261101b">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surikata3K</title>
+<meta name="description" content="Sysadmin notes, videos and small web apps for the classroom.">
+<link rel="canonical" href="https://surikata3k.com/">
+<meta name="theme-color" content="#FBFBF9">
+<meta property="og:title" content="Surikata3K">
+<meta property="og:description" content="Sysadmin notes, videos and small web apps for the classroom.">
+<meta property="og:url" content="https://surikata3k.com/">
+<meta property="og:image" content="https://surikata3k.com/img/logo.png">
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBFBF9;
+    --ink: #111111;
+    --muted: #555550;
+    --text-2: #45453F;
+    --rule: #D9D8D2;
+    --card: #FFFFFF;
+    --accent: #B23A0A;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--ink); text-decoration: none; }
+  a:hover { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 64px); }
+  .mono { font-family: var(--mono); }
+  .accent { color: var(--accent); }
+  .label { margin: 0; font-family: var(--mono); font-weight: 400; font-size: 14px; color: var(--muted); text-transform: lowercase; }
+
+  /* Header */
+  .site-header {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 16px 32px; padding: 28px 0; border-bottom: 1px solid var(--ink);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand img { width: 40px; height: 40px; object-fit: contain; }
+  .brand span { font-family: var(--serif); font-size: 34px; line-height: 1; letter-spacing: -0.01em; }
+  .brand em { color: var(--accent); }
+  .site-nav { display: flex; flex-wrap: wrap; gap: 4px 28px; font-family: var(--mono); font-size: 14px; }
+  .site-nav a { padding: 12px 0; }
+
+  /* Hero */
+  .hero { padding: clamp(64px, 10vw, 128px) 0 clamp(56px, 8vw, 96px); display: flex; flex-direction: column; gap: 32px; }
+  .hero h1 {
+    margin: 0; font-family: var(--serif); font-weight: 400;
+    font-size: clamp(48px, 8vw, 112px); line-height: 0.98; letter-spacing: -0.02em; max-width: 1050px;
+  }
+  .hero h1 em { color: var(--accent); }
+
+  /* Sections */
+  .section { border-top: 1px solid var(--ink); padding: 32px 0 clamp(64px, 9vw, 112px); }
+  .card {
+    display: flex; flex-direction: column; gap: 12px; padding: 24px;
+    background: var(--card); border: 1px solid var(--rule); border-radius: 6px;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .card:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 6px 0 -2px rgba(17,17,17,.08); }
+  .card:hover .name { color: var(--accent); }
+  .card .desc { color: var(--text-2); flex-grow: 1; }
+  .card .arrow { font-family: var(--mono); font-size: 20px; color: var(--accent); transition: transform .15s; }
+  .card:hover .arrow { transform: translateX(4px); }
+
+  .channels { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px; }
+  .channel { padding: 28px; min-height: 240px; gap: 14px; }
+  .channel .name { font-family: var(--serif); font-size: 44px; line-height: 1; }
+
+  /* Apps */
+  .apps-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; margin-bottom: 40px; }
+  .apps-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 7vw, 88px); line-height: 1; letter-spacing: -0.02em; }
+  .apps-head p { margin: 0; max-width: 380px; color: var(--text-2); }
+  .group { border-top: 1px solid var(--rule); padding: 20px 0 40px; }
+  .group h3 { margin: 0 0 16px; font-family: var(--mono); font-weight: 400; font-size: 13px; color: var(--muted); }
+  .group ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .group li { display: flex; }
+  .app { flex-grow: 1; min-height: 200px; }
+  .app .name { font-family: var(--serif); font-size: 30px; line-height: 1.1; }
+  .app .desc { font-size: 16px; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--ink); padding: 40px 0 56px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px 48px; }
+  .site-footer .mail { font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); line-height: 1.1; }
+  .site-footer p { margin: 0; font-size: 14px; color: var(--muted); max-width: 420px; }
+  .site-footer p a { text-decoration: underline; color: var(--muted); }
+  .site-footer p a:hover { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .card, .card .arrow { transition: none; }
+    .card:hover { transform: none; }
+  }
+</style>
 </head>
-
 <body>
-  <div class="page">
+<div class="wrap">
 
-    <header class="masthead">
-      <img src="/img/logo_mark.png" alt="" class="mark" width="248" height="283">
-      <div class="brand">
-        <h1>Surikata3K</h1>
-        <p>Sysadmin notes, videos and small web apps for the classroom.</p>
-      </div>
-    </header>
+  <header class="site-header">
+    <a class="brand" href="https://surikata3k.com/">
+      <img src="https://surikata3k.com/img/logo_mark.png" alt="" width="40" height="40">
+      <span>Surikata<em>3K</em></span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="https://surikata3k.com/it-hub/">notes</a>
+      <a href="#apps">apps</a>
+      <a href="https://www.youtube.com/@Surikata3K">videos</a>
+      <a href="https://github.com/surikata3k/">code</a>
+      <a href="mailto:hello@surikata3k.com">contact</a>
+    </nav>
+  </header>
 
-    <!-- Llocs principals -->
-    <section class="places" aria-label="Sections">
-      <a class="place place-hub" href="https://surikata3k.com/it-hub/">
-        <span class="kicker">~/it-hub</span>
-        <span class="title">IT-Hub</span>
-        <span class="text">Notes on systems, networks and databases, organised by module.</span>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-      <a class="place place-yt" href="https://www.youtube.com/@Surikata3K" target="_blank" rel="noopener">
-        <span class="kicker">videos</span>
-        <span class="title">YouTube</span>
-        <span class="text">Tutorials and step-by-step explanations.</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="place place-gh" href="https://github.com/surikata3k/" target="_blank" rel="noopener">
-        <span class="kicker">code</span>
-        <span class="title">GitHub</span>
-        <span class="text">The code behind everything you see here.</span>
-        <span class="arrow" aria-hidden="true">↗</span>
-      </a>
+  <main>
+    <section class="hero">
+      <h1>Sysadmin notes, videos and <em>small web apps</em> for the classroom.</h1>
     </section>
 
-    <!-- Apps (formerly the /web-apps/ homepage) -->
-    <section class="apps" id="apps" aria-labelledby="apps-title">
+    <section class="section" aria-labelledby="where">
+      <h2 id="where" class="label">where to find things</h2>
+      <div class="channels">
+        <a class="card channel" href="https://surikata3k.com/it-hub/">
+          <span class="name">IT-Hub</span>
+          <span class="desc">Notes on systems, networks and databases, organised by module.</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="card channel" href="https://www.youtube.com/@Surikata3K">
+          <span class="name">YouTube</span>
+          <span class="desc">Tutorials and step-by-step explanations.</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="card channel" href="https://github.com/surikata3k/">
+          <span class="name">GitHub</span>
+          <span class="desc">The code behind everything you see here.</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="apps" class="section" aria-labelledby="apps-title">
       <div class="apps-head">
         <h2 id="apps-title">Apps</h2>
+        <p>They run right in your browser: nothing to install, no server needed.</p>
       </div>
-      <p class="apps-note">They run right in your browser: nothing to install, no server needed.</p>
 
-      <ul class="app-grid">
-        <li>
-          <a class="app" href="https://surikata3k.com/ditsmagics/" style="--accent:#E8634A">
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2.5"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 15h10"/></svg></span>
-            <span class="name">Dits Màgics</span>
-            <span class="desc">Touch typing in Catalan for kids, with 43 levels and stars to earn.</span>
-            <span class="tag">classroom</span>
-          </a>
-        </li>
-        <li>
-          <a class="app" href="https://surikata3k.com/web-apps/calc_hours_ra/" style="--accent:#3E8E5A">
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M8 14h3M8 17h6"/></svg></span>
-            <span class="name">Learning Outcome Hours</span>
-            <span class="desc">Plan and spread the hours of a module's learning outcomes (RA).</span>
-            <span class="tag">classroom</span>
-          </a>
-        </li>
-        <li>
-          <a class="app" href="https://surikata3k.com/web-apps/passgen/" style="--accent:#4F5BD5">
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M18.5 15l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></span>
-            <span class="name">PassForge</span>
-            <span class="desc">A different password for every site, from a single master key.</span>
-            <span class="tag">passwords</span>
-          </a>
-        </li>
-        <li>
-          <a class="app" href="https://surikata3k.com/web-apps/password_generator/" style="--accent:#8A4FC4">
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2.5 2.5M14 9l2 2"/></svg></span>
-            <span class="name">Password Generator</span>
-            <span class="desc">Random passwords with the length and characters you choose.</span>
-            <span class="tag">passwords</span>
-          </a>
-        </li>
-        <li>
-          <a class="app" href="https://surikata3k.com/web-apps/password_info/" style="--accent:#C98300">
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
-            <span class="name">Password Strength Checker</span>
-            <span class="desc">Check how strong a password really is.</span>
-            <span class="tag">passwords</span>
-          </a>
-        </li>
-        <li>
-          <a class="app" href="https://surikata3k.com/web-apps/password_calculator/" style="--accent:#1C8C9E">
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4.5" y="2.5" width="15" height="19" rx="2.5"/><path d="M8 6.5h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></svg></span>
-            <span class="name">Entropy Calculator</span>
-            <span class="desc">Possible combinations and entropy by length and character set.</span>
-            <span class="tag">passwords</span>
-          </a>
-        </li>
-        <li>
-          <a class="app" href="https://surikata3k.com/web-apps/asymmetric_keys/" style="--accent:#D6336C">
-            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3L20 3M17 6l3 3M14.5 8.5l2 2"/></svg></span>
-            <span class="name">Asymmetric Key Simulator</span>
-            <span class="desc">Padlocks, keys and seals: learn how public-key cryptography works by playing.</span>
-            <span class="tag">security</span>
-          </a>
-        </li>
-      </ul>
+      <div class="group">
+        <h3>classroom</h3>
+        <ul>
+          <li><a class="card app" href="https://surikata3k.com/ditsmagics/"><span class="name">Dits Màgics</span><span class="desc">Touch typing in Catalan for kids, with 43 levels and stars to earn.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="https://surikata3k.com/web-apps/calc_hours_ra/"><span class="name">Learning Outcome Hours</span><span class="desc">Plan and spread the hours of a module’s learning outcomes (RA).</span><span class="arrow" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>passwords</h3>
+        <ul>
+          <li><a class="card app" href="https://surikata3k.com/web-apps/passgen/"><span class="name">PassForge</span><span class="desc">A different password for every site, from a single master key.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="https://surikata3k.com/web-apps/password_generator/"><span class="name">Password Generator</span><span class="desc">Random passwords with the length and characters you choose.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="https://surikata3k.com/web-apps/password_info/"><span class="name">Password Strength Checker</span><span class="desc">Check how strong a password really is.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="https://surikata3k.com/web-apps/password_calculator/"><span class="name">Entropy Calculator</span><span class="desc">Possible combinations and entropy by length and character set.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>security</h3>
+        <ul>
+          <li><a class="card app" href="https://surikata3k.com/web-apps/asymmetric_keys/"><span class="name">Asymmetric Key Simulator</span><span class="desc">Padlocks, keys and seals: learn how public-key cryptography works by playing.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
     </section>
+  </main>
 
-    <footer class="foot">
+  <footer class="site-footer">
+    <div>
+      <p class="label" style="margin-bottom:8px">say hello</p>
       <a class="mail" href="mailto:hello@surikata3k.com">hello@surikata3k.com</a>
-      <span class="legal">Apps licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="license" target="_blank">CC BY-NC-SA 4.0</a></span>
-    </footer>
-  </div>
-</body>
+    </div>
+    <p>Apps licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">CC BY-NC-SA 4.0</a>. Code on <a href="https://github.com/surikata3k/">GitHub</a>.</p>
+  </footer>
 
+</div>
+</body>
 </html>
