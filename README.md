@@ -1,14 +1,14 @@
 # Surikata3K
 
-Código de **[surikata3k.com](https://surikata3k.com)**, la página principal de mis proyectos: apuntes de sistemas, vídeos de YouTube y apps web educativas.
+Código de **[surikata3k.com](https://surikata3k.com)**, la página principal de mis proyectos: apuntes de sistemas, vídeos de YouTube y apps web.
 
 ## Qué hay en la web
 
-- **Apuntes**: sistemas, redes y bases de datos, en [docs.surikata3k.com](https://docs.surikata3k.com/)
+- **Apuntes**: sistemas operativos, redes, bases de datos, máquinas virtuales y contenedores, en [docs.surikata3k.com](https://docs.surikata3k.com/)
 - **Vídeos**: el canal [@Surikata3K](https://www.youtube.com/@Surikata3K) de YouTube
 - **Código**: todo en [GitHub](https://github.com/surikata3k/)
 - **Apps**: pequeñas apps que funcionan en el navegador, sin instalar nada ni servidor:
-  - *aula y docencia*: [Dits Màgics](https://surikata3k.com/ditsmagics/), [Planificador de horas de RA](https://surikata3k.com/apps/horas-ra/)
+  - *utilidades*: [Dits Màgics](https://surikata3k.com/ditsmagics/), [Planificador de horas de RA](https://surikata3k.com/apps/horas-ra/)
   - *contraseñas*: [PassForge](https://surikata3k.com/apps/passforge/), [Generador](https://surikata3k.com/apps/generador-contrasenas/), [Analizador](https://surikata3k.com/apps/analizador-contrasenas/), [Calculadora de entropía](https://surikata3k.com/apps/calculadora-entropia/)
   - *criptografía y seguridad*: [Simulador de clave asimétrica](https://surikata3k.com/apps/clave-asimetrica/) (con [las matemáticas de RSA](https://surikata3k.com/apps/clave-asimetrica/matematicas.html)), [Simulador de blockchain](https://surikata3k.com/apps/blockchain/)
 

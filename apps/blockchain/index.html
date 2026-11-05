@@ -146,7 +146,7 @@ footer a{color:var(--accent)}
     </div>
     <div class="hashpad">
       <label class="lab" for="hash-in">Datos</label>
-      <textarea id="hash-in">Hola, ASIX!</textarea>
+      <textarea id="hash-in">¡Hola, mundo!</textarea>
       <span class="lab">Hash</span>
       <div class="hashv big" id="hash-out"></div>
       <span class="meta" id="hash-meta"></span>
@@ -341,8 +341,8 @@ function renderChain(chain, host) {
 }
 
 /* ---------- Dades inicials (nonces minats per a dificultat 4) ---------- */
-const CHAIN_DATA = ['Bloque génesis', 'Clase de bases de datos', 'Práctica de redes', 'Examen de la UF1', 'Proyecto final'];
-const CHAIN_NONCES = [88772, 28648, 27556, 18394, 327706];
+const CHAIN_DATA = ['Bloque génesis', 'Clase de bases de datos', 'Práctica de redes', 'Entrega del proyecto', 'Proyecto final'];
+const CHAIN_NONCES = [100630, 91831, 12548, 17493, 16245];
 const TOKENS = [
   [[25,'Anna','Pau'],[4.27,'Marta','Jordi'],[19.22,'Laia','Biel']],
   [[10,'Pau','Marta'],[7.5,'Jordi','Anna'],[3,'Biel','Laia']],
@@ -363,7 +363,7 @@ const updHash = () => {
 hin.addEventListener('input', updHash); updHash();
 
 // Bloc
-const solo = makeChain(['Hola, ASIX!'], [62897], { noPrev: true, solo: true });
+const solo = makeChain(['¡Hola, mundo!'], [189], { noPrev: true, solo: true });
 renderChain(solo, document.getElementById('bloc-host'));
 
 // Cadena
