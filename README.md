@@ -8,7 +8,7 @@ Source of **[surikata3k.com](https://surikata3k.com)**, the home page for my pro
 - **Videos**: the [@Surikata3K](https://www.youtube.com/@Surikata3K) YouTube channel
 - **Code**: everything on [GitHub](https://github.com/surikata3k/)
 - **Apps**: small apps that run in the browser, with nothing to install and no server:
-  - *tools*: [Dits Màgics](https://surikata3k.com/ditsmagics/), [Learning outcome hours planner](https://surikata3k.com/apps/learning-outcome-hours/)
+  - *tools*: [Dits Màgics](https://surikata3k.com/ditsmagics/en/) (English, [Catalan](https://surikata3k.com/ditsmagics/), [Spanish](https://surikata3k.com/ditsmagics/es/)), [Learning outcome hours planner](https://surikata3k.com/apps/learning-outcome-hours/)
   - *passwords*: [PassForge](https://surikata3k.com/apps/passforge/), [Password generator](https://surikata3k.com/apps/password-generator/), [Password strength checker](https://surikata3k.com/apps/password-strength-checker/), [Entropy calculator](https://surikata3k.com/apps/password-entropy-calculator/)
   - *cryptography and security*: [Asymmetric key simulator](https://surikata3k.com/apps/asymmetric-key-simulator/) (with [the maths of RSA](https://surikata3k.com/apps/asymmetric-key-simulator/rsa-math.html)), [Blockchain simulator](https://surikata3k.com/apps/blockchain-simulator/)
 
@@ -28,7 +28,7 @@ tools/         build for the apps' Tailwind CSS and Lucide icons
 CNAME          custom domain for GitHub Pages (surikata3k.com)
 ```
 
-Dits Màgics lives in its own repository (it's a Catalan typing app, so it stays in Catalan) and is served at `surikata3k.com/ditsmagics/`.
+Dits Màgics lives in its own repository and is served at `surikata3k.com/ditsmagics/` (Catalan), `/ditsmagics/es/` (Spanish) and `/ditsmagics/en/` (English). It keeps its own playful design for children.
 
 ### Design
 
