@@ -1,11 +1,21 @@
 <!doctype html>
-<html lang="ca">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Simulador de Blockchain</title>
+<title>Simulador de blockchain: hash, minería y cadena de bloques · Surikata3K</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Simulador educatiu de blockchain: hash SHA-256, blocs, mineria, cadena, xarxa distribuïda i tokens.">
+<meta name="description" content="Simulador educativo de blockchain: hash SHA-256, bloques, minería con nonce, cadena, red distribuida y tokens. Modifica un bloque y mira cómo se rompe la cadena.">
+    <link rel="canonical" href="https://surikata3k.com/apps/blockchain/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Surikata3K">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Simulador de blockchain: hash, minería y cadena de bloques">
+    <meta property="og:description" content="Simulador educativo de blockchain: hash SHA-256, bloques, minería con nonce, cadena, red distribuida y tokens. Modifica un bloque y mira cómo se rompe la cadena.">
+    <meta property="og:url" content="https://surikata3k.com/apps/blockchain/">
+    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Simulador de blockchain", "url": "https://surikata3k.com/apps/blockchain/", "description": "Simulador educativo de blockchain: hash SHA-256, bloques, minería con nonce, cadena, red distribuida y tokens. Modifica un bloque y mira cómo se rompe la cadena.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233346c8'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.55'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.3'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -114,28 +124,28 @@ footer a{color:var(--accent)}
 <div class="wrap">
   <header class="top">
     <div>
-      <h1><span class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Simulador de Blockchain</h1>
-      <p class="sub">Toca les dades d'un bloc i mira com es trenca la cadena. Després torna-la a minar.</p>
+      <h1><span class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Simulador de blockchain</h1>
+      <p class="sub">Toca los datos de un bloque y mira cómo se rompe la cadena. Después vuelve a minarla.</p>
     </div>
-    <label class="diff" for="diff">Dificultat: el hash ha de començar per
+    <label class="diff" for="diff">Dificultad: el hash debe empezar por
       <select id="diff"><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option></select> zeros</label>
   </header>
 
-  <nav class="tabs" aria-label="Seccions">
+  <nav class="tabs" aria-label="Secciones">
     <a href="#hash"><span class="n">1</span>Hash</a>
-    <a href="#bloc"><span class="n">2</span>Bloc</a>
+    <a href="#bloc"><span class="n">2</span>Bloque</a>
     <a href="#cadena"><span class="n">3</span>Cadena</a>
-    <a href="#distribuida"><span class="n">4</span>Distribuïda</a>
+    <a href="#distribuida"><span class="n">4</span>Distribuida</a>
     <a href="#tokens"><span class="n">5</span>Tokens</a>
   </nav>
 
   <section class="view" id="v-hash">
     <div class="intro">
       <h2>Hash SHA-256</h2>
-      <p>Un hash és l'<b>empremta digital</b> d'unes dades: sempre té 64 caràcters hexadecimals (256 bits), la mateixa entrada dona sempre el mateix hash, i canviar una sola lletra el canvia completament.</p>
+      <p>Un hash es la <b>huella digital</b> de unos datos: siempre tiene 64 caracteres hexadecimales (256 bits), la misma entrada da siempre el mismo hash, y cambiar una sola letra lo cambia por completo.</p>
     </div>
     <div class="hashpad">
-      <label class="lab" for="hash-in">Dades</label>
+      <label class="lab" for="hash-in">Datos</label>
       <textarea id="hash-in">Hola, ASIX!</textarea>
       <span class="lab">Hash</span>
       <div class="hashv big" id="hash-out"></div>
@@ -145,25 +155,25 @@ footer a{color:var(--accent)}
 
   <section class="view" id="v-bloc" hidden>
     <div class="intro">
-      <h2>Un bloc i la mineria</h2>
-      <p>El hash del bloc es calcula a partir del <b>número</b>, el <b>nonce</b> i les <b>dades</b>. El bloc és vàlid (verd) quan el hash comença pels zeros que demana la dificultat. Si canvies les dades, el bloc deixa de ser vàlid: prem <b>Mina</b> per buscar un nonce nou per força bruta.</p>
+      <h2>Un bloque y la minería</h2>
+      <p>El hash del bloque se calcula a partir del <b>número</b>, el <b>nonce</b> y los <b>datos</b>. El bloque es válido (verde) cuando el hash empieza por los ceros que pide la dificultad. Si cambias los datos, el bloque deja de ser válido: pulsa <b>Mina</b> para buscar un nonce nuevo por fuerza bruta.</p>
     </div>
-    <div class="legend"><span class="ok"><i></i>Vàlid</span><span class="bad"><i></i>No vàlid</span></div>
+    <div class="legend"><span class="ok"><i></i>Válido</span><span class="bad"><i></i>No válido</span></div>
     <div id="bloc-host"></div>
   </section>
 
   <section class="view" id="v-cadena" hidden>
     <div class="intro">
       <h2>La cadena</h2>
-      <p>Cada bloc guarda el hash del <b>bloc anterior</b>. Si modifiques un bloc antic, el seu hash canvia i trenca tots els blocs que el segueixen. Per falsificar la història caldria tornar a minar tota la resta de la cadena.</p>
+      <p>Cada bloque guarda el hash del <b>bloque anterior</b>. Si modificas un bloque antiguo, su hash cambia y rompe todos los bloques que lo siguen. Para falsificar la historia habría que volver a minar todo el resto de la cadena.</p>
     </div>
     <div class="rail"><div class="chain" id="cadena-host"></div></div>
   </section>
 
   <section class="view" id="v-distribuida" hidden>
     <div class="intro">
-      <h2>Xarxa distribuïda</h2>
-      <p>Tres nodes guarden una còpia de la mateixa cadena. Modifica i remina la cadena d'un sol node: el seu darrer hash ja no coincidirà amb el dels altres, i la <b>majoria</b> de la xarxa el rebutjarà.</p>
+      <h2>Red distribuida</h2>
+      <p>Tres nodos guardan una copia de la misma cadena. Modifica y vuelve a minar la cadena de un solo nodo: su último hash ya no coincidirá con el de los demás, y la <b>mayoría</b> de la red lo rechazará.</p>
     </div>
     <div id="dist-host" style="display:flex;flex-direction:column;gap:14px"></div>
   </section>
@@ -171,15 +181,15 @@ footer a{color:var(--accent)}
   <section class="view" id="v-tokens" hidden>
     <div class="intro">
       <h2>Tokens</h2>
-      <p>En una criptomoneda, les dades de cada bloc són <b>transaccions</b>. Prova d'augmentar l'import d'una transacció antiga: tot el que ve després queda invalidat.</p>
+      <p>En una criptomoneda, los datos de cada bloque son <b>transacciones</b>. Prueba a aumentar el importe de una transacción antigua: todo lo que viene después queda invalidado.</p>
     </div>
     <div class="rail"><div class="chain" id="tokens-host"></div></div>
   </section>
 
   <footer>
-    <span>© 2026 <a href="https://surikata3k.com/#apps">web-apps</a> · <a href="https://surikata3k.com">surikata3k.com</a></span>
-    <span>Llicència <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
-    <span>Inspirat en la demo d'<a href="https://andersbrownworth.com/blockchain/" target="_blank" rel="noopener">Anders Brownworth</a></span>
+    <span>© 2026 <a href="/#apps">Apps de Surikata3K</a> · <a href="https://surikata3k.com">surikata3k.com</a></span>
+    <span>Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
+    <span>Inspirado en la demo de <a href="https://andersbrownworth.com/blockchain/" target="_blank" rel="noopener">Anders Brownworth</a></span>
   </footer>
 </div>
 
@@ -258,7 +268,7 @@ function recompute(chain, from = 0) {
       b.el.hash.innerHTML = hashHTML(b.hash);
       b.el.root.classList.toggle('bad', !b.valid);
       b.el.status.className = 'pill ' + (b.valid ? 'ok' : 'bad');
-      b.el.status.textContent = b.valid ? 'Vàlid' : 'No vàlid';
+      b.el.status.textContent = b.valid ? 'Válido' : 'No válido';
     }
   }
   chain.onChange && chain.onChange();
@@ -267,7 +277,7 @@ function recompute(chain, from = 0) {
 function mine(chain, i, btn) {
   const b = chain.blocks[i], p = prefix();
   let n = 0;
-  btn.disabled = true; btn.textContent = 'Minant…';
+  btn.disabled = true; btn.textContent = 'Minando…';
   const t0 = performance.now();
   const step = () => {
     const end = n + 4000;
@@ -276,7 +286,7 @@ function mine(chain, i, btn) {
       if (sha256(payload(b)).startsWith(p)) {
         b.el.nonce.value = b.nonce;
         btn.disabled = false; btn.textContent = 'Mina';
-        b.el.status.title = `${n + 1} intents en ${((performance.now() - t0) / 1000).toFixed(2)} s`;
+        b.el.status.title = `${n + 1} intentos en ${((performance.now() - t0) / 1000).toFixed(2)} s`;
         recompute(chain, i);
         return;
       }
@@ -295,17 +305,17 @@ function blockCard(chain, i) {
   art.className = 'block' + (chain.opts.solo ? ' solo' : '');
   const dataRow = b.txs
     ? `<div class="row"><span class="lab">Tx</span><div class="txs">${b.txs.map((t, k) => `
-        <div class="tx"><input type="text" class="amt" id="${id}-a${k}" data-k="${k}" data-f="amt" value="${t.amt}" aria-label="Import">
+        <div class="tx"><input type="text" class="amt" id="${id}-a${k}" data-k="${k}" data-f="amt" value="${t.amt}" aria-label="Importe">
         <span>€ de</span><input type="text" id="${id}-f${k}" data-k="${k}" data-f="from" value="${t.from}" aria-label="Origen">
-        <span class="arrow2">a</span><input type="text" class="to" id="${id}-t${k}" data-k="${k}" data-f="to" value="${t.to}" aria-label="Destí"></div>`).join('')}</div></div>`
-    : `<div class="row"><label for="${id}-d">Dades</label><textarea id="${id}-d" class="data">${b.data}</textarea></div>`;
+        <span class="arrow2">a</span><input type="text" class="to" id="${id}-t${k}" data-k="${k}" data-f="to" value="${t.to}" aria-label="Destino"></div>`).join('')}</div></div>`
+    : `<div class="row"><label for="${id}-d">Datos</label><textarea id="${id}-d" class="data">${b.data}</textarea></div>`;
   art.innerHTML = `
-    <div class="row"><label for="${id}-n">Bloc</label><div class="numwrap"><span>#</span><input type="text" inputmode="numeric" id="${id}-n" class="num" value="${b.num}"></div></div>
+    <div class="row"><label for="${id}-n">Bloque</label><div class="numwrap"><span>#</span><input type="text" inputmode="numeric" id="${id}-n" class="num" value="${b.num}"></div></div>
     <div class="row"><label for="${id}-o">Nonce</label><input type="text" inputmode="numeric" id="${id}-o" class="nonce" value="${b.nonce}"></div>
     ${dataRow}
     ${chain.opts.noPrev ? '' : `<div class="row"><span class="lab">Anterior</span><div class="hashv prev"></div></div>`}
     <div class="row"><span class="lab">Hash</span><div class="hashv hash"></div></div>
-    <div class="foot"><span class="pill ok">Vàlid</span><button type="button">Mina</button></div>`;
+    <div class="foot"><span class="pill ok">Válido</span><button type="button">Mina</button></div>`;
   b.el = {
     root: art, nonce: art.querySelector('.nonce'), prev: art.querySelector('.prev'),
     hash: art.querySelector('.hash'), status: art.querySelector('.pill'), btn: art.querySelector('button')
@@ -331,7 +341,7 @@ function renderChain(chain, host) {
 }
 
 /* ---------- Dades inicials (nonces minats per a dificultat 4) ---------- */
-const CHAIN_DATA = ['Bloc gènesi', 'Classe de bases de dades', 'Pràctica de xarxes', 'Examen de la UF1', 'Projecte final'];
+const CHAIN_DATA = ['Bloque génesis', 'Clase de bases de datos', 'Práctica de redes', 'Examen de la UF1', 'Proyecto final'];
 const CHAIN_NONCES = [88772, 28648, 27556, 18394, 327706];
 const TOKENS = [
   [[25,'Anna','Pau'],[4.27,'Marta','Jordi'],[19.22,'Laia','Biel']],
@@ -348,7 +358,7 @@ const updHash = () => {
   const h = sha256(hin.value);
   hout.textContent = h;
   const bytes = new TextEncoder().encode(hin.value).length;
-  hmeta.textContent = `${hin.value.length} caràcters (${bytes} bytes) → 64 caràcters hexadecimals`;
+  hmeta.textContent = `${hin.value.length} caracteres (${bytes} bytes) → 64 caracteres hexadecimales`;
 };
 hin.addEventListener('input', updHash); updHash();
 
@@ -364,7 +374,7 @@ const distHost = document.getElementById('dist-host'), peers = [];
 ['A', 'B', 'C'].forEach(name => {
   const sec = document.createElement('div');
   sec.className = 'peer';
-  sec.innerHTML = `<div class="peer-head"><h3>Node ${name}</h3><span class="tip"></span><span class="pill ok"></span></div><div class="rail"><div class="chain"></div></div>`;
+  sec.innerHTML = `<div class="peer-head"><h3>Nodo ${name}</h3><span class="tip"></span><span class="pill ok"></span></div><div class="rail"><div class="chain"></div></div>`;
   distHost.appendChild(sec);
   const ch = makeChain(CHAIN_DATA, CHAIN_NONCES);
   ch.peer = { name, tip: sec.querySelector('.tip'), pill: sec.querySelector('.peer-head .pill') };
@@ -377,9 +387,9 @@ const updPeers = () => {
     const allValid = p.blocks.every(b => b.valid);
     const agree = tips.filter(t => t === tips[i]).length;
     const ok = allValid && agree * 2 > peers.length;
-    p.peer.tip.innerHTML = `Darrer hash: <b>${tips[i].slice(0, 16)}…</b> · coincideix amb ${agree} de ${peers.length} nodes`;
+    p.peer.tip.innerHTML = `Último hash: <b>${tips[i].slice(0, 16)}…</b> · coincide con ${agree} de ${peers.length} nodos`;
     p.peer.pill.className = 'pill ' + (ok ? 'ok' : 'bad');
-    p.peer.pill.textContent = ok ? 'Acceptada per la majoria' : (allValid ? 'Rebutjada: en minoria' : 'Cadena no vàlida');
+    p.peer.pill.textContent = ok ? 'Aceptada por la mayoría' : (allValid ? 'Rechazada: en minoría' : 'Cadena no válida');
   });
 };
 peers.forEach(p => { p.onChange = updPeers; });

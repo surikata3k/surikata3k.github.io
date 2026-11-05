@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="ca" class="h-full bg-slate-50">
+<html lang="es" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de contrasenyes</title>
-    <meta name="description" content="Genera contrasenyes aleatòries i segures directament al navegador.">
+    <title>Generador de contraseñas seguras y aleatorias · Surikata3K</title>
+    <meta name="description" content="Genera contraseñas aleatorias y seguras directamente en el navegador, sin enviar nada a ningún servidor.">
+    <link rel="canonical" href="https://surikata3k.com/apps/generador-contrasenas/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Surikata3K">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Generador de contraseñas seguras y aleatorias">
+    <meta property="og:description" content="Genera contraseñas aleatorias y seguras directamente en el navegador, sin enviar nada a ningún servidor.">
+    <meta property="og:url" content="https://surikata3k.com/apps/generador-contrasenas/">
+    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Generador de contraseñas", "url": "https://surikata3k.com/apps/generador-contrasenas/", "description": "Genera contraseñas aleatorias y seguras directamente en el navegador, sin enviar nada a ningún servidor.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white' opacity='.45'/></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -31,25 +41,25 @@
                     <i data-lucide="key-round" class="w-6 h-6"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Generador de contrasenyes</h1>
-                    <p class="text-xs text-slate-500 hidden sm:block">Contrasenyes aleatòries i segures, generades al teu navegador</p>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Generador de contraseñas</h1>
+                    <p class="text-xs text-slate-500 hidden sm:block">Contraseñas aleatorias y seguras, generadas en tu navegador</p>
                 </div>
             </div>
             <button id="btnRegenerate" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors">
                 <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                <span>Generar-ne una altra</span>
+                <span>Generar otra</span>
             </button>
         </div>
     </header>
 
     <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- Opcions -->
+        <!-- Opciones -->
         <section class="lg:col-span-5">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
                     <i data-lucide="sliders-horizontal" class="w-5 h-5 text-indigo-600"></i>
-                    <h2 class="font-semibold text-slate-800 text-sm">Opcions</h2>
+                    <h2 class="font-semibold text-slate-800 text-sm">Opciones</h2>
                 </div>
 
                 <div class="p-4 flex flex-col gap-5">
@@ -63,39 +73,39 @@
                     </div>
 
                     <div>
-                        <p class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Caràcters</p>
+                        <p class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Caracteres</p>
                         <div class="grid grid-cols-2 gap-2">
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
-                                <input type="checkbox" id="optLower" checked class="accent-indigo-600 w-4 h-4"> Minúscules <span class="ml-auto font-mono text-xs text-slate-400">a-z</span>
+                                <input type="checkbox" id="optLower" checked class="accent-indigo-600 w-4 h-4"> Minúsculas <span class="ml-auto font-mono text-xs text-slate-400">a-z</span>
                             </label>
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
-                                <input type="checkbox" id="optUpper" checked class="accent-indigo-600 w-4 h-4"> Majúscules <span class="ml-auto font-mono text-xs text-slate-400">A-Z</span>
+                                <input type="checkbox" id="optUpper" checked class="accent-indigo-600 w-4 h-4"> Mayúsculas <span class="ml-auto font-mono text-xs text-slate-400">A-Z</span>
                             </label>
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
                                 <input type="checkbox" id="optDigits" checked class="accent-indigo-600 w-4 h-4"> Números <span class="ml-auto font-mono text-xs text-slate-400">0-9</span>
                             </label>
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
-                                <input type="checkbox" id="optSymbols" checked class="accent-indigo-600 w-4 h-4"> Símbols <span class="ml-auto font-mono text-xs text-slate-400">!@#</span>
+                                <input type="checkbox" id="optSymbols" checked class="accent-indigo-600 w-4 h-4"> Símbolos <span class="ml-auto font-mono text-xs text-slate-400">!@#</span>
                             </label>
                         </div>
                     </div>
 
                     <label class="flex items-start gap-2 text-sm cursor-pointer">
                         <input type="checkbox" id="optAmbiguous" class="accent-indigo-600 w-4 h-4 mt-0.5">
-                        <span>Evitar caràcters que es confonen
-                            <span class="block text-xs text-slate-400">Treu <span class="font-mono">I l 1 O 0 o | ` ' "</span>, útil si l'has de copiar a mà</span>
+                        <span>Evitar caracteres que se confunden
+                            <span class="block text-xs text-slate-400">Quita <span class="font-mono">I l 1 O 0 o | ` ' "</span>, útil si tienes que copiarla a mano</span>
                         </span>
                     </label>
 
                     <div id="errorAlert" class="hidden p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-start gap-2 text-rose-800 text-xs">
                         <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-600 shrink-0"></i>
-                        <span>Selecciona com a mínim un tipus de caràcter.</span>
+                        <span>Selecciona al menos un tipo de carácter.</span>
                     </div>
                 </div>
 
                 <div class="p-4 border-t border-slate-100 bg-slate-50/50 text-[11px] text-slate-500 flex items-start gap-2">
                     <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                    <span>Fa servir el generador criptogràfic del navegador (<span class="font-mono">crypto.getRandomValues</span>) i inclou com a mínim un caràcter de cada tipus seleccionat. No s'envia ni es guarda res.</span>
+                    <span>Usa el generador criptográfico del navegador (<span class="font-mono">crypto.getRandomValues</span>) e incluye al menos un carácter de cada tipo seleccionado. No se envía ni se guarda nada.</span>
                 </div>
             </div>
         </section>
@@ -106,7 +116,7 @@
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between gap-2">
                     <div class="flex items-center gap-2">
                         <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600"></i>
-                        <h2 class="font-semibold text-slate-800 text-sm">Contrasenya generada</h2>
+                        <h2 class="font-semibold text-slate-800 text-sm">Contraseña generada</h2>
                     </div>
                     <button id="btnCopy" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg shadow-sm transition-all active:scale-95">
                         <i data-lucide="copy" class="w-3.5 h-3.5"></i>
@@ -122,42 +132,42 @@
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Entropia</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Entropía</span>
                         <i data-lucide="sigma" class="w-4 h-4 text-indigo-500"></i>
                     </div>
                     <div id="kpiEntropy" class="text-2xl font-bold text-slate-900">—</div>
-                    <p class="text-[10px] text-slate-400 mt-0.5">bits aproximats</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">bits aproximados</p>
                 </div>
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Conjunt</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Conjunto</span>
                         <i data-lucide="type" class="w-4 h-4 text-blue-500"></i>
                     </div>
                     <div id="kpiPool" class="text-2xl font-bold text-slate-900">—</div>
-                    <p class="text-[10px] text-slate-400 mt-0.5">caràcters possibles</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">caracteres posibles</p>
                 </div>
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Fortalesa</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Fortaleza</span>
                         <i data-lucide="gauge" class="w-4 h-4 text-amber-500"></i>
                     </div>
                     <div id="kpiStrength" class="inline-flex px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">—</div>
-                    <p class="text-[10px] text-slate-400 mt-1">segons l'entropia</p>
+                    <p class="text-[10px] text-slate-400 mt-1">según la entropía</p>
                 </div>
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Força bruta</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Fuerza bruta</span>
                         <i data-lucide="timer" class="w-4 h-4 text-emerald-500"></i>
                     </div>
                     <div id="kpiTime" class="text-base font-bold text-slate-900 leading-tight">—</div>
-                    <p class="text-[10px] text-slate-400 mt-0.5">a 10<sup>10</sup> intents/s</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">a 10<sup>10</sup> intentos/s</p>
                 </div>
             </div>
 
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
                     <i data-lucide="list" class="w-5 h-5 text-indigo-600"></i>
-                    <h2 class="font-semibold text-slate-800 text-sm">Altres opcions amb la mateixa configuració</h2>
+                    <h2 class="font-semibold text-slate-800 text-sm">Otras opciones con la misma configuración</h2>
                 </div>
                 <ul id="alternatives" class="divide-y divide-slate-100"></ul>
             </div>
@@ -168,11 +178,10 @@
     <footer class="border-t border-slate-200 bg-white mt-6">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p class="text-center sm:text-left">
-                © 2026 <a href="../" class="font-medium text-slate-700 hover:text-indigo-600">web-apps</a> ·
-                Llicència <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" rel="license" target="_blank" class="font-medium text-slate-700 hover:text-indigo-600">CC BY-NC-SA 4.0</a>
+                © 2026 <a href="/#apps" class="font-medium text-slate-700 hover:text-indigo-600">Apps de Surikata3K</a> · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license" target="_blank" class="font-medium text-slate-700 hover:text-indigo-600">CC BY-NC-SA 4.0</a>
             </p>
             <div class="flex items-center gap-4">
-                <a href="../" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Totes les apps</a>
+                <a href="/#apps" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Todas las apps</a>
                 <a href="https://surikata3k.com" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="globe" class="w-3.5 h-3.5"></i> surikata3k.com</a>
             </div>
         </div>
@@ -180,7 +189,7 @@
 
     <div id="toast" class="fixed bottom-5 right-5 translate-y-20 opacity-0 transition-all duration-300 ease-out bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 text-xs z-50 pointer-events-none">
         <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
-        <span id="toastMessage">Copiat</span>
+        <span id="toastMessage">Copiado</span>
     </div>
 
     <script>
@@ -234,23 +243,23 @@
         }
 
         function classify(bits) {
-            if (bits < 28)  return { label: 'Molt feble',  pill: 'bg-rose-100 text-rose-700',       bar: '#e11d48' };
-            if (bits < 36)  return { label: 'Feble',       pill: 'bg-orange-100 text-orange-700',   bar: '#f97316' };
-            if (bits < 60)  return { label: 'Acceptable',  pill: 'bg-amber-100 text-amber-700',     bar: '#f59e0b' };
-            if (bits < 128) return { label: 'Forta',       pill: 'bg-emerald-100 text-emerald-700', bar: '#10b981' };
-            return             { label: 'Molt forta',  pill: 'bg-teal-100 text-teal-700',       bar: '#0d9488' };
+            if (bits < 28)  return { label: 'Muy débil',  pill: 'bg-rose-100 text-rose-700',       bar: '#e11d48' };
+            if (bits < 36)  return { label: 'Débil',       pill: 'bg-orange-100 text-orange-700',   bar: '#f97316' };
+            if (bits < 60)  return { label: 'Aceptable',   pill: 'bg-amber-100 text-amber-700',     bar: '#f59e0b' };
+            if (bits < 128) return { label: 'Fuerte',      pill: 'bg-emerald-100 text-emerald-700', bar: '#10b981' };
+            return             { label: 'Muy fuerte',  pill: 'bg-teal-100 text-teal-700',       bar: '#0d9488' };
         }
 
         function formatYearsLog10(log10Seconds) {
-            if (log10Seconds < 0) return 'Instantani';
+            if (log10Seconds < 0) return 'Instantáneo';
             const s = Math.pow(10, log10Seconds);
             if (s < 60) return Math.round(s) + ' s';
             if (s < 3600) return Math.round(s / 60) + ' min';
             if (s < 86400) return Math.round(s / 3600) + ' h';
-            if (s < 31536000) return Math.round(s / 86400) + ' dies';
+            if (s < 31536000) return Math.round(s / 86400) + ' días';
             const yLog = log10Seconds - Math.log10(31536000);
-            if (yLog < 6) return Math.round(Math.pow(10, yLog)).toLocaleString('ca') + ' anys';
-            return '10^' + Math.floor(yLog) + ' anys';
+            if (yLog < 6) return Math.round(Math.pow(10, yLog)).toLocaleString('es') + ' años';
+            return '10^' + Math.floor(yLog) + ' años';
         }
 
         let current = '';
@@ -307,9 +316,9 @@
             if (!text) return;
             try {
                 await navigator.clipboard.writeText(text);
-                showToast('Contrasenya copiada');
+                showToast('Contraseña copiada');
             } catch {
-                showToast('No s\'ha pogut copiar');
+                showToast('No se ha podido copiar');
             }
         }
 

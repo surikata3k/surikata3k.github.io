@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html lang="ca" class="h-full bg-slate-50">
+<html lang="es" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planificador i Distribuïdor d'Hores de RA</title>
+    <title>Planificador de horas de RA para módulos de FP · Surikata3K</title>
+    <meta name="description" content="Reparte automáticamente las horas de los resultados de aprendizaje (RA) de un módulo de FP en el calendario lectivo, teniendo en cuenta festivos y horario. Exporta a CSV y TXT.">
+    <link rel="canonical" href="https://surikata3k.com/apps/horas-ra/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Surikata3K">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Planificador de horas de RA para módulos de FP">
+    <meta property="og:description" content="Reparte automáticamente las horas de los resultados de aprendizaje (RA) de un módulo de FP en el calendario lectivo, teniendo en cuenta festivos y horario. Exporta a CSV y TXT.">
+    <meta property="og:url" content="https://surikata3k.com/apps/horas-ra/">
+    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Planificador de horas de RA", "url": "https://surikata3k.com/apps/horas-ra/", "description": "Reparte automáticamente las horas de los resultados de aprendizaje (RA) de un módulo de FP en el calendario lectivo, teniendo en cuenta festivos y horario. Exporta a CSV y TXT.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -52,15 +63,15 @@
                     <i data-lucide="calendar-range" class="w-6 h-6"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Planificador d'Hores de RA</h1>
-                    <p class="text-xs text-slate-500 hidden sm:block">Calculadora i distribuïdora lectiva automatitzada</p>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Planificador de horas de RA</h1>
+                    <p class="text-xs text-slate-500 hidden sm:block">Calculadora y distribuidora lectiva automatizada</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-2">
                 <button onclick="loadExampleData()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors">
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
-                    <span>Carregar Dades d'Exemple</span>
+                    <span>Cargar datos de ejemplo</span>
                 </button>
             </div>
         </div>
@@ -76,17 +87,17 @@
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <i data-lucide="file-text" class="w-5 h-5 text-indigo-600"></i>
-                        <h2 class="font-semibold text-slate-800 text-sm">Entrada de Dades (.txt)</h2>
+                        <h2 class="font-semibold text-slate-800 text-sm">Entrada de datos (.txt)</h2>
                     </div>
-                    <span class="text-xs text-slate-400">Format text pla</span>
+                    <span class="text-xs text-slate-400">Formato texto plano</span>
                 </div>
 
                 <!-- Dropzone / Upload Bar -->
                 <div class="p-4 border-b border-slate-100 bg-slate-50/30">
                     <label id="dropzone" for="fileInput" class="border-2 border-dashed border-slate-300 hover:border-indigo-400 bg-white hover:bg-indigo-50/30 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all group text-center">
                         <i data-lucide="upload-cloud" class="w-8 h-8 text-slate-400 group-hover:text-indigo-600 transition-colors mb-1"></i>
-                        <p class="text-xs font-medium text-slate-700">Prem per carregar o arrossega un fitxer <span class="text-indigo-600 font-semibold">.txt</span></p>
-                        <p class="text-[10px] text-slate-400 mt-0.5">Processament 100% local al navegador</p>
+                        <p class="text-xs font-medium text-slate-700">Pulsa para cargar o arrastra un archivo <span class="text-indigo-600 font-semibold">.txt</span></p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Procesamiento 100% local en el navegador</p>
                         <input id="fileInput" type="file" accept=".txt" class="hidden" onchange="handleFileUpload(event)">
                     </label>
                 </div>
@@ -94,20 +105,20 @@
                 <!-- Textarea Editor -->
                 <div class="p-4 flex-1 flex flex-col min-h-[350px]">
                     <div class="flex items-center justify-between mb-2">
-                        <label for="txtContent" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Contingut del Text</label>
+                        <label for="txtContent" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Contenido del texto</label>
                         <button onclick="clearContent()" class="text-xs text-slate-400 hover:text-rose-600 transition-colors flex items-center gap-1">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                            <span>Netejar</span>
+                            <span>Limpiar</span>
                         </button>
                     </div>
-                    <textarea id="txtContent" spellcheck="false" placeholder="Enganxa o escriu aquí les dades del curs, festius, horari i RAs..." class="flex-1 w-full p-3 font-mono text-xs text-slate-800 bg-slate-900/5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none resize-none transition-all"></textarea>
+                    <textarea id="txtContent" spellcheck="false" placeholder="Pega o escribe aquí los datos del curso, festivos, horario y RA..." class="flex-1 w-full p-3 font-mono text-xs text-slate-800 bg-slate-900/5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none resize-none transition-all"></textarea>
                 </div>
 
                 <!-- Action Button -->
                 <div class="p-4 border-t border-slate-100 bg-slate-50/50 flex gap-2">
                     <button onclick="processAndCalculate()" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-medium text-sm rounded-xl shadow-md shadow-indigo-100 flex items-center justify-center gap-2 transition-all">
                         <i data-lucide="calculator" class="w-4 h-4"></i>
-                        <span>Calcular Distribució</span>
+                        <span>Calcular distribución</span>
                     </button>
                 </div>
             </div>
@@ -119,7 +130,7 @@
             <!-- Error Banner (Hidden by default) -->
             <div id="errorAlert" class="hidden p-4 bg-rose-50 border border-rose-200 rounded-2xl flex items-start gap-3 text-rose-800">
                 <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600 shrink-0 mt-0.5"></i>
-                <div class="text-xs leading-relaxed" id="errorMessage">Ha hagut un error en llegir les dades.</div>
+                <div class="text-xs leading-relaxed" id="errorMessage">Ha habido un error al leer los datos.</div>
             </div>
 
             <!-- KPI Cards Row -->
@@ -127,50 +138,50 @@
                 <!-- Card 1 -->
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Hores Disp.</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Horas disp.</span>
                         <i data-lucide="clock" class="w-4 h-4 text-emerald-500"></i>
                     </div>
                     <div>
                         <div id="kpiAvailableHours" class="text-2xl font-bold text-slate-900">0h</div>
-                        <p class="text-[10px] text-slate-400 mt-0.5">Capacitat del curs</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Capacidad del curso</p>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Hores Sol·lic.</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Horas solic.</span>
                         <i data-lucide="list-checks" class="w-4 h-4 text-indigo-500"></i>
                     </div>
                     <div>
                         <div id="kpiRequestedHours" class="text-2xl font-bold text-slate-900">0h</div>
-                        <p class="text-[10px] text-slate-400 mt-0.5">Suma de tots els RAs</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Suma de todos los RA</p>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Estat Assign.</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Estado asign.</span>
                         <i data-lucide="scale" class="w-4 h-4 text-amber-500"></i>
                     </div>
                     <div>
                         <div id="kpiStatusBadge" class="inline-flex px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">
-                            Pendent
+                            Pendiente
                         </div>
-                        <p class="text-[10px] text-slate-400 mt-0.5" id="kpiStatusDesc">Sense dades</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5" id="kpiStatusDesc">Sin datos</p>
                     </div>
                 </div>
 
                 <!-- Card 4 -->
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Dies Lectius</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Días lectivos</span>
                         <i data-lucide="calendar" class="w-4 h-4 text-blue-500"></i>
                     </div>
                     <div>
                         <div id="kpiTeachingDays" class="text-2xl font-bold text-slate-900">0</div>
-                        <p class="text-[10px] text-slate-400 mt-0.5">Sessions efectives</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Sesiones efectivas</p>
                     </div>
                 </div>
             </div>
@@ -180,18 +191,18 @@
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between flex-wrap gap-2">
                     <div class="flex items-center gap-2">
                         <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600"></i>
-                        <h2 class="font-semibold text-slate-800 text-sm">Resum de la Distribució (Format de Sortida)</h2>
+                        <h2 class="font-semibold text-slate-800 text-sm">Resumen de la distribución (formato de salida)</h2>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="copyFormattedText()" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg shadow-sm transition-all active:scale-95">
                             <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                            <span id="copyBtnText">Copiar al portapapers</span>
+                            <span id="copyBtnText">Copiar al portapapeles</span>
                         </button>
                     </div>
                 </div>
                 
                 <div class="p-4 bg-slate-900">
-                    <pre id="outputFormattedText" class="font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[120px] selection:bg-indigo-500 selection:text-white">// Els resultats calculats apareixeran aquí...</pre>
+                    <pre id="outputFormattedText" class="font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[120px] selection:bg-indigo-500 selection:text-white">// Los resultados calculados aparecerán aquí...</pre>
                 </div>
             </div>
 
@@ -200,7 +211,7 @@
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <i data-lucide="table" class="w-5 h-5 text-indigo-600"></i>
-                        <h2 class="font-semibold text-slate-800 text-sm">Detall per Resultat d'Aprenentatge</h2>
+                        <h2 class="font-semibold text-slate-800 text-sm">Detalle por resultado de aprendizaje</h2>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="downloadCSV()" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-slate-600 hover:text-slate-900 border border-slate-200 rounded-md hover:bg-slate-50 transition-colors">
@@ -219,15 +230,15 @@
                         <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200">
                             <tr>
                                 <th class="py-3 px-4">RA</th>
-                                <th class="py-3 px-4">Data Inici</th>
-                                <th class="py-3 px-4">Data Fi</th>
-                                <th class="py-3 px-4 text-center">Hores Adjudicades</th>
-                                <th class="py-3 px-4">Tipus Assignació</th>
+                                <th class="py-3 px-4">Fecha inicio</th>
+                                <th class="py-3 px-4">Fecha fin</th>
+                                <th class="py-3 px-4 text-center">Horas adjudicadas</th>
+                                <th class="py-3 px-4">Tipo de asignación</th>
                             </tr>
                         </thead>
                         <tbody id="raTableBody" class="divide-y divide-slate-100 text-slate-700 font-medium">
                             <tr>
-                                <td colspan="5" class="py-8 text-center text-slate-400 italic">No hi ha dades per mostrar. Premeu "Calcular Distribució".</td>
+                                <td colspan="5" class="py-8 text-center text-slate-400 italic">No hay datos para mostrar. Pulsa "Calcular distribución".</td>
                             </tr>
                         </tbody>
                     </table>
@@ -240,8 +251,8 @@
                     <div class="flex items-center gap-2">
                         <i data-lucide="calendar-days" class="w-5 h-5 text-indigo-600"></i>
                         <div>
-                            <h2 class="font-semibold text-slate-800 text-sm">Calendari Lectiu Desglossat per Dies</h2>
-                            <p class="text-[11px] text-slate-400">Veure cada dia de classe amb les hores i el RA assignat</p>
+                            <h2 class="font-semibold text-slate-800 text-sm">Calendario lectivo desglosado por días</h2>
+                            <p class="text-[11px] text-slate-400">Ver cada día de clase con las horas y el RA asignado</p>
                         </div>
                     </div>
                     <i id="calendarChevron" data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-200"></i>
@@ -252,15 +263,15 @@
                         <table class="w-full text-left text-xs">
                             <thead class="bg-slate-100 text-slate-500 uppercase text-[10px] tracking-wider sticky top-0">
                                 <tr>
-                                    <th class="py-2 px-3">Data</th>
-                                    <th class="py-2 px-3">Dia</th>
-                                    <th class="py-2 px-3 text-center">Hores</th>
-                                    <th class="py-2 px-3">RA Assignat</th>
+                                    <th class="py-2 px-3">Fecha</th>
+                                    <th class="py-2 px-3">Día</th>
+                                    <th class="py-2 px-3 text-center">Horas</th>
+                                    <th class="py-2 px-3">RA asignado</th>
                                 </tr>
                             </thead>
                             <tbody id="dayBreakdownBody" class="divide-y divide-slate-100 text-slate-600">
                                 <tr>
-                                    <td colspan="4" class="py-4 text-center text-slate-400">Calcular per carregar el calendari.</td>
+                                    <td colspan="4" class="py-4 text-center text-slate-400">Calcula para cargar el calendario.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -275,11 +286,10 @@
     <footer class="border-t border-slate-200 bg-white mt-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p class="text-center sm:text-left">
-                © 2026 <a href="../" class="font-medium text-slate-700 hover:text-indigo-600">web-apps</a> ·
-                Llicència <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" rel="license" target="_blank" class="font-medium text-slate-700 hover:text-indigo-600">CC BY-NC-SA 4.0</a>
+                © 2026 <a href="/#apps" class="font-medium text-slate-700 hover:text-indigo-600">Apps de Surikata3K</a> · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license" target="_blank" class="font-medium text-slate-700 hover:text-indigo-600">CC BY-NC-SA 4.0</a>
             </p>
             <div class="flex items-center gap-4">
-                <a href="../" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Totes les apps</a>
+                <a href="/#apps" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Todas las apps</a>
                 <a href="https://surikata3k.com" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="globe" class="w-3.5 h-3.5"></i> surikata3k.com</a>
             </div>
         </div>
@@ -288,16 +298,16 @@
     <!-- Toast Notification Container -->
     <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 ease-out bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 text-xs z-50 pointer-events-none">
         <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
-        <span id="toastMessage">Acció realitzada amb èxit</span>
+        <span id="toastMessage">Acción realizada con éxito</span>
     </div>
 
     <!-- JavaScript Logic -->
     <script>
         // Default sample data provided by the user
-        const SAMPLE_TEXT_DATA = `Data ini: 14/09/2026 
-Data fi: 21/05/2027
+        const SAMPLE_TEXT_DATA = `Fecha inicio: 14/09/2026
+Fecha fin: 21/05/2027
 
-Dies i periodes festius
+Días y periodos festivos
 29/09/2026
 12/10/2026
 30/10/2026
@@ -309,22 +319,22 @@ Dies i periodes festius
 10/05/2027
 11/05/2027
 
-Hores de classe per dia:
-Dilluns: 0
-Dimarts: 2
-Dimecres: 0
-Dijous: 0
-Divendres: 0
+Horas de clase por día:
+Lunes: 0
+Martes: 2
+Miércoles: 0
+Jueves: 0
+Viernes: 0
 
-Hores per cada RA:
+Horas por cada RA:
 RA1: 14
 RA2: 13
 RA3: 13
 RA4: 13
 RA5: 13`;
 
-        // Day of week Catalan names array (0 = Diumenge, 1 = Dilluns, ...)
-        const DAY_NAMES = ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'];
+        // Day of week names (0 = Domingo, 1 = Lunes, ...)
+        const DAY_NAMES = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
         // Global calculation state
         let lastCalculatedResults = null;
@@ -360,7 +370,7 @@ RA5: 13`;
             document.getElementById('txtContent').value = SAMPLE_TEXT_DATA;
             hideError();
             processAndCalculate();
-            showToast("Dades d'exemple carregades");
+            showToast("Datos de ejemplo cargados");
         }
 
         function clearContent() {
@@ -377,7 +387,7 @@ RA5: 13`;
 
         function readSingleFile(file) {
             if (!file.name.endsWith('.txt') && file.type !== 'text/plain') {
-                showError("El fitxer seleccionat ha de ser de format text (.txt).");
+                showError("El archivo seleccionado debe ser de texto (.txt).");
                 return;
             }
             const reader = new FileReader();
@@ -385,7 +395,7 @@ RA5: 13`;
                 document.getElementById('txtContent').value = e.target.result;
                 hideError();
                 processAndCalculate();
-                showToast(`Fitxer "${file.name}" carregat`);
+                showToast(`Archivo "${file.name}" cargado`);
             };
             reader.readAsText(file);
         }
@@ -405,27 +415,27 @@ RA5: 13`;
                 if (!line || line.startsWith('#') || line.startsWith('//')) continue;
 
                 // Detect Start Date
-                const startMatch = line.match(/Data\s*ini\s*:\s*(\d{1,2}[\/\.-]\d{1,2}[\/\.-]\d{4})/i);
+                const startMatch = line.match(/(?:Data\s*ini(?:ci)?|Fecha\s*(?:de\s*)?inicio)\s*:\s*(\d{1,2}[\/\.-]\d{1,2}[\/\.-]\d{4})/i);
                 if (startMatch) {
                     startDate = parseDateDDMMYYYY(startMatch[1]);
                     continue;
                 }
 
                 // Detect End Date
-                const endMatch = line.match(/Data\s*fi\s*:\s*(\d{1,2}[\/\.-]\d{1,2}[\/\.-]\d{4})/i);
+                const endMatch = line.match(/(?:Data\s*fi|Fecha\s*(?:de\s*)?fin)\s*:\s*(\d{1,2}[\/\.-]\d{1,2}[\/\.-]\d{4})/i);
                 if (endMatch) {
                     endDate = parseDateDDMMYYYY(endMatch[1]);
                     continue;
                 }
 
                 // Detect Section Headers
-                if (/Dies\s*i\s*per[ií]odes\s*festius/i.test(line)) {
+                if (/(?:Dies\s*i\s*per[ií]odes\s*festius|D[ií]as\s*y\s*per[ií]odos\s*festivos|Festivos)/i.test(line)) {
                     currentSection = 'festius';
                     continue;
-                } else if (/Hores\s*de\s*classe\s*per\s*dia/i.test(line)) {
+                } else if (/(?:Hores\s*de\s*classe\s*per\s*dia|Horas\s*de\s*clase\s*por\s*d[ií]a)/i.test(line)) {
                     currentSection = 'horari';
                     continue;
-                } else if (/Hores\s*per\s*cada\s*RA/i.test(line)) {
+                } else if (/(?:Hores\s*per\s*cada\s*RA|Horas\s*por\s*cada\s*RA)/i.test(line)) {
                     currentSection = 'ra';
                     continue;
                 }
@@ -461,10 +471,10 @@ RA5: 13`;
                     
                     if (dayName.includes('dillun') || dayName.includes('lunes')) weeklyHours[1] = hours;
                     else if (dayName.includes('dimart') || dayName.includes('martes')) weeklyHours[2] = hours;
-                    else if (dayName.includes('dimecre') || dayName.includes('mi[eé]rcoles')) weeklyHours[3] = hours;
+                    else if (dayName.includes('dimecre') || /mi[eé]rcoles/.test(dayName)) weeklyHours[3] = hours;
                     else if (dayName.includes('dijou') || dayName.includes('jueves')) weeklyHours[4] = hours;
                     else if (dayName.includes('divendres') || dayName.includes('viernes')) weeklyHours[5] = hours;
-                    else if (dayName.includes('dissabte') || dayName.includes('s[aá]bado')) weeklyHours[6] = hours;
+                    else if (dayName.includes('dissabte') || /s[aá]bado/.test(dayName)) weeklyHours[6] = hours;
                     else if (dayName.includes('diumenge') || dayName.includes('domingo')) weeklyHours[0] = hours;
                     continue;
                 }
@@ -481,13 +491,13 @@ RA5: 13`;
             }
 
             if (!startDate || !endDate) {
-                throw new Error("Falta la data d'inici o de finalització al fitxer (format DD/MM/YYYY).");
+                throw new Error("Falta la fecha de inicio o de fin en el archivo (formato DD/MM/AAAA).");
             }
             if (startDate > endDate) {
-                throw new Error("La data d'inici no pot ser posterior a la data de fi.");
+                throw new Error("La fecha de inicio no puede ser posterior a la fecha de fin.");
             }
             if (raList.length === 0) {
-                throw new Error("No s'ha trobat cap RA especificat (ex. 'RA1: 14').");
+                throw new Error("No se ha encontrado ningún RA (ej. 'RA1: 14').");
             }
 
             return { startDate, endDate, holidays, weeklyHours, raList };
@@ -521,7 +531,7 @@ RA5: 13`;
         function processAndCalculate() {
             const text = document.getElementById('txtContent').value;
             if (!text.trim()) {
-                showError("L'àrea de text està buida. Enganxa un contingut o carrega un fitxer.");
+                showError("El área de texto está vacía. Pega un contenido o carga un archivo.");
                 return;
             }
 
@@ -555,7 +565,7 @@ RA5: 13`;
                 const totalRequestedHours = config.raList.reduce((sum, r) => sum + r.requestedHours, 0);
 
                 if (totalAvailableHours === 0) {
-                    throw new Error("No hi ha cap hora lectiva disponible entre les dates indicades (comprova els dies festius i l'horari setmanal).");
+                    throw new Error("No hay ninguna hora lectiva disponible entre las fechas indicadas (revisa los festivos y el horario semanal).");
                 }
 
                 // 2. Allocate hours per RA (Sufficient vs Proportional)
@@ -569,7 +579,7 @@ RA5: 13`;
                         name: ra.name,
                         requestedHours: ra.requestedHours,
                         assignedHours: ra.requestedHours,
-                        type: 'Assignat'
+                        type: 'Asignado'
                     }));
                 } else {
                     // Proportional distribution (Largest Remainder / Hamilton Method for integers)
@@ -585,7 +595,7 @@ RA5: 13`;
                             floorShare: floorShare,
                             remainder: remainder,
                             assignedHours: floorShare,
-                            type: 'Assignació proporcional'
+                            type: 'Asignación proporcional'
                         };
                     });
 
@@ -667,15 +677,15 @@ RA5: 13`;
 
             if (!res.isProportional) {
                 badgeEl.className = "inline-flex px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800";
-                badgeEl.textContent = "Suficient";
-                descEl.textContent = "Assignació 100% directa";
+                badgeEl.textContent = "Suficiente";
+                descEl.textContent = "Asignación 100% directa";
             } else {
                 badgeEl.className = "inline-flex px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800";
                 badgeEl.textContent = "Proporcional";
-                descEl.textContent = "Hores ajustades per capacitat";
+                descEl.textContent = "Horas ajustadas por capacidad";
             }
 
-            // Render Output Text Block (Format required: RA1 - Data inici - Data fi - Hores - Assignat o proporcional.)
+            // Render Output Text Block (Format: RA1 - Fecha inicio - Fecha fin - Horas - Asignado o proporcional.)
             const textLines = res.allocatedRAs.map(ra => {
                 return `${ra.name} - ${ra.startDate} - ${ra.endDate} - ${ra.assignedHours}h - ${ra.type}.`;
             });
@@ -740,13 +750,13 @@ RA5: 13`;
             try {
                 document.execCommand('copy');
                 const btnText = document.getElementById('copyBtnText');
-                btnText.textContent = "¡Copiat!";
-                showToast("Resultats copiats al portapapers");
+                btnText.textContent = "¡Copiado!";
+                showToast("Resultados copiados al portapapeles");
                 setTimeout(() => {
-                    btnText.textContent = "Copiar al portapapers";
+                    btnText.textContent = "Copiar al portapapeles";
                 }, 2000);
             } catch (err) {
-                showError("No s'ha pogut copiar el text.");
+                showError("No se ha podido copiar el texto.");
             } finally {
                 document.body.removeChild(textarea);
             }
@@ -761,23 +771,23 @@ RA5: 13`;
 
         function downloadTXT() {
             if (!lastCalculatedResults) {
-                showError("Calcula primer la distribució per poder descarregar el fitxer.");
+                showError("Calcula primero la distribución para poder descargar el archivo.");
                 return;
             }
             const text = document.getElementById('outputFormattedText').textContent;
-            downloadFile("distribució_RA.txt", text, "text/plain");
+            downloadFile("distribucion_RA.txt", text, "text/plain");
         }
 
         function downloadCSV() {
             if (!lastCalculatedResults) {
-                showError("Calcula primer la distribució per poder descarregar el fitxer.");
+                showError("Calcula primero la distribución para poder descargar el archivo.");
                 return;
             }
-            let csv = "RA,Data Inici,Data Fi,Hores Adjudicades,Tipus Assignació\n";
+            let csv = "RA,Fecha inicio,Fecha fin,Horas adjudicadas,Tipo de asignación\n";
             lastCalculatedResults.allocatedRAs.forEach(ra => {
                 csv += `"${ra.name}","${ra.startDate}","${ra.endDate}",${ra.assignedHours},"${ra.type}"\n`;
             });
-            downloadFile("distribució_RA.csv", csv, "text/csv");
+            downloadFile("distribucion_RA.csv", csv, "text/csv");
         }
 
         function downloadFile(filename, text, mimeType) {
@@ -788,7 +798,7 @@ RA5: 13`;
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
-            showToast(`S'ha descarregat ${filename}`);
+            showToast(`Se ha descargado ${filename}`);
         }
 
         function showError(msg) {

@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="ca" class="h-full bg-slate-50">
+<html lang="es" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora d'entropia de contrasenyes</title>
-    <meta name="description" content="Calcula les combinacions possibles, l'entropia i el temps d'un atac de força bruta segons la longitud i els tipus de caràcters.">
+    <title>Calculadora de entropía de contraseñas y tiempo de fuerza bruta · Surikata3K</title>
+    <meta name="description" content="Calcula las combinaciones posibles, la entropía y el tiempo de un ataque de fuerza bruta según la longitud y los tipos de caracteres.">
+    <link rel="canonical" href="https://surikata3k.com/apps/calculadora-entropia/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Surikata3K">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Calculadora de entropía de contraseñas y tiempo de fuerza bruta">
+    <meta property="og:description" content="Calcula las combinaciones posibles, la entropía y el tiempo de un ataque de fuerza bruta según la longitud y los tipos de caracteres.">
+    <meta property="og:url" content="https://surikata3k.com/apps/calculadora-entropia/">
+    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Calculadora de entropía", "url": "https://surikata3k.com/apps/calculadora-entropia/", "description": "Calcula las combinaciones posibles, la entropía y el tiempo de un ataque de fuerza bruta según la longitud y los tipos de caracteres.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white' opacity='.45'/></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -30,25 +40,25 @@
                     <i data-lucide="calculator" class="w-6 h-6"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Calculadora d'entropia</h1>
-                    <p class="text-xs text-slate-500 hidden sm:block">Combinacions, entropia i temps de força bruta d'una contrasenya</p>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Calculadora de entropía</h1>
+                    <p class="text-xs text-slate-500 hidden sm:block">Combinaciones, entropía y tiempo de fuerza bruta de una contraseña</p>
                 </div>
             </div>
             <button id="resetBtn" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors">
                 <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                <span>Restablir</span>
+                <span>Restablecer</span>
             </button>
         </div>
     </header>
 
     <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- Paràmetres -->
+        <!-- Parámetros -->
         <section class="lg:col-span-5">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
                     <i data-lucide="sliders-horizontal" class="w-5 h-5 text-indigo-600"></i>
-                    <h2 class="font-semibold text-slate-800 text-sm">Paràmetres</h2>
+                    <h2 class="font-semibold text-slate-800 text-sm">Parámetros</h2>
                 </div>
 
                 <div class="p-4 flex flex-col gap-5">
@@ -59,40 +69,40 @@
                                 class="w-20 px-2 py-0.5 text-right font-mono text-sm font-semibold text-indigo-700 bg-indigo-50 border border-indigo-100 rounded-md outline-none focus:ring-2 focus:ring-indigo-100">
                         </div>
                         <input id="length" type="range" min="1" max="64" value="12" class="w-full">
-                        <div class="flex justify-between text-[10px] text-slate-400 mt-1"><span>1</span><span>64 (o escriu-ne més a la casella)</span></div>
+                        <div class="flex justify-between text-[10px] text-slate-400 mt-1"><span>1</span><span>64 (o escribe más en la casilla)</span></div>
                     </div>
 
                     <div>
-                        <p class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Conjunts de caràcters</p>
+                        <p class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Conjuntos de caracteres</p>
                         <div class="grid grid-cols-2 gap-2">
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
-                                <input type="checkbox" id="lower" checked class="accent-indigo-600 w-4 h-4"> Minúscules <span class="ml-auto font-mono text-xs text-slate-400">26</span>
+                                <input type="checkbox" id="lower" checked class="accent-indigo-600 w-4 h-4"> Minúsculas <span class="ml-auto font-mono text-xs text-slate-400">26</span>
                             </label>
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
-                                <input type="checkbox" id="upper" checked class="accent-indigo-600 w-4 h-4"> Majúscules <span class="ml-auto font-mono text-xs text-slate-400">26</span>
+                                <input type="checkbox" id="upper" checked class="accent-indigo-600 w-4 h-4"> Mayúsculas <span class="ml-auto font-mono text-xs text-slate-400">26</span>
                             </label>
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
                                 <input type="checkbox" id="numbers" checked class="accent-indigo-600 w-4 h-4"> Números <span class="ml-auto font-mono text-xs text-slate-400">10</span>
                             </label>
                             <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 cursor-pointer text-sm">
-                                <input type="checkbox" id="symbols" class="accent-indigo-600 w-4 h-4"> Símbols <span id="symbolsCount" class="ml-auto font-mono text-xs text-slate-400">32</span>
+                                <input type="checkbox" id="symbols" class="accent-indigo-600 w-4 h-4"> Símbolos <span id="symbolsCount" class="ml-auto font-mono text-xs text-slate-400">32</span>
                             </label>
                         </div>
                     </div>
 
                     <div>
-                        <label for="symbolsList" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Símbols (editable)</label>
+                        <label for="symbolsList" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Símbolos (editable)</label>
                         <input id="symbolsList" type="text" spellcheck="false" value="!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~"
                             class="mt-1.5 w-full px-3 py-2.5 font-mono text-xs bg-slate-900/5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all">
                     </div>
 
                     <div>
-                        <label for="speed" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Velocitat de l'atacant</label>
+                        <label for="speed" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Velocidad del atacante</label>
                         <select id="speed" class="mt-1.5 w-full px-3 py-2.5 text-sm bg-white rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none">
-                            <option value="1000000">CPU — 10⁶ intents/s</option>
-                            <option value="1000000000">GPU moderna — 10⁹ intents/s</option>
-                            <option value="10000000000" selected>Equip domèstic d'última generació — 10¹⁰ intents/s</option>
-                            <option value="100000000000000">Granja o clúster — 10¹⁴ intents/s</option>
+                            <option value="1000000">CPU — 10⁶ intentos/s</option>
+                            <option value="1000000000">GPU moderna — 10⁹ intentos/s</option>
+                            <option value="10000000000" selected>Equipo doméstico de última generación — 10¹⁰ intentos/s</option>
+                            <option value="100000000000000">Granja o clúster — 10¹⁴ intentos/s</option>
                         </select>
                     </div>
                 </div>
@@ -104,15 +114,15 @@
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Conjunt</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Conjunto</span>
                         <i data-lucide="type" class="w-4 h-4 text-blue-500"></i>
                     </div>
                     <div id="charsetSize" class="text-2xl font-bold text-slate-900">—</div>
-                    <p class="text-[10px] text-slate-400 mt-0.5">caràcters possibles</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">caracteres posibles</p>
                 </div>
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Entropia</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Entropía</span>
                         <i data-lucide="sigma" class="w-4 h-4 text-indigo-500"></i>
                     </div>
                     <div id="entropy" class="text-2xl font-bold text-slate-900">—</div>
@@ -120,7 +130,7 @@
                 </div>
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Classificació</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Clasificación</span>
                         <i data-lucide="gauge" class="w-4 h-4 text-amber-500"></i>
                     </div>
                     <div id="classification" class="inline-flex px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">—</div>
@@ -128,18 +138,18 @@
                 </div>
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-[11px] font-medium uppercase tracking-wider">Temps mitjà</span>
+                        <span class="text-[11px] font-medium uppercase tracking-wider">Tiempo medio</span>
                         <i data-lucide="timer" class="w-4 h-4 text-emerald-500"></i>
                     </div>
                     <div id="timeAvgShort" class="text-base font-bold text-slate-900 leading-tight">—</div>
-                    <p class="text-[10px] text-slate-400 mt-0.5">per trobar-la</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">para encontrarla</p>
                 </div>
             </div>
 
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
                     <i data-lucide="activity" class="w-5 h-5 text-indigo-600"></i>
-                    <h2 class="font-semibold text-slate-800 text-sm">Barra d'entropia</h2>
+                    <h2 class="font-semibold text-slate-800 text-sm">Barra de entropía</h2>
                 </div>
                 <div class="p-4">
                     <div class="h-3 bg-slate-100 rounded-full overflow-hidden"><div id="entropyBar" class="h-full rounded-full transition-all duration-300" style="width:0%"></div></div>
@@ -156,12 +166,12 @@
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
                     <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600"></i>
-                    <h2 class="font-semibold text-slate-800 text-sm">Resultat detallat</h2>
+                    <h2 class="font-semibold text-slate-800 text-sm">Resultado detallado</h2>
                 </div>
                 <div class="p-4 bg-slate-900">
                     <pre id="detail" class="font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[100px]"></pre>
                 </div>
-                <p class="px-4 py-3 text-[11px] text-slate-400">Resultats aproximats. Les velocitats són estimades i depenen del maquinari i de l'algorisme amb què es guarda la contrasenya.</p>
+                <p class="px-4 py-3 text-[11px] text-slate-400">Resultados aproximados. Las velocidades son estimadas y dependen del hardware y del algoritmo con el que se guarda la contraseña.</p>
             </div>
         </section>
     </main>
@@ -170,11 +180,10 @@
     <footer class="border-t border-slate-200 bg-white mt-6">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p class="text-center sm:text-left">
-                © 2026 <a href="../" class="font-medium text-slate-700 hover:text-indigo-600">web-apps</a> ·
-                Llicència <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ca" rel="license" target="_blank" class="font-medium text-slate-700 hover:text-indigo-600">CC BY-NC-SA 4.0</a>
+                © 2026 <a href="/#apps" class="font-medium text-slate-700 hover:text-indigo-600">Apps de Surikata3K</a> · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license" target="_blank" class="font-medium text-slate-700 hover:text-indigo-600">CC BY-NC-SA 4.0</a>
             </p>
             <div class="flex items-center gap-4">
-                <a href="../" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Totes les apps</a>
+                <a href="/#apps" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Todas las apps</a>
                 <a href="https://surikata3k.com" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="globe" class="w-3.5 h-3.5"></i> surikata3k.com</a>
             </div>
         </div>
@@ -186,11 +195,11 @@
         const YEAR = 31536000;
 
         function classify(bits) {
-            if (bits < 28)  return { label: 'Molt feble',  pill: 'bg-rose-100 text-rose-700',       bar: '#e11d48', desc: 'Menys de 28 bits' };
-            if (bits < 36)  return { label: 'Feble',       pill: 'bg-orange-100 text-orange-700',   bar: '#f97316', desc: '28–35 bits' };
-            if (bits < 60)  return { label: 'Acceptable',  pill: 'bg-amber-100 text-amber-700',     bar: '#f59e0b', desc: '36–59 bits' };
-            if (bits < 128) return { label: 'Forta',       pill: 'bg-emerald-100 text-emerald-700', bar: '#10b981', desc: '60–127 bits' };
-            return             { label: 'Molt forta',  pill: 'bg-teal-100 text-teal-700',       bar: '#0d9488', desc: '128 bits o més' };
+            if (bits < 28)  return { label: 'Muy débil',  pill: 'bg-rose-100 text-rose-700',       bar: '#e11d48', desc: 'Menos de 28 bits' };
+            if (bits < 36)  return { label: 'Débil',       pill: 'bg-orange-100 text-orange-700',   bar: '#f97316', desc: '28–35 bits' };
+            if (bits < 60)  return { label: 'Aceptable',   pill: 'bg-amber-100 text-amber-700',     bar: '#f59e0b', desc: '36–59 bits' };
+            if (bits < 128) return { label: 'Fuerte',      pill: 'bg-emerald-100 text-emerald-700', bar: '#10b981', desc: '60–127 bits' };
+            return             { label: 'Muy fuerte',  pill: 'bg-teal-100 text-teal-700',       bar: '#0d9488', desc: '128 bits o más' };
         }
 
         function symbolCount() {
@@ -199,29 +208,29 @@
 
         function formatCombinations(charset, length, entropy) {
             const digits = entropy * Math.log10(2);
-            if (digits < 30) return (BigInt(charset) ** BigInt(length)).toLocaleString('ca');
+            if (digits < 30) return (BigInt(charset) ** BigInt(length)).toLocaleString('es');
             const p = Math.floor(digits);
-            return Math.pow(10, digits - p).toFixed(3) + ' × 10^' + p + '  (' + (p + 1).toLocaleString('ca') + ' xifres)';
+            return Math.pow(10, digits - p).toFixed(3) + ' × 10^' + p + '  (' + (p + 1).toLocaleString('es') + ' cifras)';
         }
 
         function humanTime(log10s) {
-            if (log10s < -3) return 'menys d\'1 ms';
+            if (log10s < -3) return 'menos de 1 ms';
             if (log10s >= 15) {
                 const y = log10s - Math.log10(YEAR);
                 const p = Math.floor(y);
-                return '≈ ' + Math.pow(10, y - p).toFixed(2) + ' × 10^' + p + ' anys';
+                return '≈ ' + Math.pow(10, y - p).toFixed(2) + ' × 10^' + p + ' años';
             }
             const n = Math.pow(10, log10s);
             if (n < 1) return (n * 1000).toFixed(1) + ' ms';
             if (n < 60) return n.toFixed(1) + ' s';
             if (n < 3600) return (n / 60).toFixed(1) + ' min';
             if (n < 86400) return (n / 3600).toFixed(1) + ' h';
-            if (n < YEAR) return (n / 86400).toFixed(1) + ' dies';
+            if (n < YEAR) return (n / 86400).toFixed(1) + ' días';
             const years = n / YEAR;
-            if (years < 1e3) return years.toFixed(1) + ' anys';
-            if (years < 1e6) return (years / 1e3).toFixed(1) + ' mil anys';
-            if (years < 1e9) return (years / 1e6).toFixed(1) + ' milions d\'anys';
-            return (years / 1e9).toFixed(1) + ' mil milions d\'anys';
+            if (years < 1e3) return years.toFixed(1) + ' años';
+            if (years < 1e6) return (years / 1e3).toFixed(1) + ' mil años';
+            if (years < 1e9) return (years / 1e6).toFixed(1) + ' millones de años';
+            return (years / 1e9).toFixed(1) + ' mil millones de años';
         }
 
         function compute() {
@@ -239,18 +248,18 @@
 
             if (!charset) {
                 $('entropy').textContent = '0';
-                $('classification').textContent = 'Sense conjunt';
+                $('classification').textContent = 'Sin conjunto';
                 $('classification').className = 'inline-flex px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-100 text-rose-700';
-                $('classificationDesc').textContent = 'Tria algun tipus de caràcter';
+                $('classificationDesc').textContent = 'Elige algún tipo de carácter';
                 $('entropyBar').style.width = '0%';
                 $('timeAvgShort').textContent = '—';
-                $('detail').textContent = '// Selecciona com a mínim un conjunt de caràcters.';
+                $('detail').textContent = '// Selecciona al menos un conjunto de caracteres.';
                 return;
             }
 
             const entropy = length * Math.log2(charset);
             const cls = classify(entropy);
-            $('entropy').textContent = entropy < 1000 ? entropy.toFixed(1) : Math.round(entropy).toLocaleString('ca');
+            $('entropy').textContent = entropy < 1000 ? entropy.toFixed(1) : Math.round(entropy).toLocaleString('es');
             $('classification').textContent = cls.label;
             $('classification').className = 'inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ' + cls.pill;
             $('classificationDesc').textContent = cls.desc;
@@ -263,12 +272,12 @@
             $('timeAvgShort').textContent = avg;
 
             $('detail').textContent =
-                `Fórmula               : ${charset}^${length} combinacions\n` +
-                `Combinacions possibles: ${formatCombinations(charset, length, entropy)}\n` +
-                `Entropia              : ${length} × log₂(${charset}) = ${entropy.toFixed(2)} bits\n` +
-                `Velocitat             : ${speed.toLocaleString('ca')} intents/s\n` +
-                `Temps mitjà           : ${avg}\n` +
-                `Pitjor cas            : ${humanTime(log10Worst)}`;
+                `Fórmula               : ${charset}^${length} combinaciones\n` +
+                `Combinaciones posibles: ${formatCombinations(charset, length, entropy)}\n` +
+                `Entropía              : ${length} × log₂(${charset}) = ${entropy.toFixed(2)} bits\n` +
+                `Velocidad             : ${speed.toLocaleString('es')} intentos/s\n` +
+                `Tiempo medio          : ${avg}\n` +
+                `Peor caso             : ${humanTime(log10Worst)}`;
         }
 
         // Sincronitzar slider i casella de longitud
