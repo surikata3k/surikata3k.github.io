@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://surikata3k.com/sitemap.xml
