@@ -12,20 +12,17 @@
     <meta property="og:title" content="Las matemáticas de RSA paso a paso: claves, cifrado y firma">
     <meta property="og:description" content="Aprende cómo funciona la criptografía de clave asimétrica (RSA): genera un par de claves, cifra, firma e intenta romperla, paso a paso y con números pequeños.">
     <meta property="og:url" content="https://surikata3k.com/apps/clave-asimetrica/matematicas.html">
-    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta property="og:image" content="https://surikata3k.com/img/og/matematicas-rsa.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Las matemáticas de RSA", "url": "https://surikata3k.com/apps/clave-asimetrica/matematicas.html", "description": "Aprende cómo funciona la criptografía de clave asimétrica (RSA): genera un par de claves, cifra, firma e intenta romperla, paso a paso y con números pequeños.", "inLanguage": "es", "learningResourceType": "Simulación interactiva", "isPartOf": {"@type": "WebApplication", "name": "Simulador de clave asimétrica", "url": "https://surikata3k.com/apps/clave-asimetrica/"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Las matemáticas de RSA", "url": "https://surikata3k.com/apps/clave-asimetrica/matematicas.html", "description": "Aprende cómo funciona la criptografía de clave asimétrica (RSA): genera un par de claves, cifra, firma e intenta romperla, paso a paso y con números pequeños.", "inLanguage": "es", "learningResourceType": "Simulación interactiva", "isPartOf": {"@type": "WebApplication", "name": "Simulador de clave asimétrica", "url": "https://surikata3k.com/apps/clave-asimetrica/", "image": "https://surikata3k.com/img/og/matematicas-rsa.png"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}}</script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white' opacity='.45'/></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/apps/assets/tailwind.min.css">
+    <script src="/apps/assets/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-        }
-    </script>
     <style>
         .tab[aria-selected="true"] { background: #4f46e5; color: #fff; border-color: #4f46e5; }
         .tab[aria-selected="true"] .tab-num { background: #fff; color: #4f46e5; }
@@ -322,6 +319,20 @@
             </div>
         </section>
     </main>
+
+    <!-- Información y apps relacionadas -->
+    <section class="border-t border-slate-200 bg-white mt-6" aria-labelledby="info-title">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-slate-700 leading-relaxed">
+            <h2 id="info-title" class="text-lg font-semibold text-slate-900">Para saber más</h2>
+            <ul class="mt-3 space-y-1 list-disc pl-5"><li><a href="https://docs.surikata3k.com/guides/asymmetric_encryption/" class="text-indigo-700 underline hover:text-indigo-900">Guía de cifrado asimétrico en los apuntes</a></li></ul>
+            <h2 class="mt-10 text-lg font-semibold text-slate-900">Otras apps que te pueden interesar</h2>
+            <ul class="mt-3 grid gap-3 sm:grid-cols-2">
+                <li><a href="/apps/clave-asimetrica/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Simulador de clave asimétrica</span><span class="block mt-1 text-sm text-slate-600">Candados y llaves para entender la criptografía de clave pública.</span></a></li>
+                <li><a href="/apps/blockchain/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Simulador de blockchain</span><span class="block mt-1 text-sm text-slate-600">Hash, bloques, minería y cadena distribuida en un simulador interactivo.</span></a></li>
+                <li><a href="/apps/generador-contrasenas/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Generador de contraseñas</span><span class="block mt-1 text-sm text-slate-600">Contraseñas aleatorias y seguras con la longitud y los caracteres que elijas.</span></a></li>
+            </ul>
+        </div>
+    </section>
 
     <!-- Peu de pàgina -->
     <footer class="border-t border-slate-200 bg-white mt-6">

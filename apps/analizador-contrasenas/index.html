@@ -12,20 +12,17 @@
     <meta property="og:title" content="Analizador de contraseñas: comprueba si tu contraseña es segura">
     <meta property="og:description" content="Comprueba lo segura que es una contraseña: composición, entropía, patrones débiles y tiempo estimado de un ataque de fuerza bruta.">
     <meta property="og:url" content="https://surikata3k.com/apps/analizador-contrasenas/">
-    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta property="og:image" content="https://surikata3k.com/img/og/analizador-contrasenas.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Analizador de contraseñas", "url": "https://surikata3k.com/apps/analizador-contrasenas/", "description": "Comprueba lo segura que es una contraseña: composición, entropía, patrones débiles y tiempo estimado de un ataque de fuerza bruta.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Analizador de contraseñas", "url": "https://surikata3k.com/apps/analizador-contrasenas/", "image": "https://surikata3k.com/img/og/analizador-contrasenas.png", "description": "Comprueba lo segura que es una contraseña: composición, entropía, patrones débiles y tiempo estimado de un ataque de fuerza bruta.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white' opacity='.45'/></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/apps/assets/tailwind.min.css">
+    <script src="/apps/assets/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-        }
-    </script>
 </head>
 <body class="min-h-full flex flex-col font-sans text-slate-800 antialiased bg-slate-50">
 
@@ -159,6 +156,29 @@
             </div>
         </section>
     </main>
+
+    <!-- Información y apps relacionadas -->
+    <section class="border-t border-slate-200 bg-white mt-6" aria-labelledby="info-title">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-slate-700 leading-relaxed">
+            <h2 id="info-title" class="text-2xl font-bold text-slate-900">Cómo saber si una contraseña es segura</h2>
+            <p class="mt-4">El analizador mide la longitud, los tipos de caracteres y la <strong>entropía</strong> de la contraseña, y estima cuánto tardaría un atacante en encontrarla probando todas las combinaciones. También busca patrones débiles que la entropía no detecta: palabras comunes, secuencias como «123» o «qwerty», caracteres repetidos y años.</p>
+            <p class="mt-4">El análisis se hace en tu navegador y la contraseña no se envía a ningún sitio. Aun así, para comprobar una contraseña que usas de verdad, es buena idea probar con una parecida en lugar de la original.</p>
+            <h3 class="mt-8 text-lg font-semibold text-slate-900">Qué significa cada indicador</h3>
+            <ul class="mt-3 space-y-2 list-disc pl-5"><li><strong>Entropía:</strong> cuántos bits de incertidumbre tiene; cada bit duplica las combinaciones.</li><li><strong>Conjunto:</strong> cuántos caracteres distintos podría tener cada posición.</li><li><strong>Tiempo de fuerza bruta:</strong> depende del equipo atacante que elijas en la lista.</li></ul>
+            <h3 class="mt-8 text-lg font-semibold text-slate-900">Preguntas frecuentes</h3>
+            <div class="mt-3 divide-y divide-slate-200 border-y border-slate-200">
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Qué es la entropía de una contraseña?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Es una medida, en bits, de lo impredecible que es. Cada bit duplica el número de combinaciones: 60 bits ya son más de un trillón de posibilidades.</p></details>
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Por qué una contraseña con mucha entropía puede ser débil?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Porque el cálculo supone que cada carácter es aleatorio. «Barcelona2024!» parece compleja, pero un ataque de diccionario prueba primero palabras, nombres y años, y la encuentra enseguida.</p></details>
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Cuánto se tarda en descifrar una contraseña?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Depende de su longitud y de cómo la guarde el servicio. Con algoritmos lentos como bcrypt, un atacante prueba miles de contraseñas por segundo; con hashes rápidos, miles de millones.</p></details>
+            </div>
+            <h3 class="mt-10 text-lg font-semibold text-slate-900">Otras apps que te pueden interesar</h3>
+            <ul class="mt-3 grid gap-3 sm:grid-cols-2">
+                <li><a href="/apps/generador-contrasenas/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Generador de contraseñas</span><span class="block mt-1 text-sm text-slate-600">Contraseñas aleatorias y seguras con la longitud y los caracteres que elijas.</span></a></li>
+                <li><a href="/apps/calculadora-entropia/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Calculadora de entropía</span><span class="block mt-1 text-sm text-slate-600">Combinaciones, entropía y tiempo de fuerza bruta según longitud y caracteres.</span></a></li>
+                <li><a href="/apps/passforge/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">PassForge</span><span class="block mt-1 text-sm text-slate-600">Una contraseña distinta para cada sitio a partir de una sola clave maestra.</span></a></li>
+            </ul>
+        </div>
+    </section>
 
     <!-- Peu de pàgina -->
     <footer class="border-t border-slate-200 bg-white mt-6">

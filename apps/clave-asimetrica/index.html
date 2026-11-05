@@ -12,20 +12,17 @@
     <meta property="og:title" content="Simulador de clave pública y privada (criptografía asimétrica)">
     <meta property="og:description" content="Entiende cómo funciona la criptografía de clave asimétrica (pública y privada) jugando con candados y llaves: enviar secretos, responder, firmar y descubrir a un impostor.">
     <meta property="og:url" content="https://surikata3k.com/apps/clave-asimetrica/">
-    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta property="og:image" content="https://surikata3k.com/img/og/clave-asimetrica.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Simulador de clave asimétrica", "url": "https://surikata3k.com/apps/clave-asimetrica/", "description": "Entiende cómo funciona la criptografía de clave asimétrica (pública y privada) jugando con candados y llaves: enviar secretos, responder, firmar y descubrir a un impostor.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Simulador de clave asimétrica", "url": "https://surikata3k.com/apps/clave-asimetrica/", "image": "https://surikata3k.com/img/og/clave-asimetrica.png", "description": "Entiende cómo funciona la criptografía de clave asimétrica (pública y privada) jugando con candados y llaves: enviar secretos, responder, firmar y descubrir a un impostor.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white' opacity='.45'/></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/apps/assets/tailwind.min.css">
+    <script src="/apps/assets/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-        }
-    </script>
     <style>
         .tab[aria-selected="true"] { background: #4f46e5; color: #fff; border-color: #4f46e5; }
         .tab[aria-selected="true"] .tab-num { background: #fff; color: #4f46e5; }
@@ -189,6 +186,31 @@
             </div>
         </section>
     </main>
+
+    <!-- Información y apps relacionadas -->
+    <section class="border-t border-slate-200 bg-white mt-6" aria-labelledby="info-title">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-slate-700 leading-relaxed">
+            <h2 id="info-title" class="text-2xl font-bold text-slate-900">Qué es la criptografía asimétrica</h2>
+            <p class="mt-4">La criptografía asimétrica, o de clave pública, usa un <strong>par de claves</strong>: una pública, que se puede compartir con cualquiera, y una privada, que solo tiene su propietario. Lo que se cifra con la clave pública solo se descifra con la privada, y lo que se firma con la privada se verifica con la pública.</p>
+            <p class="mt-4">El simulador lo explica con candados y llaves en cuatro escenarios: enviar un secreto, responder, firmar un mensaje y descubrir un ataque de intermediario. Al final, un reto de preguntas comprueba si sabes qué clave se usa en cada caso.</p>
+            <h3 class="mt-8 text-lg font-semibold text-slate-900">Dónde se usa</h3>
+            <ul class="mt-3 space-y-2 list-disc pl-5"><li><strong>HTTPS:</strong> la clave pública de cada web llega dentro de un certificado.</li><li><strong>SSH:</strong> la clave pública se copia al servidor en <code>authorized_keys</code>.</li><li><strong>Firma de correos y documentos:</strong> GPG, PGP y firma electrónica.</li></ul>
+            <h3 class="mt-8 text-lg font-semibold text-slate-900">Preguntas frecuentes</h3>
+            <div class="mt-3 divide-y divide-slate-200 border-y border-slate-200">
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Qué clave se usa para cifrar y cuál para descifrar?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Se cifra con la clave pública del destinatario, y él descifra con su clave privada.</p></details>
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Y para firmar un mensaje?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Al revés: se firma con la clave privada propia y cualquiera puede verificar la firma con la clave pública.</p></details>
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Qué es un ataque de intermediario?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Un atacante se interpone y entrega su propia clave pública haciéndose pasar por otra persona. Se evita comprobando que la clave es de quien dice ser, con certificados o con su huella digital (fingerprint).</p></details>
+            </div>
+            <h3 class="mt-10 text-lg font-semibold text-slate-900">Para saber más</h3>
+            <ul class="mt-3 space-y-1 list-disc pl-5"><li><a href="/apps/clave-asimetrica/matematicas.html" class="text-indigo-700 underline hover:text-indigo-900">Las matemáticas de RSA, paso a paso</a></li><li><a href="https://docs.surikata3k.com/guides/asymmetric_encryption/" class="text-indigo-700 underline hover:text-indigo-900">Guía de cifrado asimétrico en los apuntes</a></li></ul>
+            <h3 class="mt-10 text-lg font-semibold text-slate-900">Otras apps que te pueden interesar</h3>
+            <ul class="mt-3 grid gap-3 sm:grid-cols-2">
+                <li><a href="/apps/clave-asimetrica/matematicas.html" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Las matemáticas de RSA</span><span class="block mt-1 text-sm text-slate-600">RSA paso a paso: genera claves, cifra, firma e intenta romperla.</span></a></li>
+                <li><a href="/apps/blockchain/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Simulador de blockchain</span><span class="block mt-1 text-sm text-slate-600">Hash, bloques, minería y cadena distribuida en un simulador interactivo.</span></a></li>
+                <li><a href="/apps/passforge/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">PassForge</span><span class="block mt-1 text-sm text-slate-600">Una contraseña distinta para cada sitio a partir de una sola clave maestra.</span></a></li>
+            </ul>
+        </div>
+    </section>
 
     <!-- Peu de pàgina -->
     <footer class="border-t border-slate-200 bg-white mt-6">

@@ -12,20 +12,17 @@
     <meta property="og:title" content="Generador de contraseñas seguras y aleatorias">
     <meta property="og:description" content="Genera contraseñas aleatorias y seguras directamente en el navegador, sin enviar nada a ningún servidor.">
     <meta property="og:url" content="https://surikata3k.com/apps/generador-contrasenas/">
-    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta property="og:image" content="https://surikata3k.com/img/og/generador-contrasenas.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Generador de contraseñas", "url": "https://surikata3k.com/apps/generador-contrasenas/", "description": "Genera contraseñas aleatorias y seguras directamente en el navegador, sin enviar nada a ningún servidor.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Generador de contraseñas", "url": "https://surikata3k.com/apps/generador-contrasenas/", "image": "https://surikata3k.com/img/og/generador-contrasenas.png", "description": "Genera contraseñas aleatorias y seguras directamente en el navegador, sin enviar nada a ningún servidor.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white' opacity='.45'/></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/apps/assets/tailwind.min.css">
+    <script src="/apps/assets/lucide.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-        }
-    </script>
     <style>
         input[type=range] { accent-color: #4f46e5; }
         .pw-out { word-break: break-all; }
@@ -173,6 +170,29 @@
             </div>
         </section>
     </main>
+
+    <!-- Información y apps relacionadas -->
+    <section class="border-t border-slate-200 bg-white mt-6" aria-labelledby="info-title">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-slate-700 leading-relaxed">
+            <h2 id="info-title" class="text-2xl font-bold text-slate-900">Cómo crear una contraseña segura</h2>
+            <p class="mt-4">Una contraseña segura es <strong>larga, aleatoria y única</strong> para cada servicio. Este generador usa el generador criptográfico del navegador (<code>crypto.getRandomValues</code>), el mismo que usan las aplicaciones de seguridad, y garantiza al menos un carácter de cada tipo que elijas.</p>
+            <p class="mt-4">Para la mayoría de cuentas, 16 caracteres con minúsculas, mayúsculas, números y símbolos dan más de 100 bits de entropía, fuera del alcance de cualquier ataque de fuerza bruta actual. Si vas a tener que escribirla a mano, activa la opción para evitar caracteres que se confunden, como <code>l</code>, <code>1</code>, <code>O</code> y <code>0</code>.</p>
+            <h3 class="mt-8 text-lg font-semibold text-slate-900">Cómo se usa</h3>
+            <ul class="mt-3 space-y-2 list-disc pl-5"><li>Elige la longitud: 16 caracteres o más es una buena opción.</li><li>Marca los tipos de caracteres que acepta el servicio.</li><li>Copia la contraseña y guárdala en tu gestor de contraseñas.</li></ul>
+            <h3 class="mt-8 text-lg font-semibold text-slate-900">Preguntas frecuentes</h3>
+            <div class="mt-3 divide-y divide-slate-200 border-y border-slate-200">
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Cuántos caracteres debe tener una contraseña?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Al menos 12, y mejor 16 o más. Cada carácter extra multiplica las combinaciones posibles, por eso la longitud importa más que añadir un símbolo.</p></details>
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Es seguro generar contraseñas en una web?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">En esta sí: la contraseña se genera en tu navegador y no se envía ni se guarda en ningún servidor. Una vez cargada la página, funciona incluso sin conexión.</p></details>
+                <details class="group py-3"><summary class="cursor-pointer font-medium text-slate-900 list-none flex justify-between gap-4">¿Qué hago con la contraseña generada?<span class="text-slate-400 group-open:rotate-45 transition">+</span></summary><p class="mt-2 text-slate-600">Guárdala en un gestor de contraseñas como Bitwarden, KeePassXC o el de tu navegador, y no la reutilices en otros servicios.</p></details>
+            </div>
+            <h3 class="mt-10 text-lg font-semibold text-slate-900">Otras apps que te pueden interesar</h3>
+            <ul class="mt-3 grid gap-3 sm:grid-cols-2">
+                <li><a href="/apps/analizador-contrasenas/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Analizador de contraseñas</span><span class="block mt-1 text-sm text-slate-600">Comprueba lo segura que es una contraseña y detecta patrones débiles.</span></a></li>
+                <li><a href="/apps/calculadora-entropia/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">Calculadora de entropía</span><span class="block mt-1 text-sm text-slate-600">Combinaciones, entropía y tiempo de fuerza bruta según longitud y caracteres.</span></a></li>
+                <li><a href="/apps/passforge/" class="block h-full p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-300 hover:shadow-sm transition"><span class="block font-semibold text-slate-900">PassForge</span><span class="block mt-1 text-sm text-slate-600">Una contraseña distinta para cada sitio a partir de una sola clave maestra.</span></a></li>
+            </ul>
+        </div>
+    </section>
 
     <!-- Peu de pàgina -->
     <footer class="border-t border-slate-200 bg-white mt-6">

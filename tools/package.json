@@ -1,0 +1,15 @@
+{
+  "name": "surikata3k-tools",
+  "private": true,
+  "description": "Genera el CSS de Tailwind y el paquete de iconos de Lucide que usan las apps.",
+  "scripts": {
+    "css": "tailwindcss -c tailwind.config.js -i tailwind.input.css -o ../apps/assets/tailwind.min.css --minify",
+    "icons": "node lucide-collect.js ../apps/*/*.html && esbuild entry.js --bundle --minify --format=iife --outfile=../apps/assets/lucide.min.js",
+    "build": "npm run css && npm run icons"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "lucide": "1.69.0",
+    "tailwindcss": "^3.4.19"
+  }
+}

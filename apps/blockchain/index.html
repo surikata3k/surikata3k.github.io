@@ -13,9 +13,11 @@
     <meta property="og:title" content="Simulador de blockchain: hash, minería y cadena de bloques">
     <meta property="og:description" content="Simulador educativo de blockchain: hash SHA-256, bloques, minería con nonce, cadena, red distribuida y tokens. Modifica un bloque y mira cómo se rompe la cadena.">
     <meta property="og:url" content="https://surikata3k.com/apps/blockchain/">
-    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta property="og:image" content="https://surikata3k.com/img/og/blockchain.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Simulador de blockchain", "url": "https://surikata3k.com/apps/blockchain/", "description": "Simulador educativo de blockchain: hash SHA-256, bloques, minería con nonce, cadena, red distribuida y tokens. Modifica un bloque y mira cómo se rompe la cadena.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Simulador de blockchain", "url": "https://surikata3k.com/apps/blockchain/", "image": "https://surikata3k.com/img/og/blockchain.png", "description": "Simulador educativo de blockchain: hash SHA-256, bloques, minería con nonce, cadena, red distribuida y tokens. Modifica un bloque y mira cómo se rompe la cadena.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233346c8'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.55'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.3'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,6 +119,23 @@ footer{border-top:1px solid var(--line);padding-top:14px;font-size:13px;color:va
 footer a{color:var(--accent)}
 @media (max-width:480px){.row{grid-template-columns:1fr;gap:4px}.row>label,.lab{padding-top:0}.tx{grid-template-columns:64px auto 1fr;}.tx .arrow2,.tx .to{grid-column:auto}}
 @media (prefers-reduced-motion:reduce){.block{transition:none}}
+
+/* Sección informativa */
+.info{max-width:760px;margin:8px auto 0;padding:28px 0 8px;border-top:1px solid var(--line);color:var(--ink);line-height:1.6;width:100%}
+.info h2,.info h3{font-family:var(--f-display)}
+.info h2{font-size:1.5rem;margin:0 0 12px}
+.info h3{font-size:1.1rem;margin:28px 0 10px}
+.info p{margin:0 0 12px}
+.info ul{margin:0;padding-left:20px}
+.info li{margin:4px 0}
+.info details{border-bottom:1px solid var(--line);padding:10px 0}
+.info summary{cursor:pointer;font-weight:600}
+.info details p{margin:8px 0 0}
+.info .related{list-style:none;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.info .related a{display:block;height:100%;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:inherit;text-decoration:none}
+.info .related a:hover{border-color:currentColor}
+.info .related b{display:block}
+.info .related span{display:block;margin-top:4px;font-size:.9em;opacity:.8}
 </style>
 </head>
 <body>
@@ -186,6 +205,23 @@ footer a{color:var(--accent)}
     <div class="rail"><div class="chain" id="tokens-host"></div></div>
   </section>
 
+  <section class="info" aria-labelledby="info-title">
+    <h2 id="info-title">Cómo funciona una blockchain</h2>
+    <p>Una blockchain es una lista de bloques encadenados: cada bloque guarda sus datos y el <strong>hash del bloque anterior</strong>. Si alguien modifica un bloque antiguo, su hash cambia y deja de coincidir con el que guarda el bloque siguiente, así que la manipulación salta a la vista.</p>
+    <p>Para que añadir bloques cueste trabajo, la <strong>prueba de trabajo</strong> exige encontrar un nonce que haga que el hash empiece por varios ceros. Encontrarlo requiere muchos intentos, pero comprobarlo es inmediato. Y como la cadena se copia en muchos nodos, un atacante tendría que volver a minar todos los bloques y convencer a la mayoría de la red.</p>
+    <h3>Qué hay en cada pestaña</h3>
+    <ul><li><strong>Hash:</strong> cómo cambia el SHA-256 al tocar una sola letra.</li><li><strong>Bloque y Cadena:</strong> minar un bloque y ver cómo se rompe la cadena al modificarlo.</li><li><strong>Distribuida y Tokens:</strong> tres nodos con la misma cadena y transacciones como datos.</li></ul>
+    <h3>Preguntas frecuentes</h3>
+    <details><summary>¿Qué es un hash SHA-256?</summary><p>Una función que convierte cualquier dato en 64 caracteres hexadecimales. El mismo dato da siempre el mismo hash, cambiar un carácter lo cambia por completo y no se puede volver atrás para obtener el dato original.</p></details>
+    <details><summary>¿Qué es minar un bloque?</summary><p>Probar valores del nonce hasta que el hash cumple la dificultad. En el simulador, la dificultad 4 pide que empiece por 0000, lo que requiere de media unos 65.000 intentos.</p></details>
+    <details><summary>¿Por qué es tan difícil falsificar una blockchain?</summary><p>Porque habría que volver a minar el bloque modificado y todos los siguientes, y además conseguir que la mayoría de los nodos acepte la nueva versión.</p></details>
+    <h3>Otras apps que te pueden interesar</h3>
+    <ul class="related">
+                <li><a href="/apps/clave-asimetrica/"><b>Simulador de clave asimétrica</b><span>Candados y llaves para entender la criptografía de clave pública.</span></a></li>
+                <li><a href="/apps/clave-asimetrica/matematicas.html"><b>Las matemáticas de RSA</b><span>RSA paso a paso: genera claves, cifra, firma e intenta romperla.</span></a></li>
+                <li><a href="/apps/generador-contrasenas/"><b>Generador de contraseñas</b><span>Contraseñas aleatorias y seguras con la longitud y los caracteres que elijas.</span></a></li>
+    </ul>
+  </section>
   <footer>
     <span>© 2026 <a href="/#apps">Apps de Surikata3K</a> · <a href="https://surikata3k.com">surikata3k.com</a></span>
     <span>Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span>
