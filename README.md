@@ -1,45 +1,51 @@
 # Surikata3K
 
-Código de **[surikata3k.com](https://surikata3k.com)**, la página principal de mis proyectos: apuntes de sistemas, vídeos de YouTube y apps web.
+Source of **[surikata3k.com](https://surikata3k.com)**, the home page for my projects: systems notes, YouTube videos and web apps.
 
-## Qué hay en la web
+## What's on the site
 
-- **Apuntes**: sistemas operativos, redes, bases de datos, máquinas virtuales y contenedores, en [docs.surikata3k.com](https://docs.surikata3k.com/)
-- **Vídeos**: el canal [@Surikata3K](https://www.youtube.com/@Surikata3K) de YouTube
-- **Código**: todo en [GitHub](https://github.com/surikata3k/)
-- **Apps**: pequeñas apps que funcionan en el navegador, sin instalar nada ni servidor:
-  - *utilidades*: [Dits Màgics](https://surikata3k.com/ditsmagics/), [Planificador de horas de RA](https://surikata3k.com/apps/horas-ra/)
-  - *contraseñas*: [PassForge](https://surikata3k.com/apps/passforge/), [Generador](https://surikata3k.com/apps/generador-contrasenas/), [Analizador](https://surikata3k.com/apps/analizador-contrasenas/), [Calculadora de entropía](https://surikata3k.com/apps/calculadora-entropia/)
-  - *criptografía y seguridad*: [Simulador de clave asimétrica](https://surikata3k.com/apps/clave-asimetrica/) (con [las matemáticas de RSA](https://surikata3k.com/apps/clave-asimetrica/matematicas.html)), [Simulador de blockchain](https://surikata3k.com/apps/blockchain/)
+- **Docs**: operating systems, networking, databases, virtual machines and containers, at [docs.surikata3k.com](https://docs.surikata3k.com/)
+- **Videos**: the [@Surikata3K](https://www.youtube.com/@Surikata3K) YouTube channel
+- **Code**: everything on [GitHub](https://github.com/surikata3k/)
+- **Apps**: small apps that run in the browser, with nothing to install and no server:
+  - *tools*: [Dits Màgics](https://surikata3k.com/ditsmagics/), [Learning outcome hours planner](https://surikata3k.com/apps/learning-outcome-hours/)
+  - *passwords*: [PassForge](https://surikata3k.com/apps/passforge/), [Password generator](https://surikata3k.com/apps/password-generator/), [Password strength checker](https://surikata3k.com/apps/password-strength-checker/), [Entropy calculator](https://surikata3k.com/apps/password-entropy-calculator/)
+  - *cryptography and security*: [Asymmetric key simulator](https://surikata3k.com/apps/asymmetric-key-simulator/) (with [the maths of RSA](https://surikata3k.com/apps/asymmetric-key-simulator/rsa-math.html)), [Blockchain simulator](https://surikata3k.com/apps/blockchain-simulator/)
 
-## Estructura del repositorio
+## Repository layout
 
 ```
-index.html     página principal (HTML con CSS en línea)
-apps/          las apps web, una carpeta por app (antes en el repositorio web-apps)
-web-apps/      redirecciones de las URL antiguas (/web-apps/...) a /apps/...
-404.html       página de error
-robots.txt     instrucciones para buscadores
-sitemap.xml    mapa del sitio para Google y Bing
-img/           logo, favicon, iconos e imágenes para redes sociales (og-image.png y og/<app>.png)
-tools/         generación del CSS de Tailwind y de los iconos de Lucide de las apps
-CNAME          dominio propio de GitHub Pages (surikata3k.com)
+index.html     home page (HTML with inline CSS)
+apps/          the web apps, one folder each (formerly the web-apps repository)
+apps/assets/   shared files for the apps: compiled Tailwind CSS, Lucide icons and site.css (site bar and fonts)
+apps/<old>/    redirects from the earlier Spanish URLs to the English ones
+web-apps/      redirects from the original /web-apps/... URLs to /apps/...
+404.html       error page
+robots.txt     instructions for search engines
+sitemap.xml    sitemap for Google and Bing
+img/           logo, favicon, icons and social images (og-image.png and og/<app>.png)
+tools/         build for the apps' Tailwind CSS and Lucide icons
+CNAME          custom domain for GitHub Pages (surikata3k.com)
 ```
 
-Dits Màgics sigue en su propio repositorio y se sirve en `surikata3k.com/ditsmagics/`.
+Dits Màgics lives in its own repository (it's a Catalan typing app, so it stays in Catalan) and is served at `surikata3k.com/ditsmagics/`.
 
-### Añadir una app nueva
+### Design
 
-1. Crea `apps/<nombre-en-castellano>/index.html`.
-2. En el `<head>`: `<title>`, `meta description`, `canonical`, Open Graph y el bloque JSON-LD (copia el de otra app).
-3. Usa `/apps/assets/tailwind.min.css` y `/apps/assets/lucide.min.js` (no los CDN de Tailwind ni de Lucide).
-4. Añade al final la sección informativa (qué es, cómo se usa, preguntas frecuentes y apps relacionadas).
-5. Añade la tarjeta en `index.html` (y en su JSON-LD `ItemList`) y la URL en `sitemap.xml`.
-6. Regenera el CSS y los iconos (ver abajo).
+Every app shares the home page's look: Instrument Serif for titles, IBM Plex Sans and IBM Plex Mono for text, the rust accent (`#B23A0A`) and the warm neutral background (`#FBFBF9`). In Tailwind, the `indigo` scale is the accent and `slate` is the neutral palette (see `tools/tailwind.config.js`), and every app starts with the shared site bar (`.s3k-bar`, in `apps/assets/site.css`).
 
-### Regenerar el CSS y los iconos
+### Adding a new app
 
-Las apps usan un CSS de Tailwind compilado y un paquete con solo los iconos de Lucide que necesitan. Si añades clases o iconos nuevos, regenéralos:
+1. Create `apps/<english-name>/index.html`.
+2. In the `<head>`: `<title>`, `meta description`, `canonical`, Open Graph and the JSON-LD block (copy them from another app).
+3. Load `/apps/assets/tailwind.min.css`, `/apps/assets/site.css` and `/apps/assets/lucide.min.js` (not the Tailwind or Lucide CDNs), and add the site bar at the top of `<body>`.
+4. Add the about section at the end (what it is, how to use it, FAQ and related apps).
+5. Add its card to `index.html` (and to the `ItemList` in its JSON-LD) and its URL to `sitemap.xml`.
+6. Rebuild the CSS and icons (see below).
+
+### Rebuilding the CSS and icons
+
+The apps use a compiled Tailwind stylesheet and a bundle with only the Lucide icons they need. If you add new classes or icons, rebuild them:
 
 ```
 cd tools
@@ -47,20 +53,20 @@ npm install
 npm run build
 ```
 
-## Publicación
+## Publishing
 
-Se publica con GitHub Pages desde la rama `main`. El dominio se gestiona en Cloudflare; cada push a `main` sale en un par de minutos.
+Published with GitHub Pages from the `main` branch. The domain is managed in Cloudflare; every push to `main` goes live in a couple of minutes.
 
-Para verla en local:
+To preview locally:
 
 ```
 python3 -m http.server
 ```
 
-## Contacto
+## Contact
 
 [hello@surikata3k.com](mailto:hello@surikata3k.com)
 
-## Licencia
+## License
 
-Las apps tienen licencia [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es) (ver [apps/LICENSE](apps/LICENSE)).
+The apps are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) (see [apps/LICENSE](apps/LICENSE)).
