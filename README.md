@@ -30,6 +30,8 @@ Sense instal·lar res, sense servidor: obre-les i fes-les servir.
   Combinacions possibles i entropia segons la longitud i el joc de caràcters.
 - **[🗝️ Simulador de clau asimètrica](https://surikata3k.github.io/web-apps/asymmetric_keys/)**<br>
   Cadenats, claus i segells: entén la criptografia de clau pública jugant (enviar secrets, signar i descobrir un impostor).
+- **[⛓️ Simulador de blockchain](https://surikata3k.com/web-apps/blockchain/)**<br>
+  Hash SHA-256, blocs, mineria amb nonce, cadena, xarxa distribuïda i tokens: modifica un bloc i mira com es trenca la cadena.
 
 ---
 
