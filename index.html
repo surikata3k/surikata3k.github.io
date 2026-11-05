@@ -1,22 +1,30 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Surikata3K</title>
-<meta name="description" content="Sysadmin notes, videos and small web apps.">
+<title>Surikata3K · Apuntes de sistemas, vídeos y apps web educativas</title>
+<meta name="description" content="Apuntes de sistemas, redes y bases de datos, tutoriales en vídeo y apps web educativas gratuitas: generador de contraseñas, simulador de blockchain, criptografía y más.">
 <link rel="canonical" href="https://surikata3k.com/">
 <meta name="theme-color" content="#FBFBF9">
-<meta property="og:title" content="Surikata3K">
-<meta property="og:description" content="Sysadmin notes, videos and small web apps.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Surikata3K">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Surikata3K · Apuntes de sistemas, vídeos y apps web educativas">
+<meta property="og:description" content="Apuntes de sistemas, redes y bases de datos, tutoriales en vídeo y apps web educativas que funcionan en el navegador.">
 <meta property="og:url" content="https://surikata3k.com/">
-<meta property="og:image" content="https://surikata3k.com/img/logo.png">
+<meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Surikata3K: apuntes de sistemas, vídeos y apps web educativas">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/img/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://surikata3k.com/#website", "url": "https://surikata3k.com/", "name": "Surikata3K", "description": "Apuntes de sistemas, redes y bases de datos, vídeos tutoriales y apps web educativas que funcionan en el navegador.", "inLanguage": "es", "publisher": {"@id": "https://surikata3k.com/#autor"}}, {"@type": "Person", "@id": "https://surikata3k.com/#autor", "name": "Surikata3K", "url": "https://surikata3k.com/", "image": "https://surikata3k.com/img/logo.png", "email": "mailto:hello@surikata3k.com", "sameAs": ["https://www.youtube.com/@Surikata3K", "https://github.com/surikata3k", "https://docs.surikata3k.com/"]}, {"@type": "ItemList", "name": "Apps web de Surikata3K", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Dits Màgics", "url": "https://surikata3k.com/ditsmagics/"}, {"@type": "ListItem", "position": 2, "name": "Planificador de horas de RA", "url": "https://surikata3k.com/apps/horas-ra/"}, {"@type": "ListItem", "position": 3, "name": "PassForge", "url": "https://surikata3k.com/apps/passforge/"}, {"@type": "ListItem", "position": 4, "name": "Generador de contraseñas", "url": "https://surikata3k.com/apps/generador-contrasenas/"}, {"@type": "ListItem", "position": 5, "name": "Analizador de contraseñas", "url": "https://surikata3k.com/apps/analizador-contrasenas/"}, {"@type": "ListItem", "position": 6, "name": "Calculadora de entropía", "url": "https://surikata3k.com/apps/calculadora-entropia/"}, {"@type": "ListItem", "position": 7, "name": "Simulador de clave asimétrica", "url": "https://surikata3k.com/apps/clave-asimetrica/"}, {"@type": "ListItem", "position": 8, "name": "Simulador de blockchain", "url": "https://surikata3k.com/apps/blockchain/"}]}]}</script>
 <style>
   :root {
     --bg: #FBFBF9;
@@ -68,6 +76,7 @@
     font-size: clamp(48px, 8vw, 112px); line-height: 0.98; letter-spacing: -0.02em; max-width: 1050px;
   }
   .hero h1 em { color: var(--accent); }
+  .hero .intro { margin: 0; max-width: 680px; font-size: 19px; color: var(--text-2); }
 
   /* Sections */
   .section { border-top: 1px solid var(--ink); padding: 32px 0 clamp(64px, 9vw, 112px); }
@@ -116,40 +125,44 @@
 <div class="wrap">
 
   <header class="site-header">
-    <a class="brand" href="https://surikata3k.com/">
-      <img src="https://surikata3k.com/img/logo_mark.png" alt="" width="40" height="40">
+    <a class="brand" href="/" aria-label="Surikata3K, inicio">
+      <picture>
+        <source srcset="/img/logo_mark-80.webp" type="image/webp">
+        <img src="/img/logo_mark-80.png" alt="" width="40" height="40">
+      </picture>
       <span>Surikata<em>3K</em></span>
     </a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="https://docs.surikata3k.com/" target="_blank" rel="noopener">docs</a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="https://docs.surikata3k.com/">apuntes</a>
       <a href="https://www.youtube.com/@Surikata3K" target="_blank" rel="noopener">youtube</a>
       <a href="https://github.com/surikata3k/" target="_blank" rel="noopener">github</a>
       <a href="#apps">apps</a>
-      <a href="mailto:hello@surikata3k.com">contact</a>
+      <a href="mailto:hello@surikata3k.com">contacto</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1>Sysadmin notes, videos and <em>small web apps</em>.</h1>
+      <h1>Apuntes de sistemas, vídeos y <em>apps web</em> educativas.</h1>
+      <p class="intro">Material para aprender administración de sistemas, redes, bases de datos y ciberseguridad, pensado para el ciclo de ASIX de FP: apuntes organizados por temas, tutoriales paso a paso y herramientas interactivas que funcionan en el navegador.</p>
     </section>
 
-    <section class="section" aria-labelledby="where">
-      <h2 id="where" class="label">where to find things</h2>
+    <section class="section" aria-labelledby="donde">
+      <h2 id="donde" class="label">dónde encontrar cada cosa</h2>
       <div class="channels">
-        <a class="card channel" href="https://docs.surikata3k.com/" target="_blank" rel="noopener">
-          <span class="name">Docs</span>
-          <span class="desc">Notes on systems, networks and databases, organised by topic.</span>
+        <a class="card channel" href="https://docs.surikata3k.com/">
+          <span class="name">Apuntes</span>
+          <span class="desc">Apuntes de sistemas, redes y bases de datos (Linux, PostgreSQL…), organizados por temas.</span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
         <a class="card channel" href="https://www.youtube.com/@Surikata3K" target="_blank" rel="noopener">
           <span class="name">YouTube</span>
-          <span class="desc">Tutorials and step-by-step explanations.</span>
+          <span class="desc">Tutoriales y explicaciones paso a paso.</span>
           <span class="arrow" aria-hidden="true">↗</span>
         </a>
         <a class="card channel" href="https://github.com/surikata3k/" target="_blank" rel="noopener">
           <span class="name">GitHub</span>
-          <span class="desc">The code behind everything you see here.</span>
+          <span class="desc">El código de todo lo que ves aquí.</span>
           <span class="arrow" aria-hidden="true">↗</span>
         </a>
       </div>
@@ -158,32 +171,32 @@
     <section id="apps" class="section" aria-labelledby="apps-title">
       <div class="apps-head">
         <h2 id="apps-title">Apps</h2>
-        <p>They run right in your browser: nothing to install, no server needed.</p>
+        <p>Funcionan directamente en el navegador: sin instalar nada, sin servidor y sin enviar tus datos a ningún sitio.</p>
       </div>
 
       <div class="group">
-        <h3>tools</h3>
+        <h3>aula y docencia</h3>
         <ul>
-          <li><a class="card app" href="https://surikata3k.com/ditsmagics/" target="_blank" rel="noopener"><span class="name">Dits Màgics</span><span class="desc">Touch typing in Catalan for kids, with 43 levels and stars to earn.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="https://surikata3k.com/web-apps/calc_hours_ra/" target="_blank" rel="noopener"><span class="name">Learning Outcome Hours</span><span class="desc">Plan and spread the hours of a module’s learning outcomes (RA).</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/ditsmagics/"><span class="name">Dits Màgics</span><span class="desc">Mecanografía en catalán para niños y niñas, con 43 niveles y estrellas que ganar.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/apps/horas-ra/"><span class="name">Planificador de horas de RA</span><span class="desc">Reparte las horas de los resultados de aprendizaje de un módulo de FP en el calendario lectivo.</span><span class="arrow" aria-hidden="true">→</span></a></li>
         </ul>
       </div>
 
       <div class="group">
-        <h3>passwords</h3>
+        <h3>contraseñas</h3>
         <ul>
-          <li><a class="card app" href="https://surikata3k.com/web-apps/passgen/" target="_blank" rel="noopener"><span class="name">PassForge</span><span class="desc">A different password for every site, from a single master key.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="https://surikata3k.com/web-apps/password_generator/" target="_blank" rel="noopener"><span class="name">Password Generator</span><span class="desc">Random passwords with the length and characters you choose.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="https://surikata3k.com/web-apps/password_info/" target="_blank" rel="noopener"><span class="name">Password Strength Checker</span><span class="desc">Check how strong a password really is.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="https://surikata3k.com/web-apps/password_calculator/" target="_blank" rel="noopener"><span class="name">Entropy Calculator</span><span class="desc">Possible combinations and entropy by length and character set.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/apps/passforge/"><span class="name">PassForge</span><span class="desc">Una contraseña distinta para cada sitio a partir de una sola clave maestra.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/apps/generador-contrasenas/"><span class="name">Generador de contraseñas</span><span class="desc">Contraseñas aleatorias y seguras, con la longitud y los caracteres que elijas.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/apps/analizador-contrasenas/"><span class="name">Analizador de contraseñas</span><span class="desc">Comprueba lo segura que es una contraseña y cuánto tardarían en descifrarla.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/apps/calculadora-entropia/"><span class="name">Calculadora de entropía</span><span class="desc">Combinaciones posibles, entropía y tiempo de fuerza bruta según la longitud y el juego de caracteres.</span><span class="arrow" aria-hidden="true">→</span></a></li>
         </ul>
       </div>
 
       <div class="group">
-        <h3>security</h3>
+        <h3>criptografía y seguridad</h3>
         <ul>
-          <li><a class="card app" href="https://surikata3k.com/web-apps/asymmetric_keys/" target="_blank" rel="noopener"><span class="name">Asymmetric Key Simulator</span><span class="desc">Padlocks, keys and seals: learn how public-key cryptography works by playing.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="https://surikata3k.com/web-apps/blockchain/" target="_blank" rel="noopener"><span class="name">Blockchain Simulator</span><span class="desc">Hashes, blocks, mining and a distributed chain: tamper with a block and watch the chain break.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/apps/clave-asimetrica/"><span class="name">Simulador de clave asimétrica</span><span class="desc">Candados, llaves y sellos: aprende cómo funciona la criptografía de clave pública jugando.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="card app" href="/apps/blockchain/"><span class="name">Simulador de blockchain</span><span class="desc">Hash, bloques, minería y cadena distribuida: modifica un bloque y mira cómo se rompe la cadena.</span><span class="arrow" aria-hidden="true">→</span></a></li>
         </ul>
       </div>
     </section>
@@ -191,10 +204,10 @@
 
   <footer class="site-footer">
     <div>
-      <p class="label" style="margin-bottom:8px">say hello</p>
+      <p class="label" style="margin-bottom:8px">escríbeme</p>
       <a class="mail" href="mailto:hello@surikata3k.com">hello@surikata3k.com</a>
     </div>
-    <p>Apps licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Code on <a href="https://github.com/surikata3k/" target="_blank" rel="noopener">GitHub</a>.</p>
+    <p>Apps con licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener license">CC BY-NC-SA 4.0</a>. Código en <a href="https://github.com/surikata3k/" target="_blank" rel="noopener">GitHub</a>.</p>
   </footer>
 
 </div>

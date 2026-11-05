@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de clave pública y privada (criptografía asimétrica) · Surikata3K</title>
+    <meta name="description" content="Entiende cómo funciona la criptografía de clave asimétrica (pública y privada) jugando con candados y llaves: enviar secretos, responder, firmar y descubrir a un impostor.">
+    <link rel="canonical" href="https://surikata3k.com/apps/clave-asimetrica/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Surikata3K">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="Simulador de clave pública y privada (criptografía asimétrica)">
+    <meta property="og:description" content="Entiende cómo funciona la criptografía de clave asimétrica (pública y privada) jugando con candados y llaves: enviar secretos, responder, firmar y descubrir a un impostor.">
+    <meta property="og:url" content="https://surikata3k.com/apps/clave-asimetrica/">
+    <meta property="og:image" content="https://surikata3k.com/img/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Simulador de clave asimétrica", "url": "https://surikata3k.com/apps/clave-asimetrica/", "description": "Entiende cómo funciona la criptografía de clave asimétrica (pública y privada) jugando con candados y llaves: enviar secretos, responder, firmar y descubrir a un impostor.", "applicationCategory": "EducationalApplication", "operatingSystem": "Cualquiera (navegador web)", "inLanguage": "es", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Surikata3K", "url": "https://surikata3k.com/"}, "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es"}</script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='2' fill='white'/><rect x='17' y='7' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='7' y='17' width='8' height='8' rx='2' fill='white' opacity='.7'/><rect x='17' y='17' width='8' height='8' rx='2' fill='white' opacity='.45'/></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
+        }
+    </script>
+    <style>
+        .tab[aria-selected="true"] { background: #4f46e5; color: #fff; border-color: #4f46e5; }
+        .tab[aria-selected="true"] .tab-num { background: #fff; color: #4f46e5; }
+        .tab.done .tab-num { background: #10b981; color: #fff; }
+
+        /* Escenari */
+        .item-slot { position: absolute; top: 50%; transform: translate(-50%, -50%); transition: left .9s ease-in-out; }
+        .item-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: .25rem; width: 7.5rem; padding: .6rem .5rem; border: 2px solid; border-radius: .9rem; text-align: center; box-shadow: 0 6px 16px rgba(15, 23, 42, .12); }
+        @media (min-width: 640px) { .item-card { width: 10rem; padding: .75rem .6rem; } }
+        .item-card .txt { font-size: .72rem; line-height: 1.25; color: #1e293b; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        @media (min-width: 640px) { .item-card .txt { font-size: .8rem; } }
+        .item-card .lbl { font-size: .65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+        .item-card .seal { position: absolute; top: -.7rem; right: -.7rem; width: 1.9rem; height: 1.9rem; border-radius: 999px; display: grid; place-items: center; color: #fff; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+        .pop { animation: pop .35s ease-out; }
+        @keyframes pop { 0% { transform: scale(.75); } 70% { transform: scale(1.06); } 100% { transform: scale(1); } }
+
+        .bubble { min-height: 3.6rem; font-size: .75rem; line-height: 1.3; border-radius: .75rem; padding: .45rem .6rem; border: 1px solid transparent; transition: opacity .2s; }
+        @media (min-width: 640px) { .bubble { font-size: .85rem; } }
+        .bubble:empty { opacity: 0; }
+        .tone-neutral { background: #f1f5f9; color: #334155; border-color: #e2e8f0; }
+        .tone-good { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+        .tone-bad { background: #fff1f2; color: #9f1239; border-color: #fecdd3; }
+
+        .keychip { display: inline-flex; align-items: center; gap: .3rem; border: 1.5px solid; border-radius: .55rem; padding: .1rem .45rem; font-size: .72rem; font-weight: 600; background: #fff; white-space: nowrap; }
+        .choice { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem .9rem; border-radius: .8rem; border: 2px solid #e2e8f0; background: #fff; font-size: .9rem; font-weight: 600; color: #1e293b; text-align: left; transition: border-color .15s, transform .1s; }
+        .choice:hover { border-color: #818cf8; }
+        .choice:active { transform: scale(.98); }
+        .rule { transition: background-color .4s, border-color .4s, opacity .4s; }
+        .rule.lit { background: #eef2ff; border-color: #a5b4fc; opacity: 1; }
+        @media (prefers-reduced-motion: reduce) { .item-slot { transition: none; } .pop { animation: none; } }
+    </style>
+</head>
+<body class="min-h-full flex flex-col font-sans text-slate-800 antialiased bg-slate-50">
+
+    <!-- Capçalera -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-2.5 rounded-xl shadow-md shadow-indigo-200">
+                    <i data-lucide="key-round" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Simulador de clave asimétrica</h1>
+                    <p class="text-xs text-slate-500 hidden sm:block">Candados, llaves y sellos: cómo funciona sin fórmulas</p>
+                </div>
+            </div>
+            <button id="btnRestart" aria-label="Reiniciar el escenario" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Reiniciar</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-5">
+
+        <!-- Llegenda -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-3" aria-label="Las dos claves">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex gap-3">
+                <div class="shrink-0 w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 grid place-items-center"><i data-lucide="lock-open" class="w-6 h-6"></i></div>
+                <div>
+                    <h2 class="font-semibold text-slate-900">Clave pública = un candado abierto</h2>
+                    <p class="text-sm text-slate-600">Cada uno reparte copias a todo el mundo. Cualquiera lo puede <strong>cerrar</strong>, pero un candado no abre nada.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex gap-3">
+                <div class="shrink-0 w-11 h-11 rounded-xl bg-rose-100 text-rose-700 grid place-items-center"><i data-lucide="key" class="w-6 h-6"></i></div>
+                <div>
+                    <h2 class="font-semibold text-slate-900">Clave privada = la única llave</h2>
+                    <p class="text-sm text-slate-600">Solo la tiene el propietario. <strong>Abre</strong> lo que su candado ha cerrado y sirve para poner un <strong>sello</strong> que solo él puede hacer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pestanyes -->
+        <nav class="grid grid-cols-2 sm:grid-cols-5 gap-2" role="tablist" aria-label="Escenarios">
+            <button class="tab flex items-center gap-2 px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:border-indigo-300" role="tab" data-tab="1"><span class="tab-num w-6 h-6 shrink-0 rounded-full bg-slate-100 grid place-items-center text-xs">1</span>Enviar un secreto</button>
+            <button class="tab flex items-center gap-2 px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:border-indigo-300" role="tab" data-tab="2"><span class="tab-num w-6 h-6 shrink-0 rounded-full bg-slate-100 grid place-items-center text-xs">2</span>Responder</button>
+            <button class="tab flex items-center gap-2 px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:border-indigo-300" role="tab" data-tab="3"><span class="tab-num w-6 h-6 shrink-0 rounded-full bg-slate-100 grid place-items-center text-xs">3</span>Firmar</button>
+            <button class="tab flex items-center gap-2 px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:border-indigo-300" role="tab" data-tab="4"><span class="tab-num w-6 h-6 shrink-0 rounded-full bg-slate-100 grid place-items-center text-xs">4</span>El impostor</button>
+            <button class="tab col-span-2 sm:col-span-1 flex items-center gap-2 px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:border-indigo-300" role="tab" data-tab="quiz"><span class="tab-num w-6 h-6 shrink-0 rounded-full bg-slate-100 grid place-items-center text-xs"><i data-lucide="trophy" class="w-3.5 h-3.5"></i></span>Reto final</button>
+        </nav>
+
+        <!-- ESCENARI -->
+        <section id="sim" class="flex flex-col gap-5">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            <div id="stage" class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-3 sm:p-5 scroll-mt-20">
+                <!-- Personatges -->
+                <div class="grid grid-cols-3 gap-2 sm:gap-6">
+                    <div class="flex flex-col items-center gap-1.5 text-center">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-sky-100 text-sky-700 grid place-items-center"><i data-lucide="user" class="w-7 h-7"></i></div>
+                        <div class="font-semibold text-slate-900 leading-tight">Anna</div>
+                        <div id="bub-anna" class="bubble w-full"></div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 text-center">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-100 text-amber-700 grid place-items-center"><i data-lucide="eye" class="w-7 h-7"></i></div>
+                        <div class="font-semibold text-slate-900 leading-tight">Eva <span class="block sm:inline text-xs font-normal text-slate-500">escucha la red</span></div>
+                        <div id="bub-eva" class="bubble w-full"></div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 text-center">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-violet-100 text-violet-700 grid place-items-center"><i data-lucide="user" class="w-7 h-7"></i></div>
+                        <div class="font-semibold text-slate-900 leading-tight">Biel</div>
+                        <div id="bub-biel" class="bubble w-full"></div>
+                    </div>
+                </div>
+
+                <!-- Xarxa -->
+                <div class="relative h-36 mt-3">
+                    <div class="absolute left-[8%] right-[8%] top-1/2 border-t-2 border-dashed border-slate-300"></div>
+                    <div class="absolute left-1/2 -translate-x-1/2 bottom-0 text-[10px] uppercase tracking-wider text-slate-400 font-semibold">red</div>
+                    <div id="itemSlot" class="item-slot" style="left:16.67%"></div>
+                </div>
+
+                <!-- Clauers -->
+                <div class="grid grid-cols-3 gap-2 sm:gap-6 mt-2 pt-3 border-t border-slate-100">
+                    <div><div class="text-[10px] uppercase tracking-wider font-semibold text-slate-400 mb-1 text-center">Llavero</div><div id="ring-anna" class="flex flex-wrap justify-center gap-1"></div></div>
+                    <div><div class="text-[10px] uppercase tracking-wider font-semibold text-slate-400 mb-1 text-center">Llavero</div><div id="ring-eva" class="flex flex-wrap justify-center gap-1"></div></div>
+                    <div><div class="text-[10px] uppercase tracking-wider font-semibold text-slate-400 mb-1 text-center">Llavero</div><div id="ring-biel" class="flex flex-wrap justify-center gap-1"></div></div>
+                </div>
+            </div>
+
+                <!-- Narració i decisions -->
+                <div id="panel" class="lg:col-span-5 lg:sticky lg:top-20 scroll-mt-20 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-5 h-5 text-indigo-600"></i>
+                        <h2 id="scTitle" class="font-semibold text-slate-800 text-sm"></h2>
+                    </div>
+                    <div class="p-5 flex flex-col gap-4" aria-live="polite">
+                        <p id="narr" class="text-slate-700 leading-relaxed"></p>
+                        <div id="notes" class="flex flex-col gap-2"></div>
+                        <div id="choices" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+
+          </div>
+
+                <!-- Regles -->
+                <aside class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
+                        <i data-lucide="list-checks" class="w-5 h-5 text-indigo-600"></i>
+                        <h2 class="font-semibold text-slate-800 text-sm">Las reglas que vas descubriendo</h2>
+                    </div>
+                    <ul class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 text-sm">
+                        <li id="rule-1" class="rule opacity-50 flex gap-3 items-start p-2.5 rounded-xl border border-slate-200"><i data-lucide="lock" class="w-4 h-4 mt-0.5 shrink-0 text-indigo-600"></i><span><strong>Cifrar</strong> → candado (pública) <strong>del destinatario</strong></span></li>
+                        <li id="rule-2" class="rule opacity-50 flex gap-3 items-start p-2.5 rounded-xl border border-slate-200"><i data-lucide="lock-open" class="w-4 h-4 mt-0.5 shrink-0 text-indigo-600"></i><span><strong>Descifrar</strong> → clave privada <strong>del destinatario</strong></span></li>
+                        <li id="rule-3" class="rule opacity-50 flex gap-3 items-start p-2.5 rounded-xl border border-slate-200"><i data-lucide="stamp" class="w-4 h-4 mt-0.5 shrink-0 text-indigo-600"></i><span><strong>Firmar</strong> → clave privada <strong>de quien envía</strong></span></li>
+                        <li id="rule-4" class="rule opacity-50 flex gap-3 items-start p-2.5 rounded-xl border border-slate-200"><i data-lucide="badge-check" class="w-4 h-4 mt-0.5 shrink-0 text-indigo-600"></i><span><strong>Verificar</strong> → clave pública <strong>de quien envía</strong></span></li>
+                        <li id="rule-5" class="rule opacity-50 flex gap-3 items-start p-2.5 rounded-xl border border-slate-200"><i data-lucide="shield-alert" class="w-4 h-4 mt-0.5 shrink-0 text-indigo-600"></i><span><strong>Comprueba</strong> que el candado es realmente de quien dice ser (certificados)</span></li>
+                    </ul>
+                    <p class="px-4 pb-4 text-xs text-slate-500">¿Quieres ver los números que hay detrás? <a href="matematicas.html" class="font-semibold text-indigo-600 hover:underline">Las matemáticas de RSA →</a></p>
+                </aside>
+        </section>
+
+        <!-- REPTE -->
+        <section id="quiz" class="hidden" aria-label="Reto final">
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2"><i data-lucide="trophy" class="w-5 h-5 text-indigo-600"></i><h2 class="font-semibold text-slate-800 text-sm">¿Qué clave usas?</h2></div>
+                    <span id="qProgress" class="text-xs font-semibold text-slate-500"></span>
+                </div>
+                <div id="qBody" class="p-5 flex flex-col gap-4"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Peu de pàgina -->
+    <footer class="border-t border-slate-200 bg-white mt-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <p class="text-center sm:text-left">
+                © 2026 <a href="/#apps" class="font-medium text-slate-700 hover:text-indigo-600">Apps de Surikata3K</a> · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" rel="license" target="_blank" class="font-medium text-slate-700 hover:text-indigo-600">CC BY-NC-SA 4.0</a>
+            </p>
+            <div class="flex items-center gap-4">
+                <a href="/#apps" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Todas las apps</a>
+                <a href="https://surikata3k.com" class="inline-flex items-center gap-1 hover:text-indigo-600"><i data-lucide="globe" class="w-3.5 h-3.5"></i> surikata3k.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const $ = id => document.getElementById(id);
+        const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const icons = () => lucide.createIcons();
+        const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // ---------- Personatges i claus ----------
+        const WHO = {
+            anna: { name: "l'Anna", short: 'Anna', fg: '#0284c7', bg: '#e0f2fe' },
+            biel: { name: 'Biel', short: 'Biel', fg: '#7c3aed', bg: '#ede9fe' },
+            eva:  { name: "l'Eva", short: 'Eva', fg: '#d97706', bg: '#fef3c7' },
+        };
+        const KEYS = {
+            annaPub: { owner: 'anna', pub: true }, annaPriv: { owner: 'anna', pub: false },
+            bielPub: { owner: 'biel', pub: true }, bielPriv: { owner: 'biel', pub: false },
+            evaPub:  { owner: 'eva',  pub: true }, evaPriv:  { owner: 'eva',  pub: false },
+            fakeBiel: { owner: 'eva', pub: true, shownAs: 'biel' },   // el cadenat de l'Eva amb l'etiqueta «Biel»
+        };
+        let revealFake = false;
+        function keyLook(id) {
+            const k = KEYS[id];
+            const as = (k.shownAs && !revealFake) ? k.shownAs : k.owner;
+            return { ...k, as, w: WHO[as] };
+        }
+        function keyLabel(id, long = true) {
+            const k = keyLook(id);
+            const kind = k.pub ? 'Candado público' : 'Clave privada';
+            if (id === 'fakeBiel' && revealFake) return long ? "Candado «de Biel» (¡era de Eva!)" : "¡«Biel» = Eva!";
+            return long ? `${kind} de ${k.w.name}` : `${k.pub ? 'pública' : 'privada'} ${k.w.short}`;
+        }
+        function keyChip(id) {
+            const k = keyLook(id);
+            return `<span class="keychip" style="border-color:${k.w.fg};color:${k.w.fg}"><i data-lucide="${k.pub ? 'lock-open' : 'key'}" class="w-3 h-3"></i>${esc(keyLabel(id, false))}</span>`;
+        }
+        let rings = {};
+        function setRings(r) { rings = r; renderRings(); }
+        function renderRings() {
+            for (const who of ['anna', 'eva', 'biel']) $('ring-' + who).innerHTML = (rings[who] || []).map(keyChip).join('');
+            icons();
+        }
+
+        // ---------- L'objecte que viatja ----------
+        const POS = { anna: '16.67%', eva: '50%', biel: '83.33%' };
+        function setItem(it) {
+            let html = '';
+            if (!it) { $('itemSlot').innerHTML = ''; return; }
+            if (it.t === 'plain' || it.t === 'signed') {
+                const seal = it.t === 'signed' ? `<span class="seal" style="background:${WHO[it.seal].fg}"><i data-lucide="stamp" class="w-4 h-4"></i></span>` : '';
+                const lbl = it.t === 'signed' ? `<span class="lbl" style="color:${WHO[it.seal].fg}">sello de ${WHO[it.seal].short}</span>` : '<span class="lbl text-slate-400">texto plano</span>';
+                html = `<div class="item-card pop bg-white border-slate-300"><i data-lucide="file-text" class="w-6 h-6 text-slate-500"></i><span class="txt">${esc(it.text)}</span>${lbl}${seal}</div>`;
+            } else if (it.t === 'locked') {
+                const k = keyLook(it.key);
+                html = `<div class="item-card pop" style="background:${k.w.bg};border-color:${k.w.fg}"><i data-lucide="lock" class="w-7 h-7" style="color:${k.w.fg}"></i><span class="txt tracking-widest">••••••••</span><span class="lbl" style="color:${k.w.fg}">cerrado con el candado de ${k.w.short}</span></div>`;
+            } else if (it.t === 'padlock') {
+                const k = keyLook(it.key);
+                html = `<div class="item-card pop" style="background:${k.w.bg};border-color:${k.w.fg}"><i data-lucide="lock-open" class="w-7 h-7" style="color:${k.w.fg}"></i><span class="txt">Una copia del candado</span><span class="lbl" style="color:${k.w.fg}">«de ${k.w.short}»</span></div>`;
+            }
+            $('itemSlot').innerHTML = html;
+            icons();
+        }
+        function place(where) {
+            const s = $('itemSlot');
+            s.style.transition = 'none'; s.style.left = POS[where]; void s.offsetWidth; s.style.transition = '';
+        }
+        async function go(where) { $('itemSlot').style.left = POS[where]; await wait(REDUCED ? 150 : 1000); }
+
+        // ---------- Bafarades, narració i decisions ----------
+        function bubble(who, html, tone = 'neutral') { const b = $('bub-' + who); b.className = 'bubble w-full tone-' + tone; b.innerHTML = html; }
+        function clearBubbles() { for (const w of ['anna', 'eva', 'biel']) { const b = $('bub-' + w); b.className = 'bubble w-full'; b.innerHTML = ''; } }
+        function narrate(html) { $('narr').innerHTML = html; $('notes').innerHTML = ''; $('choices').innerHTML = ''; }
+        function note(html, ok) {
+            const cls = ok ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900';
+            $('notes').insertAdjacentHTML('beforeend', `<div class="flex gap-2 items-start border rounded-xl p-3 text-sm ${cls}"><i data-lucide="${ok ? 'circle-check' : 'circle-x'}" class="w-5 h-5 shrink-0 ${ok ? 'text-emerald-600' : 'text-rose-600'}"></i><div>${html}</div></div>`);
+            icons();
+        }
+        const good = h => note(h, true), bad = h => note(h, false);
+
+        let runId = 0;
+        class Abort extends Error {}
+        function guard(id) { if (id !== runId) throw new Abort(); }
+        function wait(ms) { const id = runId; return new Promise(r => setTimeout(r, ms)).then(() => guard(id)); }
+
+        // Al mòbil l'escena i les decisions no caben juntes: acompanyem l'alumne amb el desplaçament
+        const NARROW = () => innerWidth < 1024;
+        let wasClicked = false;
+        function focusStage() { if (NARROW()) $('stage').scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' }); }
+        function focusPanel() { if (NARROW() && wasClicked) $('panel').scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'nearest' }); }
+
+        // Mostra botons i espera que l'alumne en triï un
+        function choose(opts) {
+            const id = runId;
+            return new Promise(resolve => {
+                const box = $('choices'); box.innerHTML = '';
+                for (const o of opts) {
+                    const b = document.createElement('button');
+                    b.className = 'choice' + (o.primary ? ' !bg-indigo-600 !border-indigo-600 !text-white' : '');
+                    if (o.key) {
+                        const k = keyLook(o.key);
+                        b.innerHTML = `<span class="w-8 h-8 shrink-0 rounded-lg grid place-items-center" style="background:${k.w.bg};color:${k.w.fg}"><i data-lucide="${k.pub ? 'lock-open' : 'key'}" class="w-4 h-4"></i></span>${esc(keyLabel(o.key))}`;
+                    } else {
+                        b.innerHTML = (o.icon ? `<i data-lucide="${o.icon}" class="w-4 h-4 shrink-0"></i>` : '') + esc(o.label);
+                    }
+                    b.addEventListener('click', () => { if (id !== runId) return; box.innerHTML = ''; wasClicked = true; focusStage(); resolve(o); });
+                    box.appendChild(b);
+                }
+                icons();
+                setTimeout(focusPanel, 250);
+            }).then(o => { guard(id); return o; });
+        }
+        const again = () => choose([{ label: 'Vuelve a intentarlo', icon: 'rotate-ccw', primary: true }]);
+        const next = (label = 'Siguiente') => choose([{ label, icon: 'arrow-right', primary: true }]);
+
+        // ---------- Progrés ----------
+        const done = new Set();
+        const RULES_FOR = { 1: [1, 2], 2: [1, 2], 3: [3, 4], 4: [5] };
+        function finish(n, lesson) {
+            done.add(n);
+            RULES_FOR[n].forEach(r => $('rule-' + r).classList.add('lit'));
+            document.querySelector(`.tab[data-tab="${n}"]`).classList.add('done');
+            document.querySelector(`.tab[data-tab="${n}"] .tab-num`).innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i>';
+            good(`<strong>Escenario superado.</strong> ${lesson}`);
+            const nxt = n < 4 ? String(n + 1) : 'quiz';
+            choose([{ label: n < 4 ? 'Escenario siguiente' : 'Al reto final', icon: 'arrow-right', primary: true }]).then(() => selectTab(nxt)).catch(() => {});
+        }
+
+        // ---------- ESCENARI 1: enviar un secret ----------
+        async function sc1() {
+            $('scTitle').textContent = '1 · Enviar un secreto';
+            setRings({ anna: ['annaPriv', 'annaPub', 'bielPub'], eva: ['evaPriv', 'evaPub', 'annaPub', 'bielPub'], biel: ['bielPriv', 'bielPub', 'annaPub'] });
+            const MSG = 'La clave del Wi-Fi es Suricata3K';
+            for (;;) {
+                clearBubbles(); place('anna'); setItem({ t: 'plain', text: MSG });
+                narrate(`<strong>Anna</strong> quiere enviar un secreto a <strong>Biel</strong>. Todo pasa por la red, y <strong>Eva</strong> ve todo lo que circula por ella. Mira el llavero de Anna: <strong>¿qué usa para proteger el mensaje?</strong>`);
+                const c = await choose([{ key: 'bielPub' }, { key: 'annaPub' }, { key: 'annaPriv' }, { label: "Nada, lo envía tal cual", icon: 'send' }]);
+                if (c.key === 'bielPub') break;
+                if (!c.key) {
+                    await go('eva'); bubble('eva', `😈 Lo leo todo: «${esc(MSG)}»`, 'bad');
+                    await go('biel'); bubble('biel', 'Recibido.');
+                    bad("Sin protección, cualquiera que escuche la red lo lee.");
+                } else if (c.key === 'annaPub') {
+                    setItem({ t: 'locked', key: 'annaPub' }); await wait(600);
+                    await go('eva'); bubble('eva', "Está cerrado con el candado de Anna. No lo puedo abrir.", 'good');
+                    await go('biel'); bubble('biel', "😕 No tengo la llave de Anna. ¡No lo puedo abrir!", 'bad');
+                    bad("Eva no lo lee… ¡pero Biel tampoco! El candado de Anna solo lo abre <strong>la clave privada de Anna</strong>, y solo la tiene ella.");
+                } else {
+                    setItem({ t: 'signed', text: MSG, seal: 'anna' }); await wait(600);
+                    await go('eva'); bubble('eva', `😈 Lleva el sello de Anna, pero se lee: «${esc(MSG)}»`, 'bad');
+                    await go('biel'); bubble('biel', "Recibido. Y seguro que es de Anna.");
+                    bad("Con la clave privada <strong>sellas</strong>: demuestras que es tuyo, pero no ocultas nada. Lo verás en el escenario 3.");
+                }
+                await again();
+            }
+            setItem({ t: 'locked', key: 'bielPub' });
+            good("¡Muy bien! Todo el mundo tiene una copia del candado de Biel y todos pueden cerrarlo, pero <strong>solo la clave privada de Biel lo abre</strong>.");
+            await wait(900);
+            await go('eva'); bubble('eva', 'Yo también tengo el candado de Biel… pero un candado solo cierra. No puedo abrirlo. 🤷', 'good');
+            await go('biel');
+            narrate("La caja llega a <strong>Biel</strong>. <strong>¿Con cuál de sus claves la abre?</strong>");
+            for (;;) {
+                const c = await choose([{ key: 'bielPub' }, { key: 'bielPriv' }, { key: 'annaPub' }]);
+                if (c.key === 'bielPriv') break;
+                bubble('biel', '🤔 Con esto no se abre…', 'bad');
+                bad(c.key === 'bielPub' ? "Un candado (clave pública) sirve para <strong>cerrar</strong>, no para abrir." : "El candado de Anna sirve para enviar cosas a Anna, no para abrir las cajas de Biel.");
+            }
+            setItem({ t: 'plain', text: MSG }); bubble('biel', `🔓 «${esc(MSG)}»`, 'good');
+            finish(1, "Para enviar un secreto lo cierras con el <strong>candado del destinatario</strong>, y solo su <strong>clave privada</strong> lo abre. Eva tiene el mismo candado y no le sirve de nada.");
+        }
+
+        // ---------- ESCENARI 2: respondre ----------
+        async function sc2() {
+            $('scTitle').textContent = '2 · Responder';
+            setRings({ anna: ['annaPriv', 'annaPub', 'bielPub'], eva: ['evaPriv', 'evaPub', 'annaPub', 'bielPub'], biel: ['bielPriv', 'bielPub', 'annaPub'] });
+            const MSG = '¡Gracias! Ya estoy conectado.';
+            for (;;) {
+                clearBubbles(); place('biel'); setItem({ t: 'plain', text: MSG });
+                narrate("Ahora es <strong>Biel</strong> quien quiere contestar a <strong>Anna</strong> en secreto. Mira el llavero de Biel: <strong>¿con qué cierra la respuesta?</strong>");
+                const c = await choose([{ key: 'bielPub' }, { key: 'bielPriv' }, { key: 'annaPub' }]);
+                if (c.key === 'annaPub') break;
+                if (c.key === 'bielPub') {
+                    setItem({ t: 'locked', key: 'bielPub' }); await wait(600);
+                    await go('eva'); bubble('eva', 'Candado de Biel. No lo puedo abrir.', 'good');
+                    await go('anna'); bubble('anna', '😕 ¡Solo Biel puede abrir su candado!', 'bad');
+                    bad("Biel ha cerrado la caja con su propio candado: solo él podría abrirla. Cada persona tiene <strong>su par de claves</strong>.");
+                } else {
+                    setItem({ t: 'signed', text: MSG, seal: 'biel' }); await wait(600);
+                    await go('eva'); bubble('eva', `😈 Se lee: «${esc(MSG)}»`, 'bad');
+                    await go('anna'); bubble('anna', 'Recibido, con el sello de Biel.');
+                    bad("La privada de Biel sella, pero no oculta nada: Eva lo ha leído.");
+                }
+                await again();
+            }
+            setItem({ t: 'locked', key: 'annaPub' });
+            good("Exacto: para escribir a Anna se usa <strong>el candado de Anna</strong>, no el propio.");
+            await wait(900);
+            await go('eva'); bubble('eva', "Candado de Anna. No lo puedo abrir.", 'good');
+            await go('anna');
+            narrate("La respuesta llega a <strong>Anna</strong>. <strong>¿Con qué la abre?</strong>");
+            for (;;) {
+                const c = await choose([{ key: 'annaPub' }, { key: 'bielPub' }, { key: 'annaPriv' }]);
+                if (c.key === 'annaPriv') break;
+                bubble('anna', '🤔 No se abre…', 'bad');
+                bad(c.key === 'annaPub' ? "Un candado solo cierra." : "El candado de Biel no abre nada y, además, esta caja no está cerrada con el candado de Biel.");
+            }
+            setItem({ t: 'plain', text: MSG }); bubble('anna', `🔓 «${esc(MSG)}»`, 'good');
+            finish(2, "Cada persona tiene su par. La pregunta es siempre: <strong>¿a quién va dirigido?</strong> Usas su candado, y él lo abre con su privada.");
+        }
+
+        // ---------- ESCENARI 3: signar ----------
+        async function sc3() {
+            $('scTitle').textContent = '3 · Firmar un mensaje';
+            setRings({ anna: ['annaPriv', 'annaPub', 'bielPub'], eva: ['evaPriv', 'evaPub', 'annaPub', 'bielPub'], biel: ['bielPriv', 'bielPub', 'annaPub'] });
+            const MSG = 'Mañana no hay clase.';
+            const FAKE = '¡Mañana hay examen sorpresa!';
+            for (;;) {
+                clearBubbles(); place('biel'); setItem({ t: 'plain', text: MSG });
+                narrate("Biel quiere colgar un aviso para todos. No es secreto, pero todo el mundo debe poder comprobar que <strong>lo ha escrito él</strong> y que <strong>nadie lo ha cambiado</strong>. <strong>¿Con qué clave lo sella?</strong>");
+                const c = await choose([{ key: 'bielPub' }, { key: 'bielPriv' }, { key: 'annaPub' }]);
+                if (c.key === 'bielPriv') break;
+                if (c.key === 'bielPub') bad("Todo el mundo tiene el candado de Biel, también Eva: si con eso se pudiera sellar, cualquiera podría hacerse pasar por Biel.");
+                else bad("Eso lo cerraría para que solo lo leyera Anna, y no demuestra nada: todo el mundo tiene el candado de Anna. Queremos un sello que <strong>solo Biel</strong> pueda hacer.");
+                await again();
+            }
+            good("Correcto: el sello se hace con la <strong>clave privada</strong>, porque es lo único que solo tiene Biel.");
+            for (;;) {
+                setItem({ t: 'signed', text: MSG, seal: 'biel' }); place('biel'); clearBubbles();
+                await wait(700);
+                await go('eva'); bubble('eva', `Lo puedo leer: el sello no oculta el texto.`, 'neutral');
+                narrate("Ahora <strong>eres Eva</strong> y tienes el aviso en las manos. <strong>¿Qué haces?</strong>");
+                const c = await choose([
+                    { id: 'edit', label: "Cambiar el texto y dejar el sello de Biel", icon: 'pencil' },
+                    { id: 'reseal', label: 'Cambiar el texto y sellarlo yo', icon: 'stamp' },
+                    { id: 'pass', label: 'Dejarlo pasar', icon: 'arrow-right' },
+                ]);
+                if (c.id === 'edit') {
+                    setItem({ t: 'signed', text: FAKE, seal: 'biel' }); bubble('eva', '😈 He cambiado el texto.', 'bad'); await wait(700);
+                    await go('anna'); bubble('anna', '❌ El sello de Biel no corresponde a este texto. ¡Alguien lo ha manipulado!', 'good');
+                    good("El sello está ligado al contenido exacto: si cambias una sola letra, la comprobación falla.");
+                } else if (c.id === 'reseal') {
+                    setItem({ t: 'signed', text: FAKE, seal: 'eva' }); bubble('eva', '😈 Texto nuevo y mi sello.', 'bad'); await wait(700);
+                    await go('anna'); bubble('anna', '❌ Compruebo con el candado de Biel… y no encaja. ¡Esto no lo ha sellado Biel!', 'good');
+                    good("Eva puede sellar, pero solo con <strong>su</strong> privada. Anna comprueba con el <strong>candado público de Biel</strong>, y no encaja.");
+                } else {
+                    bubble('eva', 'Qué aburrido… lo dejo pasar.', 'neutral');
+                    await go('anna'); bubble('anna', '✅ Compruebo con el candado de Biel: encaja. Es de Biel y está intacto.', 'good');
+                    good("Anna usa la <strong>clave pública de Biel</strong> para comprobar el sello. Cualquiera puede hacer esta comprobación.");
+                }
+                $('narr').innerHTML = "Puedes probar otra jugada de Eva o terminar el escenario.";   // sense esborrar l'explicació
+                const n = await choose([{ id: 'again', label: "Otra jugada de Eva", icon: 'rotate-ccw' }, { id: 'end', label: 'Acabar', icon: 'check', primary: true }]);
+                if (n.id === 'end') break;
+            }
+            narrate('');
+            finish(3, "<strong>Firmar</strong> = sello con la privada de quien envía. <strong>Verificar</strong> = comprobarlo con su pública. Fíjate en que la firma <strong>no oculta</strong> el texto: si además hace falta secreto, se combina con el candado del destinatario.");
+        }
+
+        // ---------- ESCENARI 4: l'impostor (home al mig) ----------
+        async function sc4() {
+            $('scTitle').textContent = "4 · El impostor (ataque de intermediario)";
+            revealFake = false;
+            setRings({ anna: ['annaPriv', 'annaPub'], eva: ['evaPriv', 'evaPub'], biel: ['bielPriv', 'bielPub'] });
+            clearBubbles(); place('biel'); setItem({ t: 'padlock', key: 'bielPub' });
+            narrate("Anna nunca ha hablado con Biel y <strong>no tiene su candado</strong>. Le pide por la red que le envíe una copia.");
+            bubble('anna', '¡Biel, envíame tu candado!');
+            await next();
+            bubble('biel', '¡Aquí lo tienes!');
+            await go('eva');
+            narrate("<strong>Eva</strong> lo intercepta. Se lo queda y, en su lugar, envía a Anna <strong>su propio candado</strong> con una etiqueta que dice «Biel».");
+            rings.eva = ['evaPriv', 'evaPub', 'bielPub']; renderRings();
+            await next();
+            setItem({ t: 'padlock', key: 'fakeBiel' }); bubble('eva', '😈 Cambio de etiqueta…', 'bad'); await wait(700);
+            await go('anna');
+            rings.anna = ['annaPriv', 'annaPub', 'fakeBiel']; renderRings();
+            bubble('anna', '¡Perfecto, ya tengo el candado de Biel!');
+            narrate("Anna, confiada, cierra un secreto con este candado y lo envía a Biel.");
+            await next();
+            const MSG = 'Quedamos a las 5 en la biblioteca';
+            setItem({ t: 'locked', key: 'fakeBiel' }); await wait(700);
+            await go('eva');
+            setItem({ t: 'plain', text: MSG }); bubble('eva', `😈 Es MI candado: lo abro con mi privada. «${esc(MSG)}»`, 'bad');
+            narrate("Eva lo abre con su clave privada y lo lee. Después <strong>lo vuelve a cerrar con el candado de verdad de Biel</strong> para que nadie sospeche.");
+            await next();
+            setItem({ t: 'locked', key: 'bielPub' }); await wait(700);
+            await go('biel'); setItem({ t: 'plain', text: MSG });
+            bubble('biel', '🔓 Recibido. ¡Todo correcto! 🙂', 'neutral');
+            revealFake = true; renderRings();
+            narrate("Ni Anna ni Biel han notado nada, y Eva lo ha leído todo. El cifrado ha funcionado perfectamente: el problema es que <strong>Anna tenía el candado equivocado</strong>.<br><br><strong>¿Cómo podría haberlo evitado Anna?</strong>");
+            for (;;) {
+                const c = await choose([
+                    { id: 'big', label: 'Usando un candado más grande (una clave más larga)', icon: 'maximize' },
+                    { id: 'check', label: 'Comprobando que el candado es de Biel (certificado o huella)', icon: 'shield-check' },
+                    { id: 'twice', label: 'Cerrándolo con dos candados', icon: 'copy' },
+                ]);
+                if (c.id === 'check') break;
+                bad(c.id === 'big' ? "El tamaño no importa: por grande que sea, el candado sigue siendo de Eva." : "Si los dos candados son de Eva (o uno es de Eva), ella lo sigue abriendo.");
+            }
+            good("Exacto. En internet, la clave pública de una web llega dentro de un <strong>certificado</strong> sellado por una autoridad de confianza (HTTPS). Con SSH, la primera conexión te muestra la <strong>huella</strong> (fingerprint) del servidor para que la compruebes.");
+            finish(4, "La criptografía asimétrica solo protege si estás seguro de que <strong>el candado es realmente de quien dice ser</strong>.");
+        }
+
+        // ---------- REPTE FINAL ----------
+        const OPTS = ['Mi clave pública', 'Mi clave privada', "La clave pública del otro", "La clave privada del otro"];
+        const QS = [
+            { q: 'Quieres enviar un correo cifrado a Marta.', a: 2, why: "Se cifra con el candado (pública) del destinatario." },
+            { q: "Has recibido un archivo cifrado para ti. ¿Con qué lo abres?", a: 1, why: 'Solo tu privada abre lo que se ha cerrado con tu candado.' },
+            { q: "Quieres firmar un documento para que se sepa que es tuyo.", a: 1, why: 'El sello se hace con la privada: es lo único que solo tienes tú.' },
+            { q: "Álex te envía un documento firmado. ¿Con qué compruebas la firma?", a: 2, why: 'Se verifica con la pública de quien ha firmado.' },
+            { q: 'Quieres entrar por SSH sin contraseña. ¿Qué copias en el servidor (authorized_keys)?', a: 0, why: 'En el servidor va tu pública; la privada nunca sale de tu ordenador.' },
+            { q: '¿Qué puedes publicar en GitHub o en tu web sin ningún peligro?', a: 0, why: 'La pública está hecha para repartirse.' },
+            { q: "Eres un servidor web. Para demostrar a los navegadores que eres tú, usas…", a: 1, why: 'El servidor firma con su privada, y el navegador lo comprueba con la pública que hay en el certificado.' },
+            { q: "¿Cuál de estas claves nunca deberías tener?", a: 3, why: 'La privada de otra persona es solo suya. Si la tienes, algo ha ido muy mal.' },
+        ];
+        let qi = 0, score = 0;
+        function renderQuiz() {
+            const body = $('qBody');
+            if (qi >= QS.length) {
+                $('qProgress').textContent = '';
+                const msg = score === QS.length ? '¡Perfecto! Dominas las claves. 🏆' : score >= 6 ? '¡Muy bien! Repasa las reglas que has fallado.' : 'Vuelve a hacer los escenarios y vuelve a intentarlo.';
+                body.innerHTML = `<div class="text-center py-6"><div class="text-5xl font-bold text-indigo-600">${score}/${QS.length}</div><p class="mt-2 text-slate-700">${msg}</p><button id="qRestart" class="mt-5 choice !bg-indigo-600 !border-indigo-600 !text-white"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Otra vez</button></div>`;
+                $('qRestart').onclick = () => { qi = 0; score = 0; renderQuiz(); };
+                icons(); return;
+            }
+            const item = QS[qi];
+            $('qProgress').textContent = `${qi + 1} / ${QS.length}`;
+            body.innerHTML = `<p class="text-lg font-semibold text-slate-900">${esc(item.q)}</p><div id="qOpts" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div><div id="qFb"></div>`;
+            OPTS.forEach((o, i) => {
+                const b = document.createElement('button');
+                b.className = 'choice justify-start';
+                b.innerHTML = `<i data-lucide="${i % 2 === 0 ? 'lock-open' : 'key'}" class="w-4 h-4 shrink-0 ${i % 2 === 0 ? 'text-emerald-600' : 'text-rose-600'}"></i>${esc(o)}`;
+                b.onclick = () => {
+                    const ok = i === item.a; if (ok) score++;
+                    [...$('qOpts').children].forEach((x, j) => {
+                        x.disabled = true;
+                        if (j === item.a) x.classList.add('!border-emerald-500', '!bg-emerald-50');
+                        else if (j === i) x.classList.add('!border-rose-400', '!bg-rose-50');
+                    });
+                    $('qFb').innerHTML = `<div class="flex gap-2 items-start border rounded-xl p-3 text-sm ${ok ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}"><i data-lucide="${ok ? 'circle-check' : 'circle-x'}" class="w-5 h-5 shrink-0"></i><div><strong>${ok ? '¡Correcto!' : 'No exactamente.'}</strong> ${esc(item.why)}</div></div><button id="qNext" class="mt-3 choice !bg-indigo-600 !border-indigo-600 !text-white">${qi + 1 < QS.length ? 'Siguiente pregunta' : 'Ver el resultado'}<i data-lucide="arrow-right" class="w-4 h-4"></i></button>`;
+                    $('qNext').onclick = () => { qi++; renderQuiz(); };
+                    icons();
+                };
+                $('qOpts').appendChild(b);
+            });
+            icons();
+        }
+
+        // ---------- Pestanyes ----------
+        const SCENES = { 1: sc1, 2: sc2, 3: sc3, 4: sc4 };
+        let current = '1';
+        function selectTab(name) {
+            current = name;
+            runId++;                                // atura l'escenari que s'estigui executant
+            document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+            const isQuiz = name === 'quiz';
+            $('sim').classList.toggle('hidden', isQuiz);
+            $('quiz').classList.toggle('hidden', !isQuiz);
+            if (isQuiz) { renderQuiz(); return; }
+            revealFake = false;
+            SCENES[name]().catch(e => { if (!(e instanceof Abort)) console.error(e); });
+        }
+        document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => { selectTab(t.dataset.tab); }));
+        $('btnRestart').addEventListener('click', () => selectTab(current));
+        selectTab('1');
+        icons();
+    </script>
+</body>
+</html>
