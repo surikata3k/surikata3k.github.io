@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://surikata3k.com/#website", "url": "https://surikata3k.com/", "name": "Surikata3K", "description": "Notes on operating systems, networking, databases, virtual machines and containers, video tutorials and free web apps that run in your browser.", "inLanguage": "en", "publisher": {"@id": "https://surikata3k.com/#author"}}, {"@type": "Person", "@id": "https://surikata3k.com/#author", "name": "Surikata3K", "url": "https://surikata3k.com/", "image": "https://surikata3k.com/img/logo.png", "email": "mailto:hello@surikata3k.com", "sameAs": ["https://www.youtube.com/@Surikata3K", "https://github.com/surikata3k", "https://docs.surikata3k.com/"]}, {"@type": "ItemList", "name": "Surikata3K web apps", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Dits Màgics", "url": "https://surikata3k.com/ditsmagics/en/"}, {"@type": "ListItem", "position": 2, "name": "Learning outcome hours planner", "url": "https://surikata3k.com/apps/learning-outcome-hours/"}, {"@type": "ListItem", "position": 3, "name": "PassForge", "url": "https://surikata3k.com/apps/passforge/"}, {"@type": "ListItem", "position": 4, "name": "Password generator", "url": "https://surikata3k.com/apps/password-generator/"}, {"@type": "ListItem", "position": 5, "name": "Password strength checker", "url": "https://surikata3k.com/apps/password-strength-checker/"}, {"@type": "ListItem", "position": 6, "name": "Entropy calculator", "url": "https://surikata3k.com/apps/password-entropy-calculator/"}, {"@type": "ListItem", "position": 7, "name": "Asymmetric key simulator", "url": "https://surikata3k.com/apps/asymmetric-key-simulator/"}, {"@type": "ListItem", "position": 8, "name": "Blockchain simulator", "url": "https://surikata3k.com/apps/blockchain-simulator/"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://surikata3k.com/#website", "url": "https://surikata3k.com/", "name": "Surikata3K", "description": "Notes on operating systems, networking, databases, virtual machines and containers, video tutorials and free web apps that run in your browser.", "inLanguage": "en", "publisher": {"@id": "https://surikata3k.com/#author"}}, {"@type": "Person", "@id": "https://surikata3k.com/#author", "name": "Surikata3K", "url": "https://surikata3k.com/", "image": "https://surikata3k.com/img/logo.png", "email": "mailto:hello@surikata3k.com", "sameAs": ["https://www.youtube.com/@Surikata3K", "https://github.com/surikata3k", "https://docs.surikata3k.com/", "https://apps.surikata3k.com/"]}]}</script>
 <style>
   :root {
     --bg: #FBFBF9;
@@ -96,17 +96,6 @@
   .channel { padding: 28px; min-height: 240px; gap: 14px; }
   .channel .name { font-family: var(--serif); font-size: 44px; line-height: 1; }
 
-  /* Apps */
-  .apps-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; margin-bottom: 40px; }
-  .apps-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 7vw, 88px); line-height: 1; letter-spacing: -0.02em; }
-  .apps-head p { margin: 0; max-width: 380px; color: var(--text-2); }
-  .group { border-top: 1px solid var(--rule); padding: 20px 0 40px; }
-  .group h3 { margin: 0 0 16px; font-family: var(--mono); font-weight: 400; font-size: 13px; color: var(--muted); }
-  .group ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-  .group li { display: flex; }
-  .app { flex-grow: 1; min-height: 200px; }
-  .app .name { font-family: var(--serif); font-size: 30px; line-height: 1.1; }
-  .app .desc { font-size: 16px; }
 
   /* Footer */
   .site-footer { border-top: 1px solid var(--ink); padding: 40px 0 56px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px 48px; }
@@ -137,7 +126,7 @@
       <a href="https://docs.surikata3k.com/">docs</a>
       <a href="https://www.youtube.com/@Surikata3K" target="_blank" rel="noopener">youtube</a>
       <a href="https://github.com/surikata3k/" target="_blank" rel="noopener">github</a>
-      <a href="#apps">apps</a>
+      <a href="https://apps.surikata3k.com/">apps</a>
       <a href="mailto:hello@surikata3k.com">contact</a>
     </nav>
   </header>
@@ -166,41 +155,14 @@
           <span class="desc">The code behind everything you see here.</span>
           <span class="arrow" aria-hidden="true">↗</span>
         </a>
+        <a class="card channel" href="https://apps.surikata3k.com/">
+          <span class="name">Apps</span>
+          <span class="desc">Free tools that run in your browser: passwords, cryptography, blockchain and more.</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
 
-    <section id="apps" class="section" aria-labelledby="apps-title">
-      <div class="apps-head">
-        <h2 id="apps-title">Apps</h2>
-        <p>They run right in your browser: nothing to install, no server and your data never leaves your device.</p>
-      </div>
-
-      <div class="group">
-        <h3>tools</h3>
-        <ul>
-          <li><a class="card app" href="/ditsmagics/en/"><span class="name">Dits Màgics</span><span class="desc">Touch typing for kids in English, Catalan and Spanish, with 44 levels and stars to earn.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="/apps/learning-outcome-hours/"><span class="name">Learning outcome hours planner</span><span class="desc">Spread the hours of each learning outcome across the school calendar, taking holidays and the weekly timetable into account.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-        </ul>
-      </div>
-
-      <div class="group">
-        <h3>passwords</h3>
-        <ul>
-          <li><a class="card app" href="/apps/passforge/"><span class="name">PassForge</span><span class="desc">A different password for every site from a single master key.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="/apps/password-generator/"><span class="name">Password generator</span><span class="desc">Strong random passwords with the length and characters you choose.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="/apps/password-strength-checker/"><span class="name">Password strength checker</span><span class="desc">See how strong a password is and how long it would take to crack.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="/apps/password-entropy-calculator/"><span class="name">Entropy calculator</span><span class="desc">Possible combinations, entropy and brute-force time by length and character set.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-        </ul>
-      </div>
-
-      <div class="group">
-        <h3>cryptography and security</h3>
-        <ul>
-          <li><a class="card app" href="/apps/asymmetric-key-simulator/"><span class="name">Asymmetric key simulator</span><span class="desc">Padlocks, keys and seals: learn how public-key cryptography works by playing.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-          <li><a class="card app" href="/apps/blockchain-simulator/"><span class="name">Blockchain simulator</span><span class="desc">Hashing, blocks, mining and a distributed chain: tamper with a block and watch the chain break.</span><span class="arrow" aria-hidden="true">→</span></a></li>
-        </ul>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -208,7 +170,7 @@
       <p class="label" style="margin-bottom:8px">say hello</p>
       <a class="mail" href="mailto:hello@surikata3k.com">hello@surikata3k.com</a>
     </div>
-    <p>Apps licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener license">CC BY-NC-SA 4.0</a>. Code on <a href="https://github.com/surikata3k/" target="_blank" rel="noopener">GitHub</a>.</p>
+    <p>Apps at <a href="https://apps.surikata3k.com/">apps.surikata3k.com</a>. Code on <a href="https://github.com/surikata3k/" target="_blank" rel="noopener">GitHub</a>.</p>
   </footer>
 
 </div>
