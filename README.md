@@ -7,51 +7,30 @@ Source of **[surikata3k.com](https://surikata3k.com)**, the home page for my pro
 - **Docs**: operating systems, networking, databases, virtual machines and containers, at [docs.surikata3k.com](https://docs.surikata3k.com/)
 - **Videos**: the [@Surikata3K](https://www.youtube.com/@Surikata3K) YouTube channel
 - **Code**: everything on [GitHub](https://github.com/surikata3k/)
-- **Apps**: small apps that run in the browser, with nothing to install and no server:
-  - *tools*: [Dits Màgics](https://surikata3k.com/ditsmagics/en/) (English, [Catalan](https://surikata3k.com/ditsmagics/), [Spanish](https://surikata3k.com/ditsmagics/es/)), [Learning outcome hours planner](https://surikata3k.com/apps/learning-outcome-hours/)
-  - *passwords*: [PassForge](https://surikata3k.com/apps/passforge/), [Password generator](https://surikata3k.com/apps/password-generator/), [Password strength checker](https://surikata3k.com/apps/password-strength-checker/), [Entropy calculator](https://surikata3k.com/apps/password-entropy-calculator/)
-  - *cryptography and security*: [Asymmetric key simulator](https://surikata3k.com/apps/asymmetric-key-simulator/) (with [the maths of RSA](https://surikata3k.com/apps/asymmetric-key-simulator/rsa-math.html)), [Blockchain simulator](https://surikata3k.com/apps/blockchain-simulator/)
+- **Apps**: small apps that run in the browser, with nothing to install and no server, at [apps.surikata3k.com](https://apps.surikata3k.com/) (source in the [apps](https://github.com/surikata3k/apps) repository). The home page lists them in its Apps section.
 
 ## Repository layout
 
 ```
 index.html     home page (HTML with inline CSS)
-apps/          the web apps, one folder each (formerly the web-apps repository)
-apps/assets/   shared files for the apps: compiled Tailwind CSS, Lucide icons and site.css (site bar and fonts)
-apps/<old>/    redirects from the earlier Spanish URLs to the English ones
-web-apps/      redirects from the original /web-apps/... URLs to /apps/...
+apps/          redirects from the old surikata3k.com/apps/... URLs to apps.surikata3k.com
+web-apps/      redirects from the original /web-apps/... URLs to apps.surikata3k.com
 404.html       error page
 robots.txt     instructions for search engines
 sitemap.xml    sitemap for Google and Bing
-img/           logo, favicon, icons and social images (og-image.png and og/<app>.png)
-tools/         build for the apps' Tailwind CSS and Lucide icons
+img/           logo, favicon, icons and social images (og-image.png and og/ditsmagics*.png)
 CNAME          custom domain for GitHub Pages (surikata3k.com)
 ```
 
-Dits Màgics lives in its own repository and is served at `surikata3k.com/ditsmagics/` (Catalan), `/ditsmagics/es/` (Spanish) and `/ditsmagics/en/` (English). It keeps its own playful design for children.
+The web apps live in their own repository, [surikata3k/apps](https://github.com/surikata3k/apps), served at `apps.surikata3k.com`. Dits Màgics also lives in its own repository and is served at `surikata3k.com/ditsmagics/` (Catalan), `/ditsmagics/es/` (Spanish) and `/ditsmagics/en/` (English). It keeps its own playful design for children.
 
 ### Design
 
-Every app shares the home page's look: Instrument Serif for titles, IBM Plex Sans and IBM Plex Mono for text, the rust accent (`#B23A0A`) and the warm neutral background (`#FBFBF9`). In Tailwind, the `indigo` scale is the accent and `slate` is the neutral palette (see `tools/tailwind.config.js`), and every app starts with the shared site bar (`.s3k-bar`, in `apps/assets/site.css`).
+The home page and the apps share one look: Instrument Serif for titles, IBM Plex Sans and IBM Plex Mono for text, the rust accent (`#B23A0A`) and the warm neutral background (`#FBFBF9`). The apps repeat the home page header (`.s3k-bar`) and footer with the contact address (`.s3k-foot`).
 
 ### Adding a new app
 
-1. Create `apps/<english-name>/index.html`.
-2. In the `<head>`: `<title>`, `meta description`, `canonical`, Open Graph and the JSON-LD block (copy them from another app).
-3. Load `/apps/assets/tailwind.min.css`, `/apps/assets/site.css` and `/apps/assets/lucide.min.js` (not the Tailwind or Lucide CDNs), and add the site bar at the top of `<body>`.
-4. Add the about section at the end (what it is, how to use it, FAQ and related apps).
-5. Add its card to `index.html` (and to the `ItemList` in its JSON-LD) and its URL to `sitemap.xml`.
-6. Rebuild the CSS and icons (see below).
-
-### Rebuilding the CSS and icons
-
-The apps use a compiled Tailwind stylesheet and a bundle with only the Lucide icons they need. If you add new classes or icons, rebuild them:
-
-```
-cd tools
-npm install
-npm run build
-```
+Add it to the [apps](https://github.com/surikata3k/apps) repository (see its README), then add its card to the Apps section of `index.html` and to the `ItemList` in its JSON-LD.
 
 ## Publishing
 
@@ -69,4 +48,4 @@ python3 -m http.server
 
 ## License
 
-The apps are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) (see [apps/LICENSE](apps/LICENSE)).
+The apps are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) (see the [LICENSE](https://github.com/surikata3k/apps/blob/main/LICENSE) in the apps repository).
