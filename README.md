@@ -7,12 +7,14 @@ Source of **[surikata3k.com](https://surikata3k.com)**, the home page for my pro
 - **Docs**: operating systems, networking, databases, virtual machines and containers, at [docs.surikata3k.com](https://docs.surikata3k.com/)
 - **Videos**: the [@Surikata3K](https://www.youtube.com/@Surikata3K) YouTube channel
 - **Code**: everything on [GitHub](https://github.com/surikata3k/)
+- **Projects**: [surikata3k.com/projects](https://surikata3k.com/projects/), my published open-source projects
 - **Apps**: small apps that run in the browser, now at [apps.surikata3k.com](https://apps.surikata3k.com/) (repository [surikata3k/apps](https://github.com/surikata3k/apps)), plus [Dits Màgics](https://surikata3k.com/ditsmagics/en/)
 
 ## Repository layout
 
 ```
 index.html     home page (HTML with inline CSS)
+projects/      page listing my published projects
 apps/          redirects from the old /apps/... URLs to apps.surikata3k.com
 web-apps/      redirects from the original /web-apps/... URLs to apps.surikata3k.com
 404.html       error page
